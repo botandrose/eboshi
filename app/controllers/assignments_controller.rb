@@ -6,18 +6,14 @@ class AssignmentsController < ApplicationController
 
   def create
     @client = current_user.clients.find params[:client_id]
-    user = begin 
-      User.find(params[:assignment][:user_id])
-    rescue ActiveRecord::RecordNotFound
-      User.find_by_email(params[:assignment][:email])
-    end
-    unless user
-      flash[:error] = "A user with that email address does not exist!"
-      redirect_to new_assignment_path(@client)
-    else
+    user = User.find_by_id(params[:assignment][:user_id]) || User.find_by_email(params[:assignment][:email])
+    if user
       @client.users << user
       flash[:notice] = "Successfully created!"
       redirect_to invoices_path(@client)
+    else
+      flash[:error] = "A user with that email address does not exist!"
+      redirect_to new_assignment_path(@client)
     end
   end
 
