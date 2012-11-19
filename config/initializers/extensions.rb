@@ -35,11 +35,6 @@ class String
   end
 end
 
-class NilClass
-  def each; self; end
-  include Enumerable
-end
-
 class Date
   def saturday?
     wday == 6
