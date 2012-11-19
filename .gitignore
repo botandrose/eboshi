@@ -9,7 +9,7 @@ db/data.*
 db/*.sqlite3
 db/blog_feed.atom
 config/database.yml
-converage/**/*
+coverage
 public/stylesheets/*.css
 *[~]
 .bundle

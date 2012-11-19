@@ -34,6 +34,7 @@ group :test, :development do
 end
 
 group :test do
+  gem "rcov"
   gem "machinist", "~>1.0"
   gem "faker"
   gem "delorean"

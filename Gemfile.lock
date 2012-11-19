@@ -179,6 +179,7 @@ GEM
     ratom (0.7.2)
       libxml-ruby (~> 2.3.2)
     rbx-require-relative (0.0.9)
+    rcov (1.0.0)
     rdoc (3.12)
       json (~> 1.4)
     rspec-core (2.12.0)
@@ -279,6 +280,7 @@ DEPENDENCIES
   quiet_assets
   rails
   ratom
+  rcov
   rspec-rails
   ruby-debug
   sass-rails
