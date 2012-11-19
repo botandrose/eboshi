@@ -70,28 +70,4 @@ class ApplicationController < ActionController::Base
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
     end
-    
-    def rescue_action_in_public(exception)
-      message = "We're sorry, but something went wrong.\nWe've been notified about this issue and we'll take a look at it shortly.\n\nPlease check that any update you tried has not been successful before trying it again."
-      respond_to do |want|
-        want.html { super exception }
-        want.js {
-          render :update do |page|
-            page.alert message
-          end
-        }
-      end
-    end
-
-    def rescue_action_locally(exception)
-      message = "Oops! I made a mistake\n#{exception.class}: #{exception.message}\nCheck the logs for more detail."
-      respond_to do |want|
-        want.html { super exception }
-        want.js {
-          render :update do |page|
-            page.alert message
-          end
-        }
-      end
-    end
 end
