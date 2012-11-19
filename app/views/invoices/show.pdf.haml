@@ -2,15 +2,8 @@
 %html
   %head
     %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
-    %title= "#{h current_user.business_name_or_name} invoice \##{@invoice.id}"
-    %meta{:name => "keywords", :content => ""}
-    %meta{:name => "description", :content => ""}
-
-    = stylesheet_link_tag "invoice"
-    = yield :css
-
-    %link{:rel => "shortcut icon", :href => "/favicon.png", :type => "image/x-icon"}
-
+    %title= "#{current_user.business_name_or_name} invoice \##{@invoice.id}"
+    = wicked_pdf_stylesheet_link_tag "invoice"
 
   %body
     #container

@@ -21,7 +21,7 @@ describe InvoicesController do
     end
 
     it "on show" do
-      get :show, :client_id => @client.id, :id => @invoice.id
+      get :show, :format => "pdf", :client_id => @client.id, :id => @invoice.id
       response.should be_success
     end
     it "on js show" do

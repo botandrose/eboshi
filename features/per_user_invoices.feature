@@ -18,8 +18,9 @@ Feature: Invoices should include a users optional customized logo and signature
     And I upload a signature
     And I press "Update"
     # Then I should see "Account updated"
+
     When I go to the first invoice for "bossanova"
-    And I should see "Bot &amp; Rose"
+    And I should see "Bot & Rose"
     And I should see "info@botandrose.com"
     And I should see "625 NW Everett St #346"
     And I should see "Portland, Oregon 97209"

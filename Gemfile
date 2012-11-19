@@ -13,6 +13,7 @@ gem "ratom", :require => "atom"
 gem "chronic"
 gem "default_value_for"
 gem "dynamic_form"
+gem "wicked_pdf"
 
 gem "sprockets-image_compressor"
 gem "sass-rails"

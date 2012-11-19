@@ -17,7 +17,7 @@ module NavigationHelpers
 
     when /the first invoice for "([^\"]*)"$/
       client = Client.find_by_name $1
-      invoice_path client.invoices.first 
+      invoice_path client.invoices.first, :format => "pdf", :debug => true
 
     when /^\//
       page_name
