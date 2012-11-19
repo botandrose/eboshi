@@ -1,5 +1,4 @@
 class WorksController < ApplicationController
-  before_filter :get_work, :only => [:edit, :update, :destroy, :convert]
   before_filter :get_client
   before_filter :authorized?
 
@@ -18,6 +17,7 @@ class WorksController < ApplicationController
   end
 
   def edit
+    @work = Work.find params[:id]
   end
 
   def update
@@ -78,16 +78,13 @@ class WorksController < ApplicationController
   end
 
   def convert
+    @work = Work.find params[:id]
     @work.to_adjustment!
     flash[:notice] = "Time item converted to adjustment"
     redirect_to invoices_path(@client)
   end
 
   private
-
-    def get_work
-      @work = Work.find params[:id]
-    end
 
     def get_client
       @client = (@work.try(:client) || Client.find(params[:client_id]))

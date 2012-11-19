@@ -1,5 +1,4 @@
 class AdjustmentsController < ApplicationController
-  before_filter :get_adjustment, :only => [:edit, :update, :destroy]
   before_filter :get_client
   before_filter :authorized?
 
@@ -27,6 +26,7 @@ class AdjustmentsController < ApplicationController
   def update
     @adjustment = Adjustment.find params[:id]
     if @adjustment.update_attributes params[:adjustment]
+      flash[:notice] = "Successfully updated Adjustment."
       respond_to do |wants|
         wants.html { redirect_to invoices_path(@client) }
         wants.js { render :nothing => true }
@@ -58,10 +58,6 @@ class AdjustmentsController < ApplicationController
       a = params[:adjustment]
       a[:user_id] = current_user.id if a[:user_id].blank?
       a[:user_id] = nil if a.delete(:no_user) == "1"
-    end
-
-    def get_adjustment
-      @adjustment = Adjustment.find params[:id]
     end
 
     def get_client
