@@ -23,14 +23,13 @@ class Work < LineItem
   
   def self.merge_from_ids(ids)
     works = Work.find ids, :order => "finish DESC"
+    hours = works.sum(&:hours)
+    notes = works.collect(&:notes_with_period).select(&:present?).join(' ')
+    works.first.update_attributes :hours => hours, :notes => notes
 
-    works.first.tap do |work|
-      work.update_attributes(
-        :hours => works.sum(&:hours),
-        :notes => works.collect(&:notes_with_period) * ' '
-      )
-      works.each { |w| w.destroy unless w == work }
-    end
+    Work.destroy ids[1..-1] # destroy all but the first work
+
+    works.first
   end
 
   def to_adjustment!

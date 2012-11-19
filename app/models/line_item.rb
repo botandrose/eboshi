@@ -85,7 +85,7 @@ class LineItem < ActiveRecord::Base
   end
   
   def notes_with_period
-    if notes.nil? or notes.last.match(/[.?]/)
+    if notes.blank? or notes.match(/[.?]$/)
       notes
     else
       "#{notes}."
