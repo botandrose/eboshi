@@ -29,10 +29,7 @@ class WorksController < ApplicationController
         wants.js { render :nothing => true }
       end
     else
-      respond_to do |wants|
-        wants.html { render :edit }
-        wants.js { exit }
-      end
+      render :edit
     end
   end
 
