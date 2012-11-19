@@ -25,11 +25,33 @@ class LineItem < ActiveRecord::Base
 
   validates_presence_of :client, :rate
     
-  scope :unbilled, :conditions => "invoice_id IS NULL", :order => 'start DESC'
-  scope :on_date,  lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_day.utc.to_s(:db)}'" } }
-  scope :on_week,  lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_week.yesterday.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_week.yesterday.end_of_day.utc.to_s(:db)}'" } }
-  scope :on_month, lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_month.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_month.end_of_day.utc.to_s(:db)}'" } }
-  scope :on_year,  lambda { |date| { :conditions => "`start` BETWEEN '#{date.beginning_of_year.beginning_of_day.utc.to_s(:db)}' AND '#{date.end_of_year.end_of_day.utc.to_s(:db)}'" } }
+  def self.unbilled
+    where(:invoice_id => nil).order("start DESC")
+  end
+
+  def self.on_date date
+    start = date.beginning_of_day
+    finish = date.end_of_day
+    where(:start => start..finish)
+  end
+
+  def self.on_week date
+    start = date.beginning_of_week(:sunday).beginning_of_day
+    finish = date.end_of_week(:sunday).end_of_day
+    where(:start => start..finish)
+  end
+
+  def self.on_month date
+    start = date.beginning_of_month.beginning_of_day
+    finish = date.end_of_month.end_of_day
+    where(:start => start..finish)
+  end
+
+  def self.on_year date
+    start = date.beginning_of_year.beginning_of_day
+    finish = date.end_of_year.end_of_day
+    where(:start => start..finish)
+  end
 
   def total
     0

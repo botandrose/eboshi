@@ -22,7 +22,7 @@ module CalendarHelper
     haml_tag :tbody do
       haml_tag :tr do
         # start out the week with last month's days
-        first.beginning_of_week.upto(first - 1.day) do |d|
+        first.beginning_of_week(:sunday).upto(first - 1.day) do |d|
           haml_tag :td, :class => "otherMonth" do
             haml_concat d.day
           end
@@ -41,7 +41,7 @@ module CalendarHelper
 
         # finish out the week with next month's days
         unless last.saturday?
-          (last + 1).upto(last.end_of_week) do |d|
+          (last + 1).upto(last.end_of_week(:sunday)) do |d|
             haml_tag :td, :class => "otherMonth" do
               haml_concat d.day
             end

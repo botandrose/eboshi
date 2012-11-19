@@ -51,17 +51,6 @@ class NilClass
 end
 
 class Date
-  def beginning_of_week
-    result = self - self.wday
-    self.acts_like?(:time) ? result.midnight : result
-  end
-  
-  def end_of_week
-    days_to_saturday = 6-self.wday
-    result = self + days_to_saturday.days
-    self.acts_like?(:time) ? result.midnight : result
-  end
-  
   def saturday?
     wday == 6
   end
