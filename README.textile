@@ -9,9 +9,7 @@ h2. Setup
 h3. Requirements
 
 * Ruby version 1.8.7
-* Bundler 1.0
-* Prince 7.0 for pdf output "http://www.princexml.com/download/":http://www.princexml.com/download/
-  * TODO: replace with wkhtmltopdf
+* wkhtmltopdf for pdf generation
 
 Other versions of these requirements may work, but have not been tested.
 
