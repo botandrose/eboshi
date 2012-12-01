@@ -49,7 +49,7 @@ $(function() {
       $.post(this.href, checkboxes.serialize(), function(data) {
         $(checkboxes[0]).parents("tr").replaceWith(data);
         checkboxes.slice(1).parents("tr").remove();
-      });
+      }, "text");
     }
     return false;
   });

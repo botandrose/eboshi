@@ -26,9 +26,11 @@ var AutoResizeTextArea = {
 //    $(dummy).css("margin-left", '6px')
 //    $(dummy).css("top", "282px")
     $(dummy).addClass("dummy")
+
     dummy.innerHTML = 'a';
-      
     var lineHeight = dummy.offsetHeight;  
+
+    dummy.innerHTML = el.value.replace(/\n/g, '<br>');  
       
     var checkExpandContract = function() {
       // hack width to fix, 3px too big for some god damned reason

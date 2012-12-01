@@ -67,24 +67,27 @@ Feature: Manage line items to contruct invoices
     Then I should see "Micah" in a line item
     And I should see "01/01/09" in a line item
     
-#  Scenario: User merges two time items
-#    When I follow "New Time Item"
-#    And I select "1pm" as the "Start" date and time
-#    And I select "3pm" as the "End" date and time
-#    And I fill in "Rate" with "75"
-#    And I fill in "Notes" with "new time item."
-#    And I press "Create"
-#    
-#    And I follow "New Time Item"
-#    And I select "6pm" as the "Start" date and time
-#    And I select "7pm" as the "End" date and time
-#    And I fill in "Rate" with "75"
-#    And I fill in "Notes" with "and another!"
-#    And I press "Create"
-#    
-#    And I check all time items
-#    And I follow "Merge"
-#    Then I should see "new time item. and another!"
-#    And I should see "3.00"
-#    And I should see "$225.00"    
-
+  Scenario: User merges two time items
+    When I follow "New Time Item"
+    # And I select "1pm" as the "Start" date and time
+    And I select "1 pm" from "work_start_4i"
+    # And I select "3pm" as the "End" date and time
+    And I select "3 pm" from "work_finish_4i"
+    And I fill in "Rate" with "75"
+    And I fill in "Notes" with "new time item."
+    And I press "Create"
+    
+    And I follow "New Time Item"
+    # And I select "6pm" as the "Start" date and time
+    And I select "6 pm" from "work_start_4i"
+    # And I select "7pm" as the "End" date and time
+    And I select "7 pm" from "work_finish_4i"
+    And I fill in "Rate" with "75"
+    And I fill in "Notes" with "and another!"
+    And I press "Create"
+    
+    And I check all time items
+    And I follow "Merge"
+    Then I should see "new time item. and another!"
+    And I should see "3.00"
+    And I should see "$225.00"    
