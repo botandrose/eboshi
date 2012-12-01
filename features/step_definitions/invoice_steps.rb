@@ -20,11 +20,10 @@ When /^I edit the first invoice for "([^\"]*)"$/ do |name|
 end
 
 When /^I uncheck the first line item$/ do
-  doc = Nokogiri::HTML(page.body)
-  uncheck doc.css("input[type=checkbox]").first[:id]
+  find("input[type=checkbox]").set false
 end
 
 Then /^I should see ([a-z]+) line items?$/ do |number|
   number = english_to_number number
-  page.all(".line_item").length.should == number
+  all(".line_item").length.should == number
 end
