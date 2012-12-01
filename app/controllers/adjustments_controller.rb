@@ -20,11 +20,11 @@ class AdjustmentsController < ApplicationController
   end
 
   def edit
-    @adjustment = Adjustment.find params[:id]
+    get_adjustment
   end
 
   def update
-    @adjustment = Adjustment.find params[:id]
+    get_adjustment
     if @adjustment.update_attributes params[:adjustment]
       flash[:notice] = "Successfully updated Adjustment."
       respond_to do |wants|
@@ -37,7 +37,7 @@ class AdjustmentsController < ApplicationController
   end
 
   def destroy
-    @adjustment = Adjustment.find params[:id]
+    get_adjustment
     @adjustment.destroy
     respond_to do |wants|
       wants.html { redirect_to invoices_path(@client) }
@@ -60,8 +60,12 @@ class AdjustmentsController < ApplicationController
       a[:user_id] = nil if a.delete(:no_user) == "1"
     end
 
+    def get_adjustment
+      @adjustment ||= Adjustment.find params[:id]
+    end
+
     def get_client
-      @client = params[:client_id] ? Client.find(params[:client_id]) : @adjustment.client
+      @client = params[:client_id] ? Client.find(params[:client_id]) : get_adjustment.client
     end
 
     def authorized?

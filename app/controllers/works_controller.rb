@@ -17,11 +17,11 @@ class WorksController < ApplicationController
   end
 
   def edit
-    @work = Work.find params[:id]
+    get_work
   end
 
   def update
-    @work = Work.find params[:id]
+    get_work
     if @work.update_attributes params[:work]
       flash[:notice] = "Successfully updated Work."
       respond_to do |wants|
@@ -34,7 +34,7 @@ class WorksController < ApplicationController
   end
 
   def destroy
-    @work = Work.find params[:id]
+    get_work
     @work.destroy
     invoice = @work.invoice || @client.build_invoice_from_unbilled
 
@@ -78,16 +78,19 @@ class WorksController < ApplicationController
   end
 
   def convert
-    @work = Work.find params[:id]
+    get_work
     @work.to_adjustment!
     flash[:notice] = "Time item converted to adjustment"
     redirect_to invoices_path(@client)
   end
 
   private
+    def get_work
+      @work ||= Work.find params[:id]
+    end
 
     def get_client
-      @client = (@work.try(:client) || Client.find(params[:client_id]))
+      @client = params[:client_id] ? Client.find(params[:client_id]) : get_work.client
     end
 
     def authorized?
