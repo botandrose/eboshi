@@ -47,14 +47,6 @@ class InvoicesController < ApplicationController
 
   def update
     @invoice = @client.invoices.find params[:id]
-
-    # HACK: this is bullshit. AR is broken?
-    line_item_ids = (params[:invoice].delete(:line_item_ids) || []).collect(&:to_i)
-    @invoice.line_items.each do |line_item|
-      line_item.update_attribute :invoice_id, nil unless line_item_ids.include?(line_item.id)
-    end
-    @invoice.reload
-
     if @invoice.update_attributes params[:invoice]
       flash[:notice] = "Invoice successfully updated."
       redirect_to invoices_path(@client)

@@ -2,7 +2,7 @@
 #ruby-gemset=eboshi
 source "http://rubygems.org"
 
-gem "rails"
+gem "rails", "3.2.8" # 3.2.9 has bug. see commit 3083a6a1af07e332b331a6b56e914ef361f65e8d
 gem "haml-rails"
 gem "mysql2"
 gem "bard-rake"
