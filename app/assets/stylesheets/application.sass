@@ -1,4 +1,27 @@
-@import "bard"
+@import "blueprint"
+@import "compass/reset"
+@import "compass/utilities"
+@import "compass/layout"
+@import "compass/css3"
+
+=blueprint($body_selector: "body")
+  +blueprint-typography($body_selector)
+  +blueprint-utilities
+  +blueprint-debug
+  +blueprint-interaction
+  +blueprint-colors
+  
+//
+
+$a: #333333
+$a_lt: #000000
+
+$content_width: 1000px
+$var_border: 3px double #666666
+
+//
+
+@import "general"
 
 body
   :margin 0
@@ -59,7 +82,7 @@ body
     h2
       :font-variant small-caps
     p
-      :font-size .8em
+      font-size: 0.9em
       :line-height 1
       :margin 3px 0
       :padding 2px 5px 1px 5px
@@ -162,45 +185,44 @@ body
   a
     :color #003300
 
-table#clients
-  tr
-    td
-      :height 24px
+#clients
+  td
+    height: 24px
 
-table.invoice
-  :margin 10px 0px
-  tr#totals
+.invoice
+  margin: 10px 0px
+  th, td
+    text-align: center
+    &.align-left
+      text-align: left
+  th
+    border-top: $var_border
+    border-bottom: $var_border
+  td
+    border-bottom: 1px solid #666666
+    border-right: 1px dotted #666666
+    padding: 2px
+    &:first-child
+      border-left: 1px dotted #666666
+    &:last-child
+      a
+        display: block
+        margin: 7px 0 7px 0
+        &.button
+          margin: 3px
+  #totals
     td
-      :border-bottom 3px double #000
-  tr
-    th
-      border-top: $var_border
-      border-bottom: $var_border
-  tr
-    td
-      :border-bottom 1px solid #666666
-      :border-right 1px dotted #666666
-      :padding 2px
-      &:first-child
-        :border-left 1px dotted #666666
-      
-  tr.line_item
+      border-bottom: 3px double #000
+  .line_item
     &.line_item_over
       :color #000
     &.line_item_selected
       :color #000
-    
-  td.notes
+  .notes
     textarea
       :width 96%
       :border 1px solid grey
-      
-  td:last-child
-    a
-      :display block
-      :margin 7px 0 7px 0
-    a.button
-      :margin 3px
+      font-size: 1em
 
 .dummy
   :line-height 14px
@@ -216,22 +238,17 @@ table.invoice
   :background #ffffff
   :margin 3px
   :text-align center
-  
   &:first-child
     :border-bottom none
     :padding 0px
-  
   &.unbilled
     :color #333
-
   &.paid
     :color green
     :background #DFF3E3
-
   &.unpaid
     :color red
     :background #EDE1E5
-
   h3
     :float left
     :padding 3px 0 0 0
