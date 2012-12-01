@@ -43,7 +43,7 @@ Feature: Manage line items to contruct invoices
     And I check "No date"
     And I press "Update"
     Then I should not see "Micah" in a line item
-    And I should not see "01/01/09/" in a line item
+    And I should not see "01/01/09" in a line item
     
   Scenario: User creates new flat fee without date and user
     When I follow "New Flat Fee"
