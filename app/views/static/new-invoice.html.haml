@@ -1,0 +1,82 @@
+.invoice-preview
+  .invoice-details.half
+    %h2 Invoice
+    %p
+      Date:
+      %b DD MMM YYYY
+    %p
+      Invoice Number:
+      %b ####
+    %p
+      Terms:
+      %b NET ##
+
+  .company.half
+    = image_tag "bot-and-rose.png"
+    %h3 Bot and Rose Design, Inc.
+    %p 625 NW Everett Street, #347
+    %p Portland, Oregon 97209
+    %p info@botandrose.com
+
+  .invoicee
+    %h5 Attn
+    %h3 Client Name
+    %h4 Client Organization
+
+  .project
+    %h5 Project
+    %h3 Project Name
+
+  %table.list-items
+    %thead
+      %tr
+        %th Item
+        %th Price
+        %th Qty
+        %th Total
+    %tbody
+      %tr
+        %td Feature: Lorem ipsum dolor sit amet
+        %td $###.##
+        %td #.##
+        %td $#,###.##
+      %tr
+        %td Bugfix: Morbi diam velit, tempus vitae egestas sit amet, suscipit non dolor
+        %td $###.##
+        %td #.##
+        %td $###.##
+      %tr
+        %td Chore: Aliquam sit amet arcu eros, et interdum libero
+        %td $###.##
+        %td #.##
+        %td $#,###.##
+    %tfoot
+      %tr
+        %td(colspan="3") Subtotal
+        %td $#,###.##
+      %tr
+        %td(colspan="3") Fees
+        %td $0
+      %tr
+        %td(colspan="3") Amount Paid
+        %td $0
+      %tr
+        %td(colspan="3") 
+          %b Balance Due
+        %td 
+          %b $#,###.##
+
+  .signature
+    %p Thank you,
+    = image_tag "mmg-sig.png"
+    %p Michael M Gubitosa
+    %p Bot and Rose Design, Inc.
+
+  .invoice-footer
+    %p 10% of balance will be added as a late fee for every 30 days past date of Invoice
+    %p 
+      Page
+      %b 1
+      of
+      %span 1
+    
