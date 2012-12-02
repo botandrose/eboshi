@@ -19,7 +19,3 @@
 
 set :output, "~/eboshi/log/whenever.log"
 job_type :rake, "bash -l -i -c 'cd :path && rake :task :output'"
-
-every 5.minutes do
-  rake "eboshi:cache_blog_feed"
-end

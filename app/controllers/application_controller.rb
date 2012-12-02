@@ -13,7 +13,6 @@ class ApplicationController < ActionController::Base
   before_filter :autoinstall
   before_filter :activate_authlogic
   before_filter :require_user
-  before_filter :fetch_blog_feed
 
   private
     def correct_webkit_and_ie_accept_headers
@@ -22,12 +21,6 @@ class ApplicationController < ActionController::Base
 
     def autoinstall
       redirect_to new_install_path if User.count == 0
-    end
-
-    def fetch_blog_feed
-      return true if `hostname`.starts_with? "Theia"
-      @blog_feed = Atom::Feed.load_feed(File.open("#{Rails.root}/db/blog_feed.atom"))
-      @blog_feed = @blog_feed.entries.first
     end
 
     def current_user_session

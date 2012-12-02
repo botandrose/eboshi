@@ -7,7 +7,6 @@ doc/app
 doc/spec/*
 db/data.*
 db/*.sqlite3
-db/blog_feed.atom
 config/database.yml
 coverage
 public/stylesheets/*.css

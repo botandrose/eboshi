@@ -38,19 +38,6 @@
                   %span Welcome, #{current_user.name}!
                 .clear
             .clear
-            - unless `hostname`.starts_with? "Theia"
-              #blog.right
-                %h2
-                  Latest news from the Eboshi Blog
-                  %a{:href => "http://eboshi-app.blogspot.com/feeds/posts/default"}
-                    = image_tag "feed-icon.gif", :size => "16x16"
-                %p
-                  = @blog_feed.updated.to_date.to_s(:long)
-                  \:
-                  = link_to h(@blog_feed.title), "http://eboshi-app.blogspot.com", :target => "_blank"
-                %p
-                  = truncate @blog_feed.content, :length => 100
-                  = link_to "more &raquo;", "http://eboshi-app.blogspot.com", :target => "_blank"
           #title
             %h1 
               %a{:href => "/"} EBO$HI
