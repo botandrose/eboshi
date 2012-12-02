@@ -16,11 +16,13 @@ gem "dynamic_form"
 gem "wicked_pdf"
 
 gem "sprockets-image_compressor"
+gem "asset_precompilation_finder"
 gem "sass-rails"
 gem "compass-rails"
 gem "coffee-rails"
 gem "therubyracer"
 gem "uglifier"
+gem "turbo-sprockets-rails3"
 
 gem "jquery-rails"
 gem "jquery-ui-rails"
