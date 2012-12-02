@@ -13,6 +13,7 @@ gem "chronic"
 gem "default_value_for"
 gem "dynamic_form"
 gem "wicked_pdf"
+gem "bard_static"
 
 gem "sprockets-image_compressor"
 gem "asset_precompilation_finder"
