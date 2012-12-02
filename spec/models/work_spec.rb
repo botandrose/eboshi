@@ -11,7 +11,7 @@ describe Work do
     
     it "should correctly merge multiple items" do
       @client = Client.make
-      @billed1 = Work.make :client => @client, :start => Time.today + 1.hour, :finish => Time.today + 2.hour
+      @billed1 = Work.make :client => @client, :start => Time.now + 1.hour, :finish => Time.now + 2.hour
       @billed2 = Work.make :client => @client
       @merged = Work.merge_from_ids [@billed1.id, @billed2.id]
       @merged.reload
@@ -27,7 +27,7 @@ describe Work do
 
   describe "when converting to an adjustment" do
     it "should work" do
-      @work = Work.make :start => Time.today, :finish => Time.today + 2.hours, :rate => 50
+      @work = Work.make :start => Time.now, :finish => Time.now + 2.hours, :rate => 50
       @work.to_adjustment!
       @work.type.should == "Adjustment"
       @work.rate.should == 100
@@ -36,7 +36,7 @@ describe Work do
   
   describe "billed" do
     before(:each) do
-      @line_item = Work.make :start => Time.today, :finish => Time.today + 1.hour, :rate => 50
+      @line_item = Work.make :start => Time.now, :finish => Time.now + 1.hour, :rate => 50
     end
 
     it "should calculate the hours correctly" do
@@ -48,7 +48,7 @@ describe Work do
     end
 
     it "should be compared to other line items by start time descending" do
-      @billed1 = Work.make :start => Time.today + 1.hour, :finish => Time.today + 2.hour
+      @billed1 = Work.make :start => Time.now + 1.hour, :finish => Time.now + 2.hour
       @billed2 = Work.make
       @billed1.should < @billed2
       @billed1.should_not > @billed2

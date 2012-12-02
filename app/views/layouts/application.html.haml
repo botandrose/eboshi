@@ -75,20 +75,20 @@
               %col{:width=>"20%"}
                 %tr
                   %td Year
-                  %td= pluralize number_with_precision(current_user.hours_by_year(Time.zone.today), :precision => 0), 'hour'
-                  %td= currency_or_empty current_user.total_by_year(Time.zone.today)
+                  %td= pluralize number_with_precision(current_user.hours_by_year(Date.today), :precision => 0), 'hour'
+                  %td= currency_or_empty current_user.total_by_year(Date.today)
                 %tr
                   %td Month
-                  %td= pluralize number_with_precision(current_user.hours_by_month(Time.zone.today), :precision => 0), 'hour'
-                  %td= currency_or_empty current_user.total_by_month(Time.zone.today)
+                  %td= pluralize number_with_precision(current_user.hours_by_month(Date.today), :precision => 0), 'hour'
+                  %td= currency_or_empty current_user.total_by_month(Date.today)
                 %tr
                   %td Week
-                  %td= pluralize number_with_precision(current_user.hours_by_week(Time.zone.today), :precision => 0), 'hour'
-                  %td= currency_or_empty current_user.total_by_week(Time.zone.today)
+                  %td= pluralize number_with_precision(current_user.hours_by_week(Date.today), :precision => 0), 'hour'
+                  %td= currency_or_empty current_user.total_by_week(Date.today)
                 %tr
                   %td Day
-                  %td= pluralize number_with_precision(current_user.hours_by_date(Time.zone.today), :precision => 0), 'hour'
-                  %td= currency_or_empty current_user.total_by_date(Time.zone.today)
+                  %td= pluralize number_with_precision(current_user.hours_by_date(Date.today), :precision => 0), 'hour'
+                  %td= currency_or_empty current_user.total_by_date(Date.today)
             %p= link_to "details", "/calendar"
             %br
 

@@ -45,11 +45,6 @@ class Date
   end
   
   def today?
-    self.to_date == Time.zone.today.to_date
+    self.to_date == Date.today
   end
 end
-
-def Time.today
-  t = Time.now
-  t - ((t.to_f + t.gmt_offset) % 86400)
-end unless defined? Time.today

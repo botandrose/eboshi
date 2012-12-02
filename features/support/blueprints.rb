@@ -19,8 +19,8 @@ User.blueprint do
   email { Faker::Internet.email }
   password "secret"
   password_confirmation "secret"
-  created_at { Time.today }
-  updated_at { Time.today }
+  created_at { Time.now }
+  updated_at { Time.now }
   rate 50
   color '123456'
 end
@@ -29,8 +29,8 @@ Work.blueprint do
   client
   invoice
   user
-  start { Time.today }
-  finish { Time.today + 1.hour }
+  start { Time.now }
+  finish { Time.now + 1.hour }
   rate 50
   notes { Faker::Lorem.sentence rand(3) }
 end
@@ -48,7 +48,7 @@ end
 
 Invoice.blueprint do
   client
-  date { Time.zone.today }
+  date { Time.zone.now }
   project_name { Faker::Company.name }
 end
 
