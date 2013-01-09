@@ -78,7 +78,7 @@ describe Work do
   
   describe "incomplete" do
     before do
-      @line_item = Work.make :invoice => nil
+      @line_item = Work.make :invoice => nil, :start => 1.day.ago
       @line_item.finish = @line_item.start
     end
 
