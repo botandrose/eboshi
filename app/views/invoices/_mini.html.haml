@@ -1,16 +1,17 @@
-%div{ :class => "#{invoice.status} invoice", :id => "invoice_#{invoice.id_or_new}" }
-  = link_to 'Details', edit_invoice_path(invoice), :class => 'mini_invoice_show_details button left'
-  %h3
-    = "\##{invoice.id} - "
-    = "#{invoice.project_name} - " unless invoice.project_name.blank?
-    = invoice.date.to_s(:slash)+": "
-    = invoice.paid? ? number_to_currency(invoice.total) : number_to_currency(invoice.balance)
-    = invoice.status
-    %span
-      - unless invoice.payments.empty?
-        - invoice.payments.each do |p|
-          %span= number_to_currency(p.total)+' paid on '+p.created_at.to_s(:slash)
-  = link_to 'Export PDF', invoice_path(invoice, :format => :pdf), :class=>"button right"
-  - unless invoice.paid?
-    = link_to 'Log payment', new_payment_path(invoice), :class => 'mini_invoice_make_payment button right'
-  .clear
+= cache invoice do
+  %div{ :class => "#{invoice.status} invoice", :id => "invoice_#{invoice.id_or_new}" }
+    = link_to 'Details', edit_invoice_path(invoice), :class => 'mini_invoice_show_details button left'
+    %h3
+      = "\##{invoice.id} - "
+      = "#{invoice.project_name} - " unless invoice.project_name.blank?
+      = invoice.date.to_s(:slash)+": "
+      = invoice.paid? ? number_to_currency(invoice.total) : number_to_currency(invoice.balance)
+      = invoice.status
+      %span
+        - unless invoice.payments.empty?
+          - invoice.payments.each do |p|
+            %span= number_to_currency(p.total)+' paid on '+p.created_at.to_s(:slash)
+    = link_to 'Export PDF', invoice_path(invoice, :format => :pdf), :class=>"button right"
+    - unless invoice.paid?
+      = link_to 'Log payment', new_payment_path(invoice), :class => 'mini_invoice_make_payment button right'
+    .clear

@@ -21,7 +21,7 @@ class LineItem < ActiveRecord::Base
 
   belongs_to :client
   belongs_to :user
-  belongs_to :invoice
+  belongs_to :invoice, :touch => true
 
   validates_presence_of :client, :rate
     
