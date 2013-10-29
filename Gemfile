@@ -1,5 +1,3 @@
-#ruby=ree-1.8.7-2011.03
-#ruby-gemset=eboshi
 source "http://rubygems.org"
 
 gem "rails"
