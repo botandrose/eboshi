@@ -11,7 +11,7 @@ describe CalendarHelper do
     end
 
     it "should accept a block for date html" do
-      Delorean.time_travel_to "6/19/1983" do
+      Delorean.time_travel_to "1983-06-19" do
         opts = {
           :year => 1983, 
           :month => 6
