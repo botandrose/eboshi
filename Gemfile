@@ -13,6 +13,9 @@ gem "dynamic_form"
 gem "wicked_pdf"
 gem "bard_static"
 
+gem "rack-mini-profiler"
+gem "flamegraph"
+
 gem "sprockets-image_compressor"
 gem "asset_precompilation_finder"
 gem "sass-rails"
