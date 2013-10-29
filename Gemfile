@@ -44,6 +44,8 @@ group :test do
   gem "database_cleaner"
   gem "poltergeist"
   gem "pickle"
+
+  gem "coveralls", require: false
 end
 
 group :production do
