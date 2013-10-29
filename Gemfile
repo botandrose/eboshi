@@ -16,6 +16,8 @@ gem "bard_static"
 gem "rack-mini-profiler"
 gem "flamegraph"
 
+gem "coveralls", require: false
+
 gem "sprockets-image_compressor"
 gem "asset_precompilation_finder"
 gem "sass-rails"
@@ -44,8 +46,6 @@ group :test do
   gem "database_cleaner"
   gem "poltergeist"
   gem "pickle"
-
-  gem "coveralls", require: false
 end
 
 group :production do
