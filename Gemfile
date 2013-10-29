@@ -27,14 +27,12 @@ gem "jquery-ui-rails"
 
 group :test, :development do
   gem "pry"
-  gem "ruby-debug"
+  gem "pry-debugger"
   gem "quiet_assets"
-
   gem "rspec-rails"
 end
 
 group :test do
-  gem "rcov"
   gem "machinist", "~>1.0"
   gem "faker"
   gem "delorean"
