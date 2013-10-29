@@ -11,7 +11,7 @@
     = yield :css
 
     - if current_user
-      %style{type="text/css"}
+      %style
         :plain
           a:hover, input.button:hover {color: ##{current_user.color};}
           .button:hover, input.button:hover {border-color:##{current_user.color};}
