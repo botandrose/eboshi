@@ -36,7 +36,7 @@ GEM
     authlogic (3.2.0)
       activerecord (>= 3.0.0)
       activesupport (>= 3.0.0)
-    bard-rake (0.10.2)
+    bard-rake (0.10.5)
     bard_static (1.4.1)
     builder (3.0.4)
     capybara (1.1.4)
