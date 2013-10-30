@@ -1,6 +1,6 @@
 class Baseline < ActiveRecord::Migration
   def change
-    create_table "clients", :force => true do |t|
+    create_table "clients" do |t|
       t.string   "name"
       t.string   "address"
       t.string   "city"
@@ -14,13 +14,13 @@ class Baseline < ActiveRecord::Migration
       t.datetime "updated_at"
     end
 
-    create_table "invoices", :force => true do |t|
+    create_table "invoices" do |t|
       t.integer  "client_id"
       t.datetime "date"
       t.string   "project_name"
     end
 
-    create_table "line_items", :force => true do |t|
+    create_table "line_items" do |t|
       t.integer  "client_id"
       t.integer  "user_id"
       t.datetime "start"
@@ -33,14 +33,14 @@ class Baseline < ActiveRecord::Migration
       t.string   "type"
     end
 
-    create_table "payments", :force => true do |t|
+    create_table "payments" do |t|
       t.integer  "invoice_id"
       t.decimal  "total",      :precision => 10, :scale => 2
       t.datetime "created_at"
       t.datetime "updated_at"
     end
 
-    create_table "users", :force => true do |t|
+    create_table "users" do |t|
       t.string   "login"
       t.string   "email"
       t.string   "crypted_password",          :limit => 40
