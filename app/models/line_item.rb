@@ -59,7 +59,8 @@ class LineItem < ActiveRecord::Base
 
   def hours
     return 0 unless finish and start
-    BigDecimal.new(((finish - start) / 60 / 60).to_s)
+    seconds = BigDecimal.new((finish - start).to_s)
+    seconds / 60 / 60
   end
   
   def == (target)
