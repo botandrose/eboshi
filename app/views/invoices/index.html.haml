@@ -11,3 +11,8 @@
   .clear
     
 = render @invoices
+
+%p
+  Total:
+  = @client.invoices.sum(&:total)
+
