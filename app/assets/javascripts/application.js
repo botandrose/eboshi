@@ -15,38 +15,6 @@ jQuery.ajaxSetup({
   'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
 })
 
-// Ajax shorthand
-
-jQuery.fn.POST = function(callback, type) {
-  return jQueryGETorPOST.call(this, "POST", callback, type)
-}
-
-jQuery.fn.GET = function(callback, type) {
-  return jQueryGETorPOST.call(this, "GET", callback, type)
-}
-
-function jQueryGETorPOST(method, callback, type) {
-  method = (method == "GET" ? $.get : $.post)
-  if(!type) type = "html"
-  var event = this.is("form") ? "submit" : "click"
-  this.live(event, function() {
-    var el = $(this)
-    var url = el.is("form") ? el.attr("action") : el.attr("href")
-    var params = el.is("form") ? el.serialize() : null
-    method(url, params, function(data, textStatus) { callback.call(el, data, textStatus) }, type)
-    return false
-  })
-  return this
-  
-}
-
-// Checkbox toggle
-
-jQuery.fn.toggleChecks = function(bool) {
-  if(!$(this).is(":checkbox")) return false
-  $(this).attr("checked", !$(this).attr("checked"))
-}
-
 // Misc ///////////////////////////////////////////////////////////////////////
 
 Date.prototype.toSQL = function() {

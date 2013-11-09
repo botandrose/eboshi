@@ -1,17 +1,16 @@
 //= require_self
-//= require auto_resize_textareas
 //= require edit_in_place
 
 $(function() {
-  $("tr.line_item").live('mouseover', function() {
+  $("#content").on("mouseover", "tr.line_item", function() {
     $(this).addClass("line_item_over");
   });
 
-  $("tr.line_item").live('mouseout', function() {
+  $("#content").on("mouseout", "tr.line_item", function() {
     $(this).removeClass("line_item_over");
   });
 
-  $("tr.line_item").live('click', function(e) {
+  $("#content").on("click", "tr.line_item", function() {
     if(e.target.type == 'textarea') return;
     $(this).toggleClass("line_item_selected");
     if(!$(e.target).is(":checkbox")) $(this).find(":checkbox").toggleChecks();
@@ -23,16 +22,20 @@ $(function() {
     return false;
   });
 
-  $("form:has(#clock_in)").POST(function(data) {
-    $("tr#totals").after(data);
+  $("form:has(#clock_in)").submit(function() {
+    $.post(this.action, this.serialize()).success(function(data) {
+      $("tr#totals").after(data);
+    });
   });
 
-  $("tr.line_item a.clock_out").POST(function(data) {
-    this.parents("tbody").find("tr#totals td.total").text(number_to_currency(data.total));
-    this.parents("tr").replaceWith(data.work);
-  }, "json");
+  $("tr.line_item a.clock_out").submit(function() {
+    $.post(this.action. this.seralize()).success(function(data) {
+      this.parents("tbody").find("tr#totals td.total").text(number_to_currency(data.total));
+      this.parents("tr").replaceWith(data.work);
+    });
+  });
 
-  $("tr.line_item a.delete").live('click', function() {
+  $("#content").on("click", "tr.line_item a.delete", function() {
     var a = this;
     if(confirm('Are you sure you want to delete this line item? This cannot be undone!')) {
       $.post(a.href, '_method=delete', function(data) {
@@ -54,18 +57,15 @@ $(function() {
     return false;
   });
 
-  $("a.mini_invoice_show_details").GET(function(data) {
-    this.parents("div:first").replaceWith(data);
+  $("a.mini_invoice_show_details").click(function() {
+    $.get(this.href).success(function(data) {
+      this.parents("div:first").replaceWith(data);
+    });
   });
 
-  $("a.invoice_hide_details").GET(function(data) {
-    this.parents("table:first").replaceWith(data);
-  });
-  
-  $("a.select_all").live('click', function() {
-    $(".line_item input:checkbox").each(function() { this.checked = true });
-  });
-  $("a.select_none").live('click', function() {
-    $(".line_item input:checkbox").each(function() { this.checked = false });
+  $("a.invoice_hide_details").click(function() {
+    $.get(this.href).success(function(data) {
+      this.parents("table:first").replaceWith(data);
+    });
   });
 });
