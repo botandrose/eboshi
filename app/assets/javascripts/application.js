@@ -3,11 +3,17 @@
 //= require jquery.ui.all
 
 //= require_self
-//= require pretty_flash
 //= require toggle_summaries
 //= require friendly_time_select
 //= require invoices
 //= require new_invoice
+
+// Checkbox toggle
+
+jQuery.fn.toggleChecks = function(bool) {
+  if(!$(this).is(":checkbox")) return false
+  $(this).attr("checked", !$(this).attr("checked"))
+}
 
 // jQuery extensions //////////////////////////////////////////////////////////
 

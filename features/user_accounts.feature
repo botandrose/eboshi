@@ -1,5 +1,4 @@
 Feature: User accounts
-  Background:
 
   Scenario: User logs out
     Given I am signed in as "Micah"
@@ -11,7 +10,8 @@ Feature: User accounts
     When I follow "Add Client"
     And I fill in "Company Name" with "Domaine Selections"
     And I press "Create"
-    Then I should see "Domaine Selections" under "Clients"
+    Then I should see the following clients:
+      | Domaine Selections |
     
   Scenario: User cancels my account
     Given I am signed in as "Micah"

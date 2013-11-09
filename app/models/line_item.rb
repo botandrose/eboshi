@@ -85,14 +85,6 @@ class LineItem < ActiveRecord::Base
     invoice.try(:total) || client.unbilled_balance
   end
   
-  def notes_with_period
-    if notes.blank? or notes.match(/[.?]$/)
-      notes
-    else
-      "#{notes}."
-    end
-  end
-
   def <=> target
     (target.start || Time.zone.parse("0000-01-01")) <=> (self.start || Time.zone.parse("0000-01-01"))
   end

@@ -10,7 +10,7 @@ $(function() {
     $(this).removeClass("line_item_over");
   });
 
-  $("#content").on("click", "tr.line_item", function() {
+  $("#content").on("click", "tr.line_item", function(e) {
     if(e.target.type == 'textarea') return;
     $(this).toggleClass("line_item_selected");
     if(!$(e.target).is(":checkbox")) $(this).find(":checkbox").toggleChecks();

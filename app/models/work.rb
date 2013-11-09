@@ -24,7 +24,7 @@ class Work < LineItem
   def self.merge_from_ids(ids)
     works = Work.find ids, :order => "finish DESC"
     hours = works.sum(&:hours)
-    notes = works.collect(&:notes_with_period).select(&:present?).join(' ')
+    notes = works.collect(&:notes).select(&:present?).join(' ')
     works.first.update_attributes :hours => hours, :notes => notes
 
     Work.destroy ids[1..-1] # destroy all but the first work

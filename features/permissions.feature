@@ -1,3 +1,4 @@
+@allow-rescue
 Feature: User permissions
   Background:
     Given I am signed in as "Micah"
@@ -21,3 +22,4 @@ Feature: User permissions
   Scenario: Users shouldnt be able to access unassigned payments
     Given an invoice exists for "fashions weekly"
     Then visiting the new payment page for that invoice should return 404
+

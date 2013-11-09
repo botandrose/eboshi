@@ -11,6 +11,15 @@ module HtmlSelectorsHelpers
     when "the page"
       "html > body"
 
+    when "the sidebar"
+      "#sidebar"
+
+    when "today"
+      ".today"
+
+    when /the "(.+)" collaborator/
+      ["li", text: $1]
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

@@ -10,11 +10,7 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new params[:user_session]
     if @user_session.save
       flash[:notice] = "Login successful!"
-      if @user_session.user.last_client
-        redirect_to invoices_path(@user_session.user.last_client)
-      else
-        redirect_back_or_default '/'
-      end
+      redirect_to_last_client_or_back_or_default
     else
       render "new"
     end
@@ -22,7 +18,6 @@ class UserSessionsController < ApplicationController
 
   def destroy
     current_user_session.destroy
-    flash[:notice] = "Logout successful!"
-    redirect_to login_path
+    redirect_to login_path, notice: "Logout successful!"
   end
 end

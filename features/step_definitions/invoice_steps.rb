@@ -20,10 +20,19 @@ When /^I edit the first invoice for "([^\"]*)"$/ do |name|
 end
 
 When /^I uncheck the first line item$/ do
-  find("input[type=checkbox]").set false
+  all("input[type=checkbox]")[0].set false
 end
 
 Then /^I should see ([a-z]+) line items?$/ do |number|
   number = english_to_number number
   all(".line_item").length.should == number
 end
+
+Then "I should see the following invoice breakdown:" do |table|
+  actual = all("tr.breakdown").map do |row|
+    text = row.all("td,th").map(&:text)
+    [text[1], text[3], text[5]]
+  end
+  table.diff! actual
+end
+

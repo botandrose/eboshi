@@ -22,5 +22,7 @@
 
 - unless current_user.works.on_month(@date).empty?
   %h2 Total
-  %p= pluralize number_with_precision(current_user.hours_by_month(@date), :precision => 0), 'hour'
-  %p= number_to_currency current_user.total_by_month(@date)
+  %ul#calendar_summary
+    %li= pluralize number_with_precision(current_user.hours_by_month(@date), :precision => 0), 'hour'
+    %li= number_to_currency current_user.total_by_month(@date)
+

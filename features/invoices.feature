@@ -41,3 +41,4 @@ Feature: Invoices
 
     When I go to the first invoice for "bossanova"
     Then I should see two line items
+

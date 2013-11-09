@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     @user = User.find params[:id]
     if @user.update_attributes params[:user]
       flash[:notice] = "Account updated!"
-      redirect_to User
+      redirect_to_last_client_or_back_or_default
     else
       render :edit
     end

@@ -4,17 +4,15 @@
   
 = form_for [@client, @assignment] do |f|
   %h2 Existing User
-  - current_user.related_users.each do |user|
-    %div
-      = f.radio_button "user_id", user.id
-      = label_tag "assignment_user_id_#{user.id}", h(user.name)
+  %ul#existing_users
+    - current_user.related_users.each do |user|
+      %li
+        = f.radio_button "user_id", user.id
+        = label_tag "assignment_user_id_#{user.id}", h(user.name)
 
-  %div
-    = radio_button_tag "assignment_user_id", 0
-    = label_tag "assignment_user_id_0", "Other"
-
-  %div
-    = label_tag "assignment_email", "Email"
-    = text_field_tag "assignment[email]"
+    %li
+      = radio_button_tag "assignment_user_id", 0
+      = label_tag "assignment_user_id_0", "Other"
+      = text_field_tag "assignment[email]", "", placeholder: "Email"
 
   = f.submit "Invite"

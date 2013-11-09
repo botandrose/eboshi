@@ -76,7 +76,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def users
-    line_items.collect(&:user).uniq
+    line_items.collect(&:user).uniq.sort_by { |user| user.try(:name) }
   end
-  
 end
+  

@@ -59,8 +59,16 @@ class ApplicationController < ActionController::Base
       session[:return_to] = request.fullpath
     end
 
-    def redirect_back_or_default(default)
+    def redirect_to_back_or_default(default)
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
+    end
+
+    def redirect_to_last_client_or_back_or_default
+      if current_user.last_client
+        redirect_to invoices_path(current_user.last_client)
+      else
+        redirect_to_back_or_default '/'
+      end
     end
 end

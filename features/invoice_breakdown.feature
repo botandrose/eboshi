@@ -15,10 +15,8 @@ Feature: Should be able to see the user breakdown for each invoice
     And a unbilled work exists with client: that client, user: user "Kit"
     And I am on the invoices page for "bossanova"
 
-    Then I should see "$150" next to "Micah"
-    And I should see "$100" next to "Michael"
-    And I should see "$50" next to "Kit"
+    Then I should see the following invoice breakdown:
+      | Kit     | 1.00 | $50.00  |
+      | Micah   | 3.00 | $150.00 | 
+      | Michael | 2.00 | $100.00 |
 
-    Then I should see "3" next to "Micah"
-    And I should see "2" next to "Michael"
-    And I should see "1" next to "Kit"

@@ -46,31 +46,34 @@
             %b.red UNPAID
             =# button_to 'Mark as Paid', paid_invoice_path(invoice)
   
-  %tr#new_line_items
-    %th
-    %th user
-    %th time
-    %th hours
-    %th rate
-    %th total
-    %th notes
-  %tr#totals
-    %td{:colspan => "3"}
-    %td.total_hours= number_with_precision invoice.total_hours, :precision => 2  
-    %td &nbsp;
-    %td.total= number_to_currency invoice.balance
-    %td.align_left
-      %b Current Balance
-  = render invoice.line_items.sort
-  - invoice.users.each_with_index do |user, i|
-    %tr.breakdown
-      %td
-      %td= user ? h(user.name) : "<em>Ambiguous</em>".html_safe
-      %td
-      %td.total_hours= number_with_precision invoice.total_hours_for_user(user), :precision => 2  
+    %tr#new_line_items
+      %th
+      %th user
+      %th time
+      %th hours
+      %th rate
+      %th total
+      %th notes
+    %tr#totals
+      %td{:colspan => "3"}
+      %td.total_hours= number_with_precision invoice.total_hours, :precision => 2  
       %td &nbsp;
-      %td.total= number_to_currency invoice.total_for_user(user)
-      - if i == 0
-        %td.align_left{ :rowspan => invoice.users.count, :valign => "middle" }
-          %b Breakdown
+      %td.total= number_to_currency invoice.balance
+      %td.align_left
+        %b Current Balance
+
+  %tbody
+    = render invoice.line_items.sort
+  %tfoot
+    - invoice.users.each_with_index do |user, i|
+      %tr.breakdown
+        %td
+        %td= user ? h(user.name) : "<em>Ambiguous</em>".html_safe
+        %td
+        %td.total_hours= number_with_precision invoice.total_hours_for_user(user), :precision => 2  
+        %td &nbsp;
+        %td.total= number_to_currency invoice.total_for_user(user)
+        - if i == 0
+          %td.align_left{ :rowspan => invoice.users.count, :valign => "middle" }
+            %b Breakdown
 

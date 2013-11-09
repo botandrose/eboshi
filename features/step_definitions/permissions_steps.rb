@@ -1,9 +1,3 @@
-When /^I click "(.+)" next to "(.+)"$/ do |link, context|
-  within("li:contains('#{context}')") do
-    click_link link
-  end
-end
-
 Then /^visiting the invoices page for "(.+)" should return 404$/ do |name|
   client = Client.find_by_name name
   visit "/clients/#{client.id}/invoices"
@@ -23,3 +17,4 @@ Then /^visiting the new payment page for that invoice should return 404$/ do
   visit new_payment_path(invoice)
   page.should have_content("RecordNotFound")
 end
+

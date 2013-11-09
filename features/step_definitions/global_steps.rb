@@ -34,14 +34,3 @@ Given /^I worked (\d+) hours for "([^\"]*)" today$/ do |hours, client_name|
   client.works.make :start => Time.zone.today + 1.hour, :finish => Time.zone.today + 1.hour + hours.to_f.hours, :user => @user
 end
 
-Then /^I should see "([^\"]*)" next to "([^\"]*)"$/ do |text, context|
-  page.should have_css("*:contains('#{context}') ~ *:contains('#{text}')")
-end
-
-Then /^I should see "(.+)" under "(.+)"$/ do |name, heading|
-  page.should have_css("h2:contains('#{heading}') ~ *:contains('#{name}')")
-end
-
-Then /^I should not see "(.+)" under "(.+)"$/ do |name, heading|
-  page.should_not have_css("h2:contains('#{heading}') ~ *:contains('#{name}')")
-end

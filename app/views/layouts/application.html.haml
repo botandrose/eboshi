@@ -21,8 +21,8 @@
     %link{:rel => "shortcut icon", :href => image_path("/favicon.png"), :type => "image/x-icon"}
 
   %body
-    #flash_notice{ :style => "display: none" }= flash[:notice]
-    #flash_error{ :style => "display: none" }= flash[:error]
+    #flash_notice= flash[:notice]
+    #flash_error= flash[:error]
 
     #wrapper
       #header_container
@@ -81,17 +81,18 @@
 
           - if @client and !@client.new_record?
             %h2 Collaborators
-            - @client.assignments.each do |assignment|
-              - next if assignment.new_record?
-              %li
-                = h assignment.user.name
-                = link_to 'delete', assignment, :method => :delete
+            %ul#collaborators
+              - @client.assignments.each do |assignment|
+                - next if assignment.new_record?
+                %li
+                  %span= assignment.user.name
+                  = link_to "delete", assignment, :method => :delete
             = link_to '+ Invite collaborator', new_assignment_path(@client), :class=>"button right"
             .clear
 
           - if current_user
             %h2= link_to "Clients", clients_path  
-            %table{:width=>"100%", :border=>"0", :cellspacing=>"0", :cellpadding=>"0"}
+            %table#clients_summary{:width=>"100%", :border=>"0", :cellspacing=>"0", :cellpadding=>"0"}
               %col{:width=>"60%"}
               %col{:width=>"20%"}
               %col{:width=>"20%"}

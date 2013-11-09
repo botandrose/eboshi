@@ -7,11 +7,11 @@ When /^I upload a signature$/ do
 end
 
 Then /^the logo should say "([^\"]*)"$/ do |text|
-  page.should have_css("#logo:contains('#{text}')")
+  page.should have_css("#logo", text: text)
 end
 
 Then /^the signature should say "([^\"]*)"$/ do |text|
-  page.should have_css("#sig:contains('#{text}')")
+  page.should have_css("#sig", text: text)
 end
 
 Then /^the logo should be an image$/ do

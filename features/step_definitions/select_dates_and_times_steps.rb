@@ -4,7 +4,7 @@ module Cucumber
   module Rails
     module CapybaraSelectDatesAndTimes
       def select_date(field, options = {})
-        id = find("label:contains('#{field}')")["for"]
+        id = find("label", text: field)["for"]
         date = Date.parse(options[:with])
         find("select##{id}_1i option[value='#{date.year}']").select_option
         find("select##{id}_2i option[value='#{date.month}']").select_option
@@ -12,7 +12,7 @@ module Cucumber
       end
 
       def select_time(field, options = {})
-        id = find("label:contains('#{field}')")["for"]
+        id = find("label", text: field)["for"]
         time = Time.parse(options[:with])
         find("select##{id}_4i option[value='#{time.hour.to_s.rjust(2,'0')}']").select_option
         find("select##{id}_5i option[value='#{time.min.to_s.rjust(2,'0')}']").select_option

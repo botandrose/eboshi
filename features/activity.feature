@@ -20,14 +20,9 @@ Feature: Sidebar should include a summary of user activity
     And today is "1983-06-20"
     And I am on the invoices page for "bossanova"
 
-    Then I should see "10 hours" next to "Year"
-    And I should see "$500.00" next to "Year"
+    Then I should see the following activity summary:
+      | Year  | 10 hours | $500.00 |
+      | Month | 6 hours  | $300.00 |
+      | Week  | 5 hours  | $250.00 |
+      | Day   | 2 hours  | $100.00 |
 
-    And I should see "6 hours" next to "Month"
-    And I should see "$300.00" next to "Month"
-
-    And I should see "5 hours" next to "Week"
-    And I should see "$250.00" next to "Week"
-
-    And I should see "2 hours" next to "Day"
-    And I should see "$100.00" next to "Day"
