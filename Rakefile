@@ -11,3 +11,5 @@ Coveralls::RakeTask.new
 
 task :ci => ["coveralls:push"]
 
+task :post_production => ["tmp:clear"]
+
