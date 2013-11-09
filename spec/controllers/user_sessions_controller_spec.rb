@@ -7,14 +7,17 @@ describe UserSessionsController do
     it "on new" do
     	get :new
 		end
+
 		it "on create" do
-			User.stub!(:authenticate).and_return User.make
+			User.stub authenticate: User.make
 			post :create
 		end
+
 		it "on destroy" do
-		  controller.stub!(:current_user_session).and_return(mock("current_user_session").as_null_object)
+      session = double.as_null_object
+		  controller.stub current_user_session: session
 			get :destroy
 		end
   end
-
 end
+

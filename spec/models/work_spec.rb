@@ -20,7 +20,7 @@ describe Work do
       @merged.total.should == 100
       @merged.notes.should include(@billed1.notes)
       @merged.notes.should include(@billed2.notes)
-      lambda { Work.find(@billed1.id) }.should_not raise_error(ActiveRecord::RecordNotFound)
+      lambda { Work.find(@billed1.id) }.should_not raise_error
       lambda { Work.find(@billed2.id) }.should raise_error(ActiveRecord::RecordNotFound)
     end
   end

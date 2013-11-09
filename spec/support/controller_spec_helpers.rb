@@ -5,9 +5,10 @@ module ControllerSpecHelpers
       
       before :each do
         @current_user = User.make :business_name => "Micah Geisel"
-        @current_user.stub!(:authorized?).and_return(true)
-        controller.stub!(:current_user).and_return(@current_user)        
+        @current_user.stub authorized?: true
+        controller.stub current_user: @current_user
       end
     end
   end
 end
+

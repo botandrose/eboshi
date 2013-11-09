@@ -9,7 +9,8 @@ describe UsersController do
 
   describe "should not error out" do
     it "on index" do
-      controller.stub!(:current_user).and_return(User.make :admin => true)
+      admin = User.make(:admin => true)
+      controller.stub current_user: admin
       get :index
     end
     it "on edit" do
@@ -25,5 +26,5 @@ describe UsersController do
       post :create, :user => @user.attributes
     end
   end
-
 end
+
