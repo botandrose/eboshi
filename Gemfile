@@ -30,14 +30,19 @@ gem "turbo-sprockets-rails3"
 gem "jquery-rails"
 gem "jquery-ui-rails"
 
-group :test, :development do
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "meta_request"
+  gem "quiet_assets"
+  gem "spring-commands-cucumber", require: false
+end
+
+group :test do
   gem "pry"
   gem "pry-debugger"
   gem "quiet_assets"
   gem "rspec-rails"
-end
-
-group :test do
   gem "machinist", "~>1.0"
   gem "faker"
   gem "delorean"
@@ -52,3 +57,4 @@ group :production do
   gem "exception_notification"
   gem "whenever", :require => false
 end
+
