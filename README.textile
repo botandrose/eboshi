@@ -1,6 +1,6 @@
 h1. Eboshi
 
-"!https://codeclimate.com/github/botandrose/eboshi.png!":https://codeclimate.com/github/botandrose/eboshi
+!https://codeclimate.com/github/botandrose/eboshi.png!:https://codeclimate.com/github/botandrose/eboshi !https://coveralls.io/repos/botandrose/eboshi/badge.png?branch=master(Coverage Status)!:https://coveralls.io/r/botandrose/eboshi?branch=master
 
 Eboshi is a web application for collaborative time-tracking and invoicing, written in Ruby on Rails. We use this internally at BOTandROSE design.
 
