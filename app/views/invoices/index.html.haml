@@ -14,5 +14,5 @@
 
 %p
   Total:
-  = @client.invoices.sum(&:total)
+  = @client.line_items.sum(&:total)
 
