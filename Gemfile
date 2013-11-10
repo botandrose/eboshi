@@ -23,7 +23,6 @@ gem "asset_precompilation_finder"
 gem "sass-rails"
 gem "compass-rails"
 gem "coffee-rails"
-gem "therubyracer"
 gem "uglifier"
 gem "turbo-sprockets-rails3"
 
