@@ -65,9 +65,19 @@ Eboshi::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.middleware.use ExceptionNotifier, email: {
-    :email_prefix => "[Eboshi] ",
-    :sender_address => %{"Botandrose Errors" <errors@botandrose.com>},
-    :exception_recipients => %w{micah@botandrose.com}
+  config.middleware.use ExceptionNotification::Rack, email: {
+    email_prefix: "[eboshi] ",
+    sender_address: %{"errors" <errors@botandrose.com>},
+    exception_recipients: "micah@botandrose.com",
+      smtp_settings: {
+      address: "smtp.gmail.com",
+      port: 587,
+      authentication: :plain,
+      user_name: "errors@botandrose.com",
+      password: "4pp3rr0rs",
+      ssl: nil,
+      tls: nil,
+      enable_starttls_auto: true,
+    }
   }
 end
