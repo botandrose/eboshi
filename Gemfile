@@ -18,7 +18,6 @@ gem "flamegraph"
 
 gem "coveralls", require: false
 
-gem "sprockets-image_compressor"
 gem "asset_precompilation_finder"
 gem "sass-rails"
 gem "compass-rails"
