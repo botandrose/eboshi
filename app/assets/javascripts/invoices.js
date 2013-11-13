@@ -1,5 +1,6 @@
 //= require_self
 //= require edit_in_place
+//= require invoices_coffee
 
 $(function() {
   $("#content").on("mouseover", "tr.line_item", function() {
@@ -20,12 +21,6 @@ $(function() {
     var line_items = $("input:checked").serialize();
     location.href = this.href+"?"+line_items;
     return false;
-  });
-
-  $("form:has(#clock_in)").submit(function() {
-    $.post(this.action, this.serialize()).success(function(data) {
-      $("tr#totals").after(data);
-    });
   });
 
   $("tr.line_item a.clock_out").submit(function() {
