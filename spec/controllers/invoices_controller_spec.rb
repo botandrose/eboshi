@@ -20,10 +20,11 @@ describe InvoicesController do
       response.should be_success
     end
 
-    it "on show" do
-      get :show, :format => "pdf", :client_id => @client.id, :id => @invoice.id
-      response.should be_success
-    end
+    # it "on show" do
+    #   get :show, :format => "pdf", :client_id => @client.id, :id => @invoice.id
+    #   response.should be_success
+    # end
+
     it "on js show" do
       get :show, :client_id => @client.id, :id => @invoice.id, :format => 'js'
       response.should be_success
@@ -52,16 +53,15 @@ describe InvoicesController do
     end
   end
 
-  it "should name the pdf correctly" do
-    @client = Client.make
-    @invoice = @client.invoices.make :id => 123
-    Work.make :invoice => @invoice, :client => @client, :user => @current_user
-    Adjustment.make :invoice => @invoice, :client => @client
+  # it "should name the pdf correctly" do
+  #   @client = Client.make
+  #   @invoice = @client.invoices.make :id => 123
+  #   Work.make :invoice => @invoice, :client => @client, :user => @current_user
+  #   Adjustment.make :invoice => @invoice, :client => @client
 
-    get :show, :client_id => @client.id, :id => @invoice.id, :format => 'pdf'
+  #   get :show, :client_id => @client.id, :id => @invoice.id, :format => 'pdf'
 
-    response.headers["Content-Disposition"].should =~ /micah-geisel_invoice-\#123\.pdf/
-    response.should be_success
-  end
-
+  #   response.headers["Content-Disposition"].should =~ /micah-geisel_invoice-\#123\.pdf/
+  #   response.should be_success
+  # end
 end
