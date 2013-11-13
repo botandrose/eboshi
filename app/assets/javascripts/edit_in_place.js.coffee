@@ -16,7 +16,7 @@ $ ->
         this.buffer = this.value
         data =
           "_method": "put"
-          "line_item[notes]": escape(this.value)
+          "line_item[notes]": this.value
           "line_item[timestamp]": new Date().getTime()
         $.post $(this).attr("data-url"), data
         this.wait = true
