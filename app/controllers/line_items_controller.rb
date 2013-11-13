@@ -3,11 +3,11 @@ class LineItemsController < ApplicationController
   before_filter :authorized?
 
   def update
-    @line_item = LineItem.find params[:id]
-    if @line_item.update_attributes params[:line_item]
-      flash[:notice] = "Line Item successfully updated!"
-      render :nothing => true
+    line_item = LineItem.find(params[:id])
+    if line_item.timestamp < params[:line_item][:timestamp].to_i
+      line_item.update_attributes(params[:line_item])
     end
+    render nothing: true
   end
 
 
