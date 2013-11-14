@@ -23,13 +23,6 @@ $(function() {
     return false;
   });
 
-  $("tr.line_item a.clock_out").submit(function() {
-    $.post(this.action. this.seralize()).success(function(data) {
-      this.parents("tbody").find("tr#totals td.total").text(number_to_currency(data.total));
-      this.parents("tr").replaceWith(data.work);
-    });
-  });
-
   $("#content").on("click", "tr.line_item a.delete", function() {
     var a = this;
     if(confirm('Are you sure you want to delete this line item? This cannot be undone!')) {
