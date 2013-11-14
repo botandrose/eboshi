@@ -44,16 +44,4 @@ $(function() {
     }
     return false;
   });
-
-  $("a.mini_invoice_show_details").click(function() {
-    $.get(this.href).success(function(data) {
-      this.parents("div:first").replaceWith(data);
-    });
-  });
-
-  $("a.invoice_hide_details").click(function() {
-    $.get(this.href).success(function(data) {
-      this.parents("table:first").replaceWith(data);
-    });
-  });
 });

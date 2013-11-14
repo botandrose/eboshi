@@ -12,3 +12,15 @@ $ ->
       $(this).parents("tr").replaceWith(data.work)
     , "json"
 
+  $("#content").on "click", "a.mini_invoice_show_details", (event) ->
+    event.preventDefault()
+    $.get this.href, (data) =>
+      $(this).parents("div:first").replaceWith(data)
+    , "html"
+
+  $("#content").on "click", "a.invoice_hide_details", (event) ->
+    event.preventDefault()
+    $.get this.href, (data) =>
+      $(this).parents("table:first").replaceWith(data)
+    , "html"
+
