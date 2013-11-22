@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131113174931) do
+ActiveRecord::Schema.define(:version => 20131122211732) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "client_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "assignments", ["client_id"], :name => "index_assignments_on_client_id"
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20131113174931) do
     t.string   "project_name"
     t.boolean  "include_dates", :default => false, :null => false
     t.boolean  "include_times", :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "invoices", ["client_id"], :name => "index_invoices_on_client_id"
