@@ -1,5 +1,3 @@
-require 'ruby-debug'
-
 module CucumberRailsDebug
   def where
     puts page.current_path
