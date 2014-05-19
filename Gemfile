@@ -38,7 +38,6 @@ end
 
 group :test do
   gem "pry"
-  gem "pry-debugger"
   gem "quiet_assets"
   gem "rspec-rails"
   gem "machinist", "~>1.0"
