@@ -11,5 +11,9 @@ Coveralls::RakeTask.new
 
 task :ci => ["coveralls:push"]
 
-task :post_production => ["tmp:clear"]
+task :update_crontab do
+  system "bundle exec whenever --update-crontab complexity"
+end
+
+task "bootstrap:production:post" => [:update_crontab, "tmp:clear"]
 
