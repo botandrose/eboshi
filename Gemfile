@@ -41,7 +41,7 @@ end
 group :test do
   gem "pry"
   gem "rspec-rails"
-  gem "machinist", "~>1.0"
+  gem "factory_girl_rails"
   gem "faker"
   gem "delorean"
 

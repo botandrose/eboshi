@@ -5,10 +5,10 @@ describe InvoicesController do
 
   describe "should not error out" do
     before :each do
-      @client = Client.make
-      @invoice = @client.invoices.make
-      Work.make :invoice => @invoice, :client => @client, :user => @current_user
-      Adjustment.make :invoice => @invoice, :client => @client
+      @client = FactoryGirl.create :client
+      @invoice = FactoryGirl.create :invoice, client: @client
+      FactoryGirl.create :work, invoice: @invoice, client: @client, user: @current_user
+      FactoryGirl.create :adjustment, invoice: @invoice, client: @client
     end
 
     it "on index" do
@@ -54,10 +54,10 @@ describe InvoicesController do
   end
 
   # it "should name the pdf correctly" do
-  #   @client = Client.make
-  #   @invoice = @client.invoices.make :id => 123
-  #   Work.make :invoice => @invoice, :client => @client, :user => @current_user
-  #   Adjustment.make :invoice => @invoice, :client => @client
+  #   @client = FactoryGirl.create :client
+  #   @invoice = FactoryGirl.create :invoice, client: @client, id: 123
+  #   FactoryGirl.create :work, invoice: @invoice, client: @client, user: @current_user
+  #   FactoryGirl.create :adjustment, invoice: @invoice, client: @client
 
   #   get :show, :client_id => @client.id, :id => @invoice.id, :format => 'pdf'
 

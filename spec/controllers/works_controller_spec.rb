@@ -4,9 +4,9 @@ describe WorksController do
   include ControllerSpecHelpers
 
   before :each do
-    @client = Client.make
+    @client = FactoryGirl.create :client
     @client.users << @current_user
-    @work = Work.make :client => @client, :user => @current_user
+    @work = FactoryGirl.create :work, client: @client, user: @current_user
   end
 
   describe "should not error out" do
@@ -61,12 +61,12 @@ describe WorksController do
     end
 
     it "on clock_out" do
-      @work = Work.make :start => Time.zone.today, :finish => Time.zone.today
+      @work = FactoryGirl.create(:work, start: Time.zone.today, finish: Time.zone.today)
       get :clock_out, :client_id => @client.id, :id => @work.id
       response.should be_redirect
     end
     it "on js clock_out" do
-      @work = Work.make :start => Time.zone.today, :finish => Time.zone.today
+      @work = FactoryGirl.create(:work, start: Time.zone.today, finish: Time.zone.today)
       get :clock_out, :client_id => @client.id, :id => @work.id, :format => 'js'
       response.should be_success
     end

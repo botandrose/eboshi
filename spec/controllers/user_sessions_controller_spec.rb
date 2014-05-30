@@ -9,7 +9,7 @@ describe UserSessionsController do
 		end
 
 		it "on create" do
-			User.stub authenticate: User.make
+			User.stub authenticate: FactoryGirl.create(:user)
 			post :create
 		end
 

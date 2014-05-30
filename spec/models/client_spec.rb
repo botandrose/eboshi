@@ -2,16 +2,16 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Client do
   before do
-    @client = Client.make
-    @invoice = Invoice.make :client => @client
-    @user = User.make :rate => 65
+    @client = FactoryGirl.create(:client)
+    @invoice = FactoryGirl.create(:invoice, client: @client)
+    @user = FactoryGirl.create(:user, rate: 65)
     @unbilled = [
-      Work.make(:client => @client, :user => @user, :invoice => nil),
-      Work.make(:client => @client, :user => @user, :invoice => nil)
+      FactoryGirl.create(:work, :client => @client, :user => @user, :invoice => nil),
+      FactoryGirl.create(:work, :client => @client, :user => @user, :invoice => nil)
     ]
-    Work.make :client => @client, :user => @user, :invoice => @invoice
-    Payment.create :invoice => @invoice, :total => 50
-    Adjustment.make :client => @client, :user => @user, :invoice => @invoice, :rate => 100
+    FactoryGirl.create(:work, :client => @client, :user => @user, :invoice => @invoice)
+    Payment.create(:invoice => @invoice, :total => 50)
+    FactoryGirl.create(:adjustment, :client => @client, :user => @user, :invoice => @invoice, :rate => 100)
   end
 
   it "should leave no trace when destroyed" do

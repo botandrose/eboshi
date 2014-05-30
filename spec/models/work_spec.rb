@@ -3,16 +3,16 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Work do
   describe "when merging a list of ids" do
     it "should gracefully handle a single id" do
-      @work = Work.make
+      @work = FactoryGirl.create(:work)
       @merged = Work.merge_from_ids [@work.id]
       @merged.reload
       @merged.should == @work
     end
     
     it "should correctly merge multiple items" do
-      @client = Client.make
-      @billed1 = Work.make :client => @client, :start => Time.now + 1.hour, :finish => Time.now + 2.hour
-      @billed2 = Work.make :client => @client
+      @client = FactoryGirl.create(:client)
+      @billed1 = FactoryGirl.create(:work, :client => @client, :start => Time.now + 1.hour, :finish => Time.now + 2.hour)
+      @billed2 = FactoryGirl.create(:work, :client => @client)
       @merged = Work.merge_from_ids [@billed1.id, @billed2.id]
       @merged.reload
       @merged.invoice.should == @billed1.invoice
@@ -27,7 +27,7 @@ describe Work do
 
   describe "when converting to an adjustment" do
     it "should work" do
-      @work = Work.make :start => Time.now, :finish => Time.now + 2.hours, :rate => 50
+      @work = FactoryGirl.create(:work, :start => Time.now, :finish => Time.now + 2.hours, :rate => 50)
       @work.to_adjustment!
       @work.type.should == "Adjustment"
       @work.rate.should == 100
@@ -36,10 +36,12 @@ describe Work do
   
   describe "billed" do
     before(:each) do
-      @line_item = Work.make :start => Time.now, :finish => Time.now + 1.hour, :rate => 50
+      start = Time.now
+      finish = start + 1.hour
+      @line_item = FactoryGirl.create(:work, start: start, finish: finish, :rate => 50)
     end
 
-    it "should calculate the hours correctly" do
+    fit "should calculate the hours correctly" do
       @line_item.hours.should == 1
     end
 
@@ -48,8 +50,8 @@ describe Work do
     end
 
     it "should be compared to other line items by start time descending" do
-      @billed1 = Work.make :start => Time.now + 1.hour, :finish => Time.now + 2.hour
-      @billed2 = Work.make
+      @billed1 = FactoryGirl.create(:work, :start => Time.now + 1.hour, :finish => Time.now + 2.hour)
+      @billed2 = FactoryGirl.create(:work)
       @billed1.should < @billed2
       @billed1.should_not > @billed2
       (@billed1 <=> @billed2).should eql -1
@@ -71,14 +73,14 @@ describe Work do
   
   describe "unbilled" do
     it "should be checked" do
-      @line_item = Work.make :invoice => nil
+      @line_item = FactoryGirl.create(:work, :invoice => nil)
       @line_item.should be_checked
     end
   end
   
   describe "incomplete" do
     before do
-      @line_item = Work.make :invoice => nil, :start => 1.day.ago
+      @line_item = FactoryGirl.create(:work, :invoice => nil, :start => 1.day.ago)
       @line_item.finish = @line_item.start
     end
 

@@ -40,7 +40,6 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.before(:each) do
-    Sham.reset
     Delorean.back_to_the_present
   end
 end

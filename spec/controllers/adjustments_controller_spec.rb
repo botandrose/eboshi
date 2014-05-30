@@ -4,8 +4,8 @@ describe AdjustmentsController do
   include ControllerSpecHelpers
   
   before :each do
-		@client = Client.make
-		@adjustment = Adjustment.make :client => @client
+		@client = FactoryGirl.create :client
+		@adjustment = FactoryGirl.create :adjustment, client: @client
 	end
 	
   describe "should not error out" do

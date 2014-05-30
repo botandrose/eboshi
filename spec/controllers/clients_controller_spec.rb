@@ -4,7 +4,7 @@ describe ClientsController do
   include ControllerSpecHelpers
   
 	before(:each) do
-		@client = Client.make
+		@client = FactoryGirl.create :client
     @client.users << @current_user
 	end
 

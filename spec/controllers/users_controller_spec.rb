@@ -4,12 +4,12 @@ describe UsersController do
   include ControllerSpecHelpers
   
 	before(:each) do
-		@user = User.make
+		@user = FactoryGirl.create :user
 	end
 
   describe "should not error out" do
     it "on index" do
-      admin = User.make(:admin => true)
+      admin = FactoryGirl.create :user, admin: true
       controller.stub current_user: admin
       get :index
     end

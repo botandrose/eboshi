@@ -4,7 +4,7 @@ module ControllerSpecHelpers
       # integrate_views
       
       before :each do
-        @current_user = User.make :business_name => "Micah Geisel"
+        @current_user = FactoryGirl.create :user, business_name: "Micah Geisel"
         @current_user.stub authorized?: true
         controller.stub current_user: @current_user
       end
