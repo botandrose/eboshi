@@ -49,6 +49,8 @@ class User < ActiveRecord::Base
     :styles => { :pdf => "450x100>" },
     :path => ":rails_root/public/:attachment/:id/:style.:extension",
     :url => "/:attachment/:id/:style.:extension"
+  validates_attachment_content_type :logo, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  validates_attachment_content_type :signature, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
     
   def default_rate_for(client)
     last_work = client.works.complete.first :conditions => { :user_id => self }, :order => "start DESC"
