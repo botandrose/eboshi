@@ -1,10 +1,10 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require "spec_helper"
 
 describe ClientsController do
   include ControllerSpecHelpers
   
 	before(:each) do
-		@client = FactoryGirl.create :client
+		@client = FactoryGirl.create(:client)
     @client.users << @current_user
 	end
 
@@ -13,20 +13,20 @@ describe ClientsController do
       get :index
     end
     it "on edit" do
-      get :edit, :id => @client.id
+      get :edit, id: @client.id
     end
     it "on new" do
       get :new
     end
     it "on update" do
-      put :update, :id => @client.id, :client => @client.attributes
+      put :update, id: @client.id, client: FactoryGirl.attributes_for(:client)
     end
     it "on destroy" do
-      delete :destroy, :id => @client.id
+      delete :destroy, id: @client.id
     end
     it "on create" do
-      post :create, :client => @client.attributes
+      post :create, client: FactoryGirl.attributes_for(:client)
     end
   end
-
 end
+

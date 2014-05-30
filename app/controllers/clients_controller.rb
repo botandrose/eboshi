@@ -8,25 +8,23 @@ class ClientsController < ApplicationController
   end
 
   def edit
-    @client = current_user.clients.find params[:id]
+    @client = current_user.clients.find(params[:id])
   end
 
   def create
-    @client = Client.new params[:client]
+    @client = Client.new(params[:client])
     if @client.save
       @client.users << current_user
-      flash[:notice] = "Client successfully created."
-      redirect_to clients_path
+      redirect_to clients_path, notice: "Client successfully created."
     else
       render :new
     end
   end
   
   def update
-    @client = current_user.clients.find params[:id], :readonly => false
-    if @client.update_attributes params[:client]
-      flash[:notice] = "Client successfully updated."
-      redirect_to clients_path
+    @client = current_user.clients.find(params[:id])
+    if @client.update_attributes(params[:client])
+      redirect_to clients_path, notice: "Client successfully updated."
     else
       render :edit
     end
@@ -38,3 +36,4 @@ class ClientsController < ApplicationController
     redirect_to clients_path
   end
 end
+

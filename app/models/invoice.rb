@@ -12,18 +12,18 @@
 class Invoice < ActiveRecord::Base
   belongs_to :client
   has_many :line_items, :dependent => :nullify
-  has_many :payments, :dependent => :destroy, :order => 'created_at DESC'
+  has_many :payments, -> { order('created_at DESC') }, dependent: :destroy
   
   validates_presence_of :client, :date
 
   default_value_for(:date) { Time.zone.today.midnight }
 
   def self.unpaid
-    self.all(:order => "`date` DESC").reject(&:paid?)
+    order("`date` DESC").reject(&:paid?)
   end
   
   def self.paid
-    self.all(:order => "`date` DESC").select(&:paid?)
+    order("`date` DESC").select(&:paid?)
   end
   
   def works

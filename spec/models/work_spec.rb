@@ -41,7 +41,7 @@ describe Work do
       @line_item = FactoryGirl.create(:work, start: start, finish: finish, :rate => 50)
     end
 
-    fit "should calculate the hours correctly" do
+    it "should calculate the hours correctly" do
       @line_item.hours.should == 1
     end
 

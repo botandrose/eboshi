@@ -18,12 +18,12 @@
 #
 
 class Client < ActiveRecord::Base
-  default_scope :order => 'name'
+  default_scope -> { order(:name) }
 
   has_many :line_items, :dependent => :destroy
   has_many :works
   has_many :adjustments
-  has_many :invoices, :dependent => :destroy, :include => [:line_items, :payments], :order => 'date DESC'
+  has_many :invoices, -> { includes(:line_items, :payments).order('`date` DESC') }, dependent: :destroy
   has_many :payments, :through => :invoices
   has_many :assignments, :dependent => :destroy
   has_many :users, :through => :assignments
@@ -36,8 +36,9 @@ class Client < ActiveRecord::Base
   end
 
   def invoices_with_unbilled
-    invoices.unshift(build_invoice_from_unbilled).pop # YUCK
-    invoices
+    new_invoices = invoices.to_a
+    new_invoices.unshift build_invoice_from_unbilled
+    new_invoices
   end
 
   def balance

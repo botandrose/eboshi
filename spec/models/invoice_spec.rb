@@ -21,10 +21,6 @@ describe Invoice do
     end
   end
 
-  it "should create a new instance given valid attributes" do
-    Invoice.create! FactoryGirl.create(:invoice).attributes
-  end
-
   it "should not be paid if there are no payments" do
     @invoice = FactoryGirl.create(:invoice)
     2.times do

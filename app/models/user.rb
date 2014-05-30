@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   
   belongs_to :last_client, :class_name => "Client"
   has_many :assignments, :dependent => :destroy
-  has_many :clients, :through => :assignments, :include => [:line_items, :payments]
+  has_many :clients, -> { includes(:line_items, :payments) }, through: :assignments
   has_many :works
   
   has_attached_file :logo,
@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :signature, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
     
   def default_rate_for(client)
-    last_work = client.works.complete.first :conditions => { :user_id => self }, :order => "start DESC"
+    last_work = client.works.complete.where(user: self).order("start DESC").first
     last_work.try(:rate) || rate
   end
 

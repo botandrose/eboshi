@@ -20,25 +20,25 @@ describe WorksController do
     end
 
     it "on create" do
-      post :create, :client_id => @client.id, :work => @work.attributes
+      post :create, client_id: @client.id, work: FactoryGirl.attributes_for(:work)
       response.should be_redirect
     end
 
     it "on update" do
-      put :update, :client_id => @client.id, :id => @work.id, :work => @work.attributes
+      put :update, client_id: @client.id, id: @work.id, work: FactoryGirl.attributes_for(:work)
       response.should be_redirect
     end
     it "on js update" do
-      put :update, :client_id => @client.id, :id => @work.id, :work => @work.attributes, :format => 'js'
+      put :update, client_id: @client.id, id: @work.id, work: FactoryGirl.attributes_for(:work), format: 'js'
       response.should be_success
     end
 
     it "on shallow update" do
-      put :update, :id => @work.id, :work => @work.attributes
+      put :update, id: @work.id, work: FactoryGirl.attributes_for(:work)
       response.should be_redirect
     end
     it "on js shallow update" do
-      put :update, :id => @work.id, :work => @work.attributes, :format => 'js'
+      put :update, id: @work.id, work: FactoryGirl.attributes_for(:work), format: 'js'
       response.should be_success
     end
 

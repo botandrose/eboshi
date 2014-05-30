@@ -39,6 +39,11 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  config.treat_symbols_as_metadata_keys_with_true_values = true
+  config.alias_example_to :fit, :focused
+  config.filter_run :focused
+  config.run_all_when_everything_filtered = true
+
   config.before(:each) do
     Delorean.back_to_the_present
   end

@@ -40,11 +40,11 @@ describe InvoicesController do
     end
 
     it "on create" do
-      post :create, :client_id => @client.id, :client_id => @client.id, :invoice => @invoice.attributes
+      post :create, client_id: @client.id, invoice: FactoryGirl.attributes_for(:invoice)
       response.should be_redirect
     end
     it "on update" do
-      put :update, :client_id => @client.id, :id => @invoice.id, :invoice => @invoice.attributes
+      put :update, client_id: @client.id, id: @invoice.id, invoice: FactoryGirl.attributes_for(:invoice), format: "js"
       response.should be_redirect
     end
     it "on destroy" do

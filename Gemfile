@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "rails", "~>3.2"
+gem "rails"
 gem "haml-rails"
 gem "mysql2"
 gem "bard-rake"
@@ -22,7 +22,6 @@ gem "sass-rails"
 gem "compass-rails"
 gem "coffee-rails"
 gem "uglifier"
-gem "turbo-sprockets-rails3"
 
 gem "jquery-rails"
 gem "jquery-ui-rails"

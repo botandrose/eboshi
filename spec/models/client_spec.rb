@@ -6,12 +6,19 @@ describe Client do
     @invoice = FactoryGirl.create(:invoice, client: @client)
     @user = FactoryGirl.create(:user, rate: 65)
     @unbilled = [
-      FactoryGirl.create(:work, :client => @client, :user => @user, :invoice => nil),
-      FactoryGirl.create(:work, :client => @client, :user => @user, :invoice => nil)
+      FactoryGirl.create(:work, :client => @client, :user => @user, :invoice => nil, start: Time.zone.now),
+      FactoryGirl.create(:work, :client => @client, :user => @user, :invoice => nil, start: Time.zone.yesterday)
     ]
     FactoryGirl.create(:work, :client => @client, :user => @user, :invoice => @invoice)
     Payment.create(:invoice => @invoice, :total => 50)
     FactoryGirl.create(:adjustment, :client => @client, :user => @user, :invoice => @invoice, :rate => 100)
+  end
+
+  it "should order the building invoice before the saved invoices" do
+    @it = @client.invoices_with_unbilled
+    @it.length.should == 2
+    @it.first.line_items.should == @unbilled
+    @it.second.should == @invoice
   end
 
   it "should leave no trace when destroyed" do
@@ -24,7 +31,7 @@ describe Client do
   end
 
   it "should create a new instance given valid attributes" do
-    Client.create!(@client.attributes)
+    Client.create! FactoryGirl.attributes_for(:client)
   end
 
   it "should calculate the total balance correctly" do
@@ -57,12 +64,5 @@ describe Client do
     i = @client.build_invoice_from_unbilled
     i.new_record?.should be_true
     i.line_items.should == @unbilled
-  end
-
-  it "should order the building invoice before the saved invoices" do
-    @it = @client.invoices_with_unbilled
-    @it.length.should == 2
-    @it.first.line_items.should == @unbilled
-    @it.second.should == @invoice
   end
 end

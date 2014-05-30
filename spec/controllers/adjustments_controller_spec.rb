@@ -19,25 +19,25 @@ describe AdjustmentsController do
     end
     
     it "on create" do
-      post :create, :client_id => @client.id, :adjustment => @adjustment.attributes
+      post :create, client_id: @client.id, adjustment: FactoryGirl.attributes_for(:adjustment)
       response.should be_redirect
     end
 
     it "on update" do
-      put :update, :client_id => @client.id, :id => @adjustment.id, :adjustment => @adjustment.attributes
+      put :update, client_id: @client.id, id: @adjustment.id, adjustment: FactoryGirl.attributes_for(:adjustment)
       response.should be_redirect
     end
     it "on js update" do
-      put :update, :client_id => @client.id, :id => @adjustment.id, :adjustment => @adjustment.attributes, :format => 'js'
+      put :update, client_id: @client.id, id: @adjustment.id, adjustment: FactoryGirl.attributes_for(:adjustment), format: 'js'
       response.should be_success
     end
     
     it "on shallow update" do
-      put :update, :id => @adjustment.id, :adjustment => @adjustment.attributes
+      put :update, id: @adjustment.id, adjustment: FactoryGirl.attributes_for(:adjustment)
       response.should be_redirect
     end
     it "on js shallow update" do
-      put :update, :id => @adjustment.id, :adjustment => @adjustment.attributes, :format => 'js'
+      put :update, id:  @adjustment.id, adjustment: FactoryGirl.attributes_for(:adjustment), format: 'js'
       response.should be_success
     end
 
