@@ -32,7 +32,9 @@
 #
 
 class User < ActiveRecord::Base
-  acts_as_authentic
+  acts_as_authentic do |config|
+    config.crypto_provider = Authlogic::CryptoProviders::Sha512
+  end
   
   belongs_to :last_client, :class_name => "Client"
   has_many :assignments, :dependent => :destroy
