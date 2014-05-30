@@ -29,7 +29,7 @@ describe WorksController do
       response.should be_redirect
     end
     it "on js update" do
-      put :update, client_id: @client.id, id: @work.id, work: FactoryGirl.attributes_for(:work), format: 'js'
+      xhr :put, :update, client_id: @client.id, id: @work.id, work: FactoryGirl.attributes_for(:work), format: 'js'
       response.should be_success
     end
 
@@ -38,7 +38,7 @@ describe WorksController do
       response.should be_redirect
     end
     it "on js shallow update" do
-      put :update, id: @work.id, work: FactoryGirl.attributes_for(:work), format: 'js'
+      xhr :put, :update, id: @work.id, work: FactoryGirl.attributes_for(:work), format: 'js'
       response.should be_success
     end
 
@@ -47,7 +47,7 @@ describe WorksController do
       response.should be_redirect
     end
     it "on js destroy" do
-      delete :destroy, :client_id => @client.id, :id => @work.id, :format => 'js'
+      xhr :delete, :destroy, client_id: @client.id, id: @work.id, format: 'js'
       response.should be_success
     end
 
@@ -56,7 +56,7 @@ describe WorksController do
       response.should be_redirect
     end
     it "on js clock_in" do
-      get :clock_in, :client_id => @client.id, :format => 'js'
+      xhr :get, :clock_in, client_id: @client.id, format: 'js'
       response.should be_success
     end
 
@@ -67,7 +67,7 @@ describe WorksController do
     end
     it "on js clock_out" do
       @work = FactoryGirl.create(:work, start: Time.zone.today, finish: Time.zone.today)
-      get :clock_out, :client_id => @client.id, :id => @work.id, :format => 'js'
+      xhr :get, :clock_out, client_id: @client.id, id: @work.id, format: 'js'
       response.should be_success
     end
     it "on merge" do
@@ -76,7 +76,7 @@ describe WorksController do
     end  	
     
     it "on js merge" do
-      get :merge, :client_id => @client.id, :line_item_ids => @client.works.collect(&:id), :format => 'js'
+      xhr :get, :merge, client_id: @client.id, line_item_ids: @client.works.collect(&:id), format: 'js'
       response.should be_success
     end  	
   end

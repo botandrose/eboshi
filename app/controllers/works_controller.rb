@@ -1,7 +1,6 @@
 class WorksController < ApplicationController
   before_filter :get_client
   before_filter :authorized?
-  skip_before_action :verify_authenticity_token, if: -> { params[:format] == "js" }
 
   def new
     @work = @client.works.build :user => current_user

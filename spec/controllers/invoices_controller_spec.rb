@@ -26,7 +26,7 @@ describe InvoicesController do
     # end
 
     it "on js show" do
-      get :show, :client_id => @client.id, :id => @invoice.id, :format => 'js'
+      xhr :get, :show, client_id: @client.id, id: @invoice.id, format: 'js'
       response.should be_success
     end
 
@@ -35,7 +35,7 @@ describe InvoicesController do
       response.should be_success
     end
     it "on js edit" do
-      get :edit, :client_id => @client.id, :id => @invoice.id, :format => 'js'
+      xhr :get, :edit, client_id: @client.id, id: @invoice.id, format: 'js'
       response.should be_success
     end
 
@@ -43,8 +43,8 @@ describe InvoicesController do
       post :create, client_id: @client.id, invoice: FactoryGirl.attributes_for(:invoice)
       response.should be_redirect
     end
-    it "on update" do
-      put :update, client_id: @client.id, id: @invoice.id, invoice: FactoryGirl.attributes_for(:invoice), format: "js"
+    it "on js update" do
+      xhr :put, :update, client_id: @client.id, id: @invoice.id, invoice: FactoryGirl.attributes_for(:invoice), format: "js"
       response.should be_redirect
     end
     it "on destroy" do

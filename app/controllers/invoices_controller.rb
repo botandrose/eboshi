@@ -1,6 +1,5 @@
 class InvoicesController < ApplicationController
   before_filter :get_client, :authorized?
-  skip_before_action :verify_authenticity_token, if: -> { params[:format] == "js" }
 
   def index
     @invoices = @client.invoices_with_unbilled
