@@ -1,12 +1,20 @@
-When /^I check all time items$/ do
-  all("[type=checkbox]").each do |checkbox|
-    checkbox.set true
+Given /^(\d+) unbilled works? exists? with client: "(.+?)", user: "(.+?)"$/ do |count, client_name, user_name|
+  client = Client.find_by_name!(client_name)
+  user = User.find_by_name!(user_name)
+  count.to_i.times do
+    FactoryGirl.create(:work, client: client, user: user, invoice: nil)
   end
 end
 
 Given /^a time item for "(.+)"$/ do |client_name|
-  @client = Client.find_by_name(client_name)
+  @client = Client.find_by_name!(client_name)
   FactoryGirl.create(:work, client: @client, invoice: nil)
+end
+
+When /^I check all time items$/ do
+  all("[type=checkbox]").each do |checkbox|
+    checkbox.set true
+  end
 end
 
 Then "I should see the following line items:" do |table|

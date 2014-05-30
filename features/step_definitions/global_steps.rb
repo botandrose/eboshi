@@ -4,7 +4,7 @@ Then /^I should not be able to go to (.+)$/ do |url|
 end
 
 Given /^I am signed in as "Micah"$/ do
-  step 'a user "Micah" exists with name: "Micah"'
+  step 'a user exists with name: "Micah"'
   @user = User.find_by_name "Micah"
   visit "/"
   fill_in "Email", :with => @user.email
@@ -14,7 +14,7 @@ Given /^I am signed in as "Micah"$/ do
 end
 
 Given /^I am signed in as an Admin$/ do
-  step 'a user "Admin" exists with name: "Admin", admin: true'
+  step 'an admin exists with name: "Admin"'
   @user = User.find_by_name "Admin"
   visit "/"
   fill_in "Email", :with => @user.email

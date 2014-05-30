@@ -149,9 +149,6 @@ GEM
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
       mime-types
-    pickle (0.4.11)
-      cucumber (>= 0.8)
-      rake
     poltergeist (1.5.1)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -279,7 +276,6 @@ DEPENDENCIES
   meta_request
   mysql2
   paperclip (~> 2.7)
-  pickle
   poltergeist
   pry
   quiet_assets

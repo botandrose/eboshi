@@ -23,6 +23,10 @@ FactoryGirl.define do
     updated_at { Time.now }
     rate 50
     color '123456'
+
+    factory :admin do
+      admin true
+    end
   end
 
   factory :work do
@@ -33,10 +37,6 @@ FactoryGirl.define do
     finish { Time.now + 1.hour }
     rate 50
     notes { Faker::Lorem.sentence rand(3) }
-
-    factory :unbilled_work do
-      invoice { nil }
-    end
   end
 
   factory :adjustment do

@@ -48,7 +48,6 @@ group :test do
   gem "cucumber-rails", :require => false
   gem "database_cleaner"
   gem "poltergeist"
-  gem "pickle"
 end
 
 group :production do
