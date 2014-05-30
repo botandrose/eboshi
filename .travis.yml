@@ -1,10 +1,8 @@
 language: ruby
 rvm:
-  - 2.0.0
-
-# speed up bundle install, especially nokogiri
-install: bundle install --jobs=4 --deployment
+  - 2.1.2
 env:
   global:
+    - BUNDLE_JOBS=4
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 
