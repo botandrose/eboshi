@@ -1,4 +1,4 @@
-Then "debug" do
+Then /^debug(?:ger)?$/ do
   debugger
   stop_here = 1
 end
