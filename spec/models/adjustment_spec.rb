@@ -15,7 +15,7 @@ describe Adjustment do
   end
 
   it "should not be checked" do
-    @adjustment.checked?.should be_false
+    @adjustment.checked?.should be_falsey
   end
 
   it "should respond via total" do

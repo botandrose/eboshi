@@ -57,12 +57,12 @@ describe Client do
   it "should return a incomplete work item on clock_in" do
     li = @client.clock_in(@user)
     li.class.should == Work
-    li.incomplete?.should be_true
+    li.incomplete?.should be_truthy
   end
 
   it "should return an unsaved invoice with all unbilled line items" do
     i = @client.build_invoice_from_unbilled
-    i.new_record?.should be_true
+    i.new_record?.should be_truthy
     i.line_items.should == @unbilled
   end
 end

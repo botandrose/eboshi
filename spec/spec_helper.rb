@@ -40,9 +40,11 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.treat_symbols_as_metadata_keys_with_true_values = true
-  config.alias_example_to :fit, :focused
-  config.filter_run :focused
+  config.alias_example_to :fit, :focus
+  config.filter_run :focus => true
   config.run_all_when_everything_filtered = true
+
+  config.infer_spec_type_from_file_location!
 
   config.before(:each) do
     Delorean.back_to_the_present

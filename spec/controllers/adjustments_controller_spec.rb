@@ -54,7 +54,7 @@ describe AdjustmentsController do
   describe "on update" do
     it "should allow update of notes" do
       put :update, :id => @adjustment.id, :adjustment => { :notes => 'test' }
-      assigns(:adjustment).should have(:no).errors 
+      assigns(:adjustment).errors.should be_empty
       assigns(:adjustment).notes.should == 'test'
       response.should be_redirect
     end

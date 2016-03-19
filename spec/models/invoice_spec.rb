@@ -6,7 +6,7 @@ describe Invoice do
       @it = FactoryGirl.create(:invoice)
       FactoryGirl.create(:work, :invoice => @it, :rate => 50)
       FactoryGirl.create(:work, :invoice => @it, :rate => 75)
-      @it.consistant_rate.should be_false
+      @it.consistant_rate.should be_falsey
     end
 
     it "should return the rate if invoice contains work items with the same hourly rates" do
@@ -17,7 +17,7 @@ describe Invoice do
 
     it "should return true if invoice contains no work items" do
       @it = FactoryGirl.create(:invoice)
-      @it.consistant_rate.should be_true
+      @it.consistant_rate.should be_truthy
     end
   end
 
@@ -63,9 +63,7 @@ describe Invoice do
     FactoryGirl.create(:work, invoice: @paid)
     FactoryGirl.create(:payment, invoice: @paid, total: 50)
 
-    Invoice.unpaid.should have(2).invoices
-    Invoice.unpaid.should include(@unpaid, @partpaid)
-    Invoice.unpaid.should_not include(@paid)
+    Invoice.unpaid.should =~ [@unpaid, @partpaid]
   end
 
   it "should default date and paid to false" do

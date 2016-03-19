@@ -84,7 +84,7 @@ describe WorksController do
   describe "on update" do
     it "should allow update of notes" do
       put :update, :id => @work.id, :work => { :notes => 'test' }
-      assigns(:work).should have(:no).errors 
+      assigns(:work).errors.should be_empty
       assigns(:work).notes.should == 'test'
       response.should be_redirect
     end
