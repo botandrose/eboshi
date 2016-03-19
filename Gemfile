@@ -51,7 +51,7 @@ group :test do
   gem "cucumber-rails", :require => false
   gem "database_cleaner"
   gem "poltergeist"
-  gem "phantomjs-binaries", "~>1.0"
+  gem "phantomjs-binaries"
 end
 
 group :production do

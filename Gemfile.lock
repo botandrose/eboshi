@@ -185,7 +185,7 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (= 0.3.0)
-    phantomjs-binaries (1.9.8.0)
+    phantomjs-binaries (2.1.1.0)
       sys-uname (= 0.9.0)
     poltergeist (1.9.0)
       capybara (~> 2.1)
@@ -327,7 +327,7 @@ DEPENDENCIES
   meta_request
   mysql2 (~> 0.3.0)
   paperclip
-  phantomjs-binaries (~> 1.0)
+  phantomjs-binaries
   poltergeist
   pry
   pry-byebug
