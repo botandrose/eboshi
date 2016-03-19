@@ -23,7 +23,7 @@ Feature: Manage line items to contruct invoices
     And I press "Convert to Flat fee"
     Then I should see "Time item converted to adjustment"
     And I should see the following line items:
-      | Micah |06/19/83 | Flat Fee | $150.00 |  | testing new time item |
+      | Micah |06/19/83 | Flat Fee | $150.00 | testing new time item |
 
   Scenario: User creates new flat fee with date and user
     When I follow "New Flat Fee"
@@ -32,16 +32,15 @@ Feature: Manage line items to contruct invoices
     And I fill in "Notes" with "testing new flat fee"
     And I press "Create"
     Then I should see the following line items:
-      | Micah | 01/01/83 | Flat Fee | $300.00 |  | testing new flat fee |
+      | Micah | 01/01/83 | Flat Fee | $300.00 | testing new flat fee |
 
 # Scenario: User removes user and date from flat fee
     When I follow "Edit"
     And I check "No user"
     And I check "No date"
     And I press "Update"
-  # FIXME cucumber doesnt like this
-  # Then I should see the following line items:
-  #   |  |  | Flat Fee | $300.00 |  | testing new flat fee |
+    Then I should see the following line items:
+      |  |  | Flat Fee | $300.00 | testing new flat fee |
     
   Scenario: User creates new flat fee without date and user
     When I follow "New Flat Fee"
@@ -51,9 +50,8 @@ Feature: Manage line items to contruct invoices
     And I fill in "Amount" with "300"
     And I fill in "Notes" with "testing new flat fee"
     And I press "Create"
-  # FIXME cucumber doesnt like this
-  # Then I should see the following line items:
-  #   |  |  | Flat Fee | $300.00 |  | testing new flat fee |
+    Then I should see the following line items:
+      |  |  | Flat Fee | $300.00 | testing new flat fee |
     
 # Scenario: User adds user and date from flat fee
     When I follow "Edit"
@@ -62,7 +60,7 @@ Feature: Manage line items to contruct invoices
     And I select "1983-01-01" as the "Date" date
     And I press "Update"
     Then I should see the following line items:
-      | Micah | 01/01/83 | Flat Fee | $300.00 |  | testing new flat fee |
+      | Micah | 01/01/83 | Flat Fee | $300.00 | testing new flat fee |
     
   Scenario: User merges two time items
     When I follow "New Time Item"

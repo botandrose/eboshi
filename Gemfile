@@ -1,8 +1,8 @@
 source "http://rubygems.org"
 
-gem "rails"
+gem "rails", "~>4.1.0"
 gem "haml-rails"
-gem "mysql2"
+gem "mysql2", "~>0.3.0"
 gem "bard-rake"
 gem "authlogic"
 gem "paperclip"
@@ -18,13 +18,16 @@ gem "flamegraph"
 
 gem "coveralls", require: false
 
+gem 'sprockets-rails'
 gem "sass-rails"
 gem "compass-rails"
+gem "compass-blueprint"
+
 gem "coffee-rails"
 gem "uglifier"
 
 gem "jquery-rails"
-gem "jquery-ui-rails"
+gem "jquery-ui-rails", "~>4.0"
 
 group :development, :test do
   gem "quiet_assets"
@@ -40,7 +43,7 @@ end
 group :test do
   gem "pry"
   gem "pry-byebug"
-  gem "rspec-rails"
+  gem "rspec-rails", "~>2.0"
   gem "factory_girl_rails"
   gem "faker"
   gem "delorean"
@@ -48,6 +51,7 @@ group :test do
   gem "cucumber-rails", :require => false
   gem "database_cleaner"
   gem "poltergeist"
+  gem "phantomjs-binaries", "~>1.0"
 end
 
 group :production do
