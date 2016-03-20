@@ -27,7 +27,7 @@ gem "coffee-rails"
 gem "uglifier"
 
 gem "jquery-rails"
-gem "jquery-ui-rails", "~>4.0"
+gem "jquery-ui-rails"
 
 group :development, :test do
   gem "quiet_assets"

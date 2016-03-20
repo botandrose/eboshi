@@ -1,6 +1,6 @@
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.all
+//= require jquery-ui
 
 //= require_self
 //= require toggle_summaries
