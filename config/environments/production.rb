@@ -76,12 +76,12 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
- 
+
   config.middleware.use ExceptionNotification::Rack, email: {
     email_prefix: "[eboshi] ",
-    sender_address: %{"errors" <errors@botandrose.com>},
+    sender_address: %("errors" <errors@botandrose.com>),
     exception_recipients: "micah@botandrose.com",
-      smtp_settings: {
+    smtp_settings: {
       address: "smtp.gmail.com",
       port: 587,
       authentication: :plain,
@@ -89,7 +89,7 @@ Rails.application.configure do
       password: "4pp3rr0rs",
       ssl: nil,
       tls: nil,
-      enable_starttls_auto: true,
+      enable_starttls_auto: true
     }
   }
 end

@@ -20,7 +20,7 @@ class ClientsController < ApplicationController
       render :new
     end
   end
-  
+
   def update
     @client = current_user.clients.find(params[:id])
     if @client.update_attributes(params[:client])
@@ -36,4 +36,3 @@ class ClientsController < ApplicationController
     redirect_to clients_path
   end
 end
-

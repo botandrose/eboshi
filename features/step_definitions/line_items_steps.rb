@@ -35,4 +35,3 @@ end
 Then /^I should not see "(.+)" in a line item$/ do |text|
   page.should_not have_css(".line_item", text: text)
 end
-

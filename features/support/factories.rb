@@ -11,7 +11,7 @@ FactoryGirl.define do
     country { Faker::Address.country }
     email { Faker::Internet.email }
     contact { Faker::Name.name }
-    phone { Faker::PhoneNumber.phone_number }  
+    phone { Faker::PhoneNumber.phone_number }
   end
 
   factory :user do

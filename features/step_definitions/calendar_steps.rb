@@ -4,4 +4,3 @@ Then "I should see the following calendar total:" do |table|
   end
   table.diff! actual
 end
-

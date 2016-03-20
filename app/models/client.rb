@@ -20,19 +20,19 @@
 class Client < ActiveRecord::Base
   default_scope -> { order(:name) }
 
-  has_many :line_items, :dependent => :destroy
+  has_many :line_items, dependent: :destroy
   has_many :works
   has_many :adjustments
   has_many :invoices, -> { includes(:line_items, :payments).order('`date` DESC') }, dependent: :destroy
-  has_many :payments, :through => :invoices
-  has_many :assignments, :dependent => :destroy
-  has_many :users, :through => :assignments
+  has_many :payments, through: :invoices
+  has_many :assignments, dependent: :destroy
+  has_many :users, through: :assignments
 
   validates_presence_of :name
 
   def build_invoice_from_unbilled(line_items_ids = nil)
     lis = line_items_ids ? LineItem.find(line_items_ids) : line_items.unbilled
-    invoices.build :line_items => lis
+    invoices.build line_items: lis
   end
 
   def invoices_with_unbilled
@@ -65,8 +65,8 @@ class Client < ActiveRecord::Base
   def clock_in(user)
     Work.new.tap do |line_item|
       now = Time.now
-      line_item.attributes = { :start => now, :finish => now, :user => user, :rate => user.default_rate_for(self) }
-      self.line_items << line_item
+      line_item.attributes = { start: now, finish: now, user: user, rate: user.default_rate_for(self) }
+      line_items << line_item
     end
   end
 

@@ -10,14 +10,13 @@ class LineItemsController < ApplicationController
     render nothing: true
   end
 
-
-  protected
-    def get_client
-      @client ||= (@line_item.try(:client) || Client.find(params[:client_id]))
-    end
-
   private
-    def authorized?
-      current_user.authorized? @client
-    end
+
+  def get_client
+    @client ||= (@line_item.try(:client) || Client.find(params[:client_id]))
+  end
+
+  def authorized?
+    current_user.authorized? @client
+  end
 end

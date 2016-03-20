@@ -2,8 +2,8 @@ class AdjustmentsController < ApplicationController
   before_filter :get_client
   before_filter :authorized?
 
-  before_filter :filter_date, :only => [:create, :update]
-  before_filter :filter_user, :only => [:create, :update]
+  before_filter :filter_date, only: [:create, :update]
+  before_filter :filter_user, only: [:create, :update]
 
   def new
     @adjustment = @client.adjustments.build
@@ -29,7 +29,7 @@ class AdjustmentsController < ApplicationController
       flash[:notice] = "Successfully updated Adjustment."
       respond_to do |wants|
         wants.html { redirect_to invoices_path(@client) }
-        wants.js { render :nothing => true }
+        wants.js { render nothing: true }
       end
     else
       render :edit
@@ -41,34 +41,35 @@ class AdjustmentsController < ApplicationController
     @adjustment.destroy
     respond_to do |wants|
       wants.html { redirect_to invoices_path(@client) }
-      wants.js { render :json => @adjustment.invoice_total }
+      wants.js { render json: @adjustment.invoice_total }
     end
   end
 
   private
-    def filter_date
-      a = params[:adjustment]
-      if a.delete(:no_date) == "1"
-        a[:start] = nil 
-        a.delete_if { |key, value| key =~ /^start\(.i\)$/ }
-      end
-    end
 
-    def filter_user
-      a = params[:adjustment]
-      a[:user_id] = current_user.id if a[:user_id].blank?
-      a[:user_id] = nil if a.delete(:no_user) == "1"
+  def filter_date
+    a = params[:adjustment]
+    if a.delete(:no_date) == "1"
+      a[:start] = nil
+      a.delete_if { |key, _value| key =~ /^start\(.i\)$/ }
     end
+  end
 
-    def get_adjustment
-      @adjustment ||= Adjustment.find params[:id]
-    end
+  def filter_user
+    a = params[:adjustment]
+    a[:user_id] = current_user.id if a[:user_id].blank?
+    a[:user_id] = nil if a.delete(:no_user) == "1"
+  end
 
-    def get_client
-      @client = params[:client_id] ? Client.find(params[:client_id]) : get_adjustment.client
-    end
+  def get_adjustment
+    @adjustment ||= Adjustment.find params[:id]
+  end
 
-    def authorized?
-      current_user.authorized? @client
-    end
+  def get_client
+    @client = params[:client_id] ? Client.find(params[:client_id]) : get_adjustment.client
+  end
+
+  def authorized?
+    current_user.authorized? @client
+  end
 end

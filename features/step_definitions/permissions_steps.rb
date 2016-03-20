@@ -5,7 +5,7 @@ Then /^visiting the invoices page for "(.+)" should return 404$/ do |name|
 end
 
 Then /^visiting that (\w+) (\w*)[ ]?page should return 404$/ do |model_name, action|
-  model = model_name.gsub(/ /, '_').classify.constantize
+  model = model_name.tr(' ', '_').classify.constantize
   args = [model.first]
   args.unshift action.to_sym unless action.blank?
   visit polymorphic_path(args)
@@ -17,4 +17,3 @@ Then /^visiting the new payment page for that invoice should return 404$/ do
   visit new_payment_path(invoice)
   page.should have_content("RecordNotFound")
 end
-

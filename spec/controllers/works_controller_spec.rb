@@ -11,11 +11,11 @@ describe WorksController do
 
   describe "should not error out" do
     it "on new" do
-      get :new, :client_id => @client.id
+      get :new, client_id: @client.id
       response.should be_success
     end
     it "on edit" do
-      get :edit, :client_id => @client.id, :id => @work.id
+      get :edit, client_id: @client.id, id: @work.id
       response.should be_success
     end
 
@@ -43,7 +43,7 @@ describe WorksController do
     end
 
     it "on destroy" do
-      delete :destroy, :client_id => @client.id, :id => @work.id
+      delete :destroy, client_id: @client.id, id: @work.id
       response.should be_redirect
     end
     it "on js destroy" do
@@ -52,7 +52,7 @@ describe WorksController do
     end
 
     it "on clock_in" do
-      get :clock_in, :client_id => @client.id
+      get :clock_in, client_id: @client.id
       response.should be_redirect
     end
     it "on js clock_in" do
@@ -62,7 +62,7 @@ describe WorksController do
 
     it "on clock_out" do
       @work = FactoryGirl.create(:work, start: Time.zone.today, finish: Time.zone.today)
-      get :clock_out, :client_id => @client.id, :id => @work.id
+      get :clock_out, client_id: @client.id, id: @work.id
       response.should be_redirect
     end
     it "on js clock_out" do
@@ -71,19 +71,19 @@ describe WorksController do
       response.should be_success
     end
     it "on merge" do
-      get :merge, :client_id => @client.id, :line_item_ids => @client.works.collect(&:id)
+      get :merge, client_id: @client.id, line_item_ids: @client.works.collect(&:id)
       response.should be_redirect
-    end  	
-    
+    end
+
     it "on js merge" do
       xhr :get, :merge, client_id: @client.id, line_item_ids: @client.works.collect(&:id), format: 'js'
       response.should be_success
-    end  	
+    end
   end
 
   describe "on update" do
     it "should allow update of notes" do
-      put :update, :id => @work.id, :work => { :notes => 'test' }
+      put :update, id: @work.id, work: { notes: 'test' }
       assigns(:work).errors.should be_empty
       assigns(:work).notes.should == 'test'
       response.should be_redirect

@@ -18,7 +18,6 @@
 # * http://elabs.se/blog/15-you-re-cuking-it-wrong
 #
 
-
 require 'uri'
 require 'cgi'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
@@ -58,11 +57,11 @@ When /^I follow "(.*?)"$/ do |link|
 end
 
 When /^I fill in "(.*?)" with "(.*?)"$/ do |field, value|
-  fill_in(field, :with => value)
+  fill_in(field, with: value)
 end
 
 When /^I fill in "(.*?)" for "(.*?)"$/ do |value, field|
-  fill_in(field, :with => value)
+  fill_in(field, with: value)
 end
 
 # Use this to fill in an entire form with data from a table. Example:
@@ -78,12 +77,12 @@ end
 #
 When /^I fill in the following:$/ do |fields|
   fields.rows_hash.each do |name, value|
-    step %{I fill in "#{name}" with "#{value}"}
+    step %(I fill in "#{name}" with "#{value}")
   end
 end
 
 When /^I select "(.*?)" from "(.*?)"$/ do |value, field|
-  select(value, :from => field)
+  select(value, from: field)
 end
 
 When /^I check "(.*?)"$/ do |field|
@@ -112,12 +111,12 @@ end
 
 Then /^I should see \/(.*?)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
-  page.should have_xpath('//*', :text => regexp)
+  page.should have_xpath('//*', text: regexp)
 end
 
 Then /^I should not see \/(.*?)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
-  page.should have_no_xpath('//*', :text => regexp)
+  page.should have_no_xpath('//*', text: regexp)
 end
 
 Then /^I should be on (.+)$/ do |page_name|

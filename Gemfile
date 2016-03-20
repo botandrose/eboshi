@@ -47,7 +47,7 @@ group :test do
   gem "faker"
   gem "delorean"
 
-  gem "cucumber-rails", :require => false
+  gem "cucumber-rails", require: false
   gem "database_cleaner"
   gem "poltergeist"
   gem "phantomjs-binaries"
@@ -55,6 +55,5 @@ end
 
 group :production do
   gem "exception_notification"
-  gem "whenever", :require => false
+  gem "whenever", require: false
 end
-

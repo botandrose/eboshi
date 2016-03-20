@@ -21,6 +21,3 @@ end
 Then /^the signature should be an image$/ do
   page.should have_css("#sig img")
 end
-
-
-

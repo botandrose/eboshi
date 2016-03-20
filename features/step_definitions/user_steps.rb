@@ -11,4 +11,3 @@ Given "the following users exist:" do |table|
     FactoryGirl.create(:user, attributes)
   end
 end
-

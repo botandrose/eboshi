@@ -2,13 +2,13 @@ require 'date'
 
 module CalendarHelper
   def calendar(options = {}, &block)
-    block ||= Proc.new {|d| nil}
+    block ||= proc { |_d| nil }
 
     defaults = {
-      :year => Date.today.year,
-      :month => Date.today.month,
-      :previous_month_text => nil,
-      :next_month_text => nil
+      year: Date.today.year,
+      month: Date.today.month,
+      previous_month_text: nil,
+      next_month_text: nil
     }
     options.reverse_merge! defaults
 
@@ -20,7 +20,7 @@ module CalendarHelper
 
   private
 
-  def build first, last, options, &block
+  def build(first, last, _options, &block)
     haml_tag :tbody do
       haml_tag :tr do
         last_month_days first # start out the week with last month's days
@@ -30,30 +30,30 @@ module CalendarHelper
     end
   end
 
-  def last_month_days first
+  def last_month_days(first)
     first.beginning_of_week(:sunday).upto(first - 1.day) do |d|
-      haml_tag :td, :class => "otherMonth" do
+      haml_tag :td, class: "otherMonth" do
         haml_concat d.day
       end
     end
   end
 
-  def this_month_days first, last, &block
+  def this_month_days(first, last, &block)
     first.upto(last) do |d|
       classes = []
       classes << "today" if d.today?
-      haml_tag :td, :id => "day_#{d.day}", :class => classes.compact.join(' ') do
+      haml_tag :td, id: "day_#{d.day}", class: classes.compact.join(' ') do
         haml_concat d.mday
         haml_concat capture_haml(d, &block)
       end
-      haml_concat "</tr><tr>" if d.saturday? unless d == last
+      haml_concat "</tr><tr>" unless d == last || !d.saturday?
     end
   end
 
-  def next_month_days last
+  def next_month_days(last)
     unless last.saturday?
       (last + 1).upto(last.end_of_week(:sunday)) do |d|
-        haml_tag :td, :class => "otherMonth" do
+        haml_tag :td, class: "otherMonth" do
           haml_concat d.day
         end
       end
@@ -74,6 +74,6 @@ module CalendarHelper
 
   def link_to_month(direction, date, options = {})
     date += (direction == :next ? 1 : -1).month
-    link_to direction, calendar_path(:year => date.year, :month => date.month), options
+    link_to direction, calendar_path(year: date.year, month: date.month), options
   end
 end

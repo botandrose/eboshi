@@ -2,11 +2,11 @@ require "spec_helper"
 
 describe ClientsController do
   include ControllerSpecHelpers
-  
-	before(:each) do
-		@client = FactoryGirl.create(:client)
+
+  before(:each) do
+    @client = FactoryGirl.create(:client)
     @client.users << @current_user
-	end
+  end
 
   describe "should not error out" do
     it "on index" do
@@ -29,4 +29,3 @@ describe ClientsController do
     end
   end
 end
-

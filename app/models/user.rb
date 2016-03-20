@@ -35,23 +35,23 @@ class User < ActiveRecord::Base
   acts_as_authentic do |config|
     config.crypto_provider = Authlogic::CryptoProviders::Sha512
   end
-  
-  belongs_to :last_client, :class_name => "Client"
-  has_many :assignments, :dependent => :destroy
+
+  belongs_to :last_client, class_name: "Client"
+  has_many :assignments, dependent: :destroy
   has_many :clients, -> { includes(:line_items, :payments) }, through: :assignments
   has_many :works
-  
+
   has_attached_file :logo,
-    :styles => { :pdf => "200x200>" },
-    :path => ":rails_root/public/:attachment/:id/:style.:extension",
-    :url => "/:attachment/:id/:style.:extension"
+                    styles: { pdf: "200x200>" },
+                    path: ":rails_root/public/:attachment/:id/:style.:extension",
+                    url: "/:attachment/:id/:style.:extension"
   has_attached_file :signature,
-    :styles => { :pdf => "450x100>" },
-    :path => ":rails_root/public/:attachment/:id/:style.:extension",
-    :url => "/:attachment/:id/:style.:extension"
-  validates_attachment_content_type :logo, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
-  validates_attachment_content_type :signature, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
-    
+                    styles: { pdf: "450x100>" },
+                    path: ":rails_root/public/:attachment/:id/:style.:extension",
+                    url: "/:attachment/:id/:style.:extension"
+  validates_attachment_content_type :logo, content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  validates_attachment_content_type :signature, content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
   def default_rate_for(client)
     last_work = client.works.complete.where(user: self).order("start DESC").first
     last_work.try(:rate) || rate
@@ -60,19 +60,19 @@ class User < ActiveRecord::Base
   def related_users
     clients.collect(&:users).flatten.uniq - [self]
   end
-  
+
   def authorized?(object)
-    return if object.is_a? Client and clients.include?(object)
-    return if object.is_a? Invoice and clients.include?(object.client)
-    return if object.is_a? Assignment and object.client.users.include?(self)
+    return if object.is_a?(Client) && clients.include?(object)
+    return if object.is_a?(Invoice) && clients.include?(object.client)
+    return if object.is_a?(Assignment) && object.client.users.include?(self)
     raise ActiveRecord::RecordNotFound
   end
-  
+
   def city_state_zip
-    return nil if city.blank? or state.blank? or zip.blank?
+    return nil if city.blank? || state.blank? || zip.blank?
     "#{city}, #{state}  #{zip}"
   end
-  
+
   def business_name_or_name
     business_name.blank? ? name : business_name
   end

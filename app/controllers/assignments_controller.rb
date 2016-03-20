@@ -1,7 +1,7 @@
 class AssignmentsController < ApplicationController
   def new
     @client = current_user.clients.find params[:client_id]
-    @assignment = @client.assignments.build :user => current_user
+    @assignment = @client.assignments.build user: current_user
   end
 
   def create

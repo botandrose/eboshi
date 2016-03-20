@@ -19,7 +19,7 @@ describe Adjustment do
   end
 
   it "should respond via total" do
-    @adjustment = Adjustment.new :total => 50
+    @adjustment = Adjustment.new total: 50
     @adjustment.total.should eql 50
   end
 end

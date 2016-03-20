@@ -6,12 +6,12 @@ describe Client do
     @invoice = FactoryGirl.create(:invoice, client: @client)
     @user = FactoryGirl.create(:user, rate: 65)
     @unbilled = [
-      FactoryGirl.create(:work, :client => @client, :user => @user, :invoice => nil, start: Time.zone.now),
-      FactoryGirl.create(:work, :client => @client, :user => @user, :invoice => nil, start: Time.zone.yesterday)
+      FactoryGirl.create(:work, client: @client, user: @user, invoice: nil, start: Time.zone.now),
+      FactoryGirl.create(:work, client: @client, user: @user, invoice: nil, start: Time.zone.yesterday)
     ]
-    FactoryGirl.create(:work, :client => @client, :user => @user, :invoice => @invoice)
-    Payment.create(:invoice => @invoice, :total => 50)
-    FactoryGirl.create(:adjustment, :client => @client, :user => @user, :invoice => @invoice, :rate => 100)
+    FactoryGirl.create(:work, client: @client, user: @user, invoice: @invoice)
+    Payment.create(invoice: @invoice, total: 50)
+    FactoryGirl.create(:adjustment, client: @client, user: @user, invoice: @invoice, rate: 100)
   end
 
   it "should order the building invoice before the saved invoices" do
@@ -26,7 +26,7 @@ describe Client do
     Invoice.count.should == 0
     Work.count.should == 0
     LineItem.count.should == 0
-    Adjustment.count.should == 0    
+    Adjustment.count.should == 0
     Payment.count.should == 0
   end
 

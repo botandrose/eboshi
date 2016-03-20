@@ -8,7 +8,7 @@ require 'rspec/rails'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
   # ## Mock Framework
@@ -42,7 +42,7 @@ RSpec.configure do |config|
   config.mock_with(:rspec) { |c| c.syntax = :should }
 
   config.alias_example_to :fit, :focus
-  config.filter_run :focus => true
+  config.filter_run focus: true
   config.run_all_when_everything_filtered = true
 
   config.infer_spec_type_from_file_location!

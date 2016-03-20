@@ -4,17 +4,17 @@ module CucumberRailsDebug
   end
 
   def how
-    # puts @request.parameters.inspect 
+    # puts @request.parameters.inspect
   end
 
   def html
     puts page.body.gsub("\n", "\n            ")
   end
 
-  def display(decoration="\n#{'*' * 80}\n\n")
+  def display(decoration = "\n#{'*' * 80}\n\n")
     puts decoration
     yield
-    puts decoration 
+    puts decoration
   end
 end
 

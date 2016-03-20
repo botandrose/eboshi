@@ -22,12 +22,12 @@ class Work < LineItem
   def self.complete
     where("start <> finish")
   end
-  
+
   def self.merge_from_ids(ids)
     works = Work.order("finish DESC").find(ids)
     hours = works.sum(&:hours)
     notes = works.collect(&:notes).select(&:present?).join(' ')
-    works.first.update_attributes :hours => hours, :notes => notes
+    works.first.update_attributes hours: hours, notes: notes
 
     Work.destroy ids[1..-1] # destroy all but the first work
 
@@ -36,27 +36,27 @@ class Work < LineItem
 
   def to_adjustment!
     self.type = "Adjustment"
-    self.rate = self.total
-    self.finish = self.start
+    self.rate = total
+    self.finish = start
     save!
   end
 
   def total
     (rate * hours).round(2)
   end
-  
+
   def total=(value)
-    self.hours = value/rate
+    self.hours = value / rate
   end
-  
+
   def hours=(total)
     update_attribute :finish, start + total.hours
   end
-  
+
   def clock_out
-    update_attributes :finish => Time.now
+    update_attributes finish: Time.now
   end
-  
+
   def incomplete?
     start >= finish
   end

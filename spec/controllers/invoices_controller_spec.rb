@@ -12,11 +12,11 @@ describe InvoicesController do
     end
 
     it "on index" do
-      get :index, :client_id => @client.id
+      get :index, client_id: @client.id
       response.should be_success
     end
     it "on new" do
-      get :new, :client_id => @client.id
+      get :new, client_id: @client.id
       response.should be_success
     end
 
@@ -31,7 +31,7 @@ describe InvoicesController do
     end
 
     it "on edit" do
-      get :edit, :client_id => @client.id, :id => @invoice.id
+      get :edit, client_id: @client.id, id: @invoice.id
       response.should be_success
     end
     it "on js edit" do
@@ -48,7 +48,7 @@ describe InvoicesController do
       response.should be_redirect
     end
     it "on destroy" do
-      delete :destroy, :client_id => @client.id, :id => @invoice.id
+      delete :destroy, client_id: @client.id, id: @invoice.id
       response.should be_redirect
     end
   end

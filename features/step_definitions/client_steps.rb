@@ -7,4 +7,3 @@ Given "the following clients exist:" do |table|
     FactoryGirl.create(:client, attributes)
   end
 end
-

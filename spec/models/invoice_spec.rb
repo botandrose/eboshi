@@ -4,15 +4,15 @@ describe Invoice do
   describe "consistant_rate" do
     it "should return false if invoice contains work items with varying hourly rates" do
       @it = FactoryGirl.create(:invoice)
-      FactoryGirl.create(:work, :invoice => @it, :rate => 50)
-      FactoryGirl.create(:work, :invoice => @it, :rate => 75)
+      FactoryGirl.create(:work, invoice: @it, rate: 50)
+      FactoryGirl.create(:work, invoice: @it, rate: 75)
       @it.consistant_rate.should be_falsey
     end
 
     it "should return the rate if invoice contains work items with the same hourly rates" do
       @it = FactoryGirl.create(:invoice)
-      3.times { FactoryGirl.create(:work, :invoice => @it, :rate => 75) }
-      @it.consistant_rate.should == 75 
+      3.times { FactoryGirl.create(:work, invoice: @it, rate: 75) }
+      @it.consistant_rate.should == 75
     end
 
     it "should return true if invoice contains no work items" do
@@ -24,7 +24,7 @@ describe Invoice do
   it "should not be paid if there are no payments" do
     @invoice = FactoryGirl.create(:invoice)
     2.times do
-      work = FactoryGirl.create(:work, :invoice => @invoice, :rate => 50)
+      work = FactoryGirl.create(:work, invoice: @invoice, rate: 50)
       work.update_attribute(:total, 100)
     end
     @invoice.should_not be_paid
@@ -33,7 +33,7 @@ describe Invoice do
   it "should calculate total as sum of line items" do
     @invoice = FactoryGirl.create(:invoice)
     2.times do
-      work = FactoryGirl.create(:work, :invoice => @invoice, :rate => 50)
+      work = FactoryGirl.create(:work, invoice: @invoice, rate: 50)
       work.update_attribute(:total, 100)
     end
     @invoice.total.should == 200
@@ -42,10 +42,10 @@ describe Invoice do
   it "should calculate balance as sum of line items minus sum of payments" do
     @invoice = FactoryGirl.create(:invoice)
     2.times do
-      work = FactoryGirl.create(:work, :invoice => @invoice, :rate => 50)
+      work = FactoryGirl.create(:work, invoice: @invoice, rate: 50)
       work.update_attribute(:total, 100)
     end
-    @invoice.payments.create(:total => 100)
+    @invoice.payments.create(total: 100)
     @invoice.balance.should == 100
   end
 
@@ -76,17 +76,17 @@ describe Invoice do
     @invoice = FactoryGirl.create(:invoice)
     count = @invoice.adjustments.length
     @invoice.total += 50
-    @invoice.adjustments.length.should eql count+1
+    @invoice.adjustments.length.should eql count + 1
     @invoice.adjustments.last.total.should eql 50
   end
 
   it "should handle the total attribute through mass assignment" do
     @invoice = FactoryGirl.create(:invoice)
-    5.times { FactoryGirl.create(:work, :invoice => @invoice) }
+    5.times { FactoryGirl.create(:work, invoice: @invoice) }
     total = @invoice.total
-    @invoice.attributes = { :total => total-50 }
+    @invoice.attributes = { total: total - 50 }
     @invoice.save
-    @invoice.reload.total.should == total-50
+    @invoice.reload.total.should == total - 50
   end
 
   it "should not create an adjustment item when a total is assigned that equals the sum of the line items" do
@@ -96,4 +96,3 @@ describe Invoice do
     @invoice.adjustments.length.should eql count
   end
 end
-

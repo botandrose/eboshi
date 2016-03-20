@@ -15,7 +15,6 @@ module ShallowRouteHelper
     edit_client_invoice_path(invoice.client, invoice, options)
   end
 
-
   def payments_path(invoice, options = {})
     client_invoice_payments_path(invoice.client, invoice, options)
   end
@@ -24,7 +23,6 @@ module ShallowRouteHelper
     new_client_invoice_payment_path(invoice.client, invoice, options)
   end
 
-
   def new_adjustment_path(adjustment, options = {})
     new_client_adjustment_path(adjustment.client, adjustment, options)
   end
@@ -32,7 +30,6 @@ module ShallowRouteHelper
   def edit_adjustment_path(adjustment, options = {})
     edit_client_adjustment_path(adjustment.client, adjustment, options)
   end
-
 
   def work_path(work, options = {})
     client_work_path(work.client, work, options)
@@ -50,11 +47,9 @@ module ShallowRouteHelper
     convert_client_work_path(work.client, work, options)
   end
 
-  
   def line_item_path(work, options = {})
     client_line_item_path(work.client, work, options)
   end
-
 
   def assignments_path(client, options = {})
     client_assignments_path(client, options)

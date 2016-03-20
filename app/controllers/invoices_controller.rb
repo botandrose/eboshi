@@ -13,11 +13,11 @@ class InvoicesController < ApplicationController
   def show
     @invoice = @client.invoices.find(params[:id])
     respond_to do |wants|
-      wants.html { render :layout => false }
-      wants.js { render :partial => 'mini', :locals => { :invoice => @invoice } } 
+      wants.html { render layout: false }
+      wants.js { render partial: 'mini', locals: { invoice: @invoice } }
       wants.pdf do
         filename = "#{current_user.business_name_or_name.parameterize}_invoice-\##{@invoice.id}.pdf"
-        render :pdf => filename, :show_as_html => params[:debug].present?
+        render pdf: filename, show_as_html: params[:debug].present?
       end
     end
   end
@@ -40,7 +40,7 @@ class InvoicesController < ApplicationController
     @invoice = @client.invoices.find(params[:id])
     respond_to do |wants|
       wants.html
-      wants.js { render :partial => 'full', :locals => { :invoice => @invoice } } 
+      wants.js { render partial: 'full', locals: { invoice: @invoice } }
     end
   end
 
@@ -67,6 +67,5 @@ class InvoicesController < ApplicationController
 
   def authorized?
     current_user.authorized?(@client)
-  end      
+  end
 end
-

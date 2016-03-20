@@ -21,36 +21,36 @@ class LineItem < ActiveRecord::Base
 
   belongs_to :client
   belongs_to :user
-  belongs_to :invoice, :touch => true
+  belongs_to :invoice, touch: true
 
   validates_presence_of :client, :rate
-    
+
   def self.unbilled
-    where(:invoice_id => nil).order("start DESC")
+    where(invoice_id: nil).order("start DESC")
   end
 
-  def self.on_date date
+  def self.on_date(date)
     start = date.beginning_of_day
     finish = date.end_of_day
-    where(:start => start..finish)
+    where(start: start..finish)
   end
 
-  def self.on_week date
+  def self.on_week(date)
     start = date.beginning_of_week(:sunday).beginning_of_day
     finish = date.end_of_week(:sunday).end_of_day
-    where(:start => start..finish)
+    where(start: start..finish)
   end
 
-  def self.on_month date
+  def self.on_month(date)
     start = date.beginning_of_month.beginning_of_day
     finish = date.end_of_month.end_of_day
-    where(:start => start..finish)
+    where(start: start..finish)
   end
 
-  def self.on_year date
+  def self.on_year(date)
     start = date.beginning_of_year.beginning_of_day
     finish = date.end_of_year.end_of_day
-    where(:start => start..finish)
+    where(start: start..finish)
   end
 
   def total
@@ -58,15 +58,15 @@ class LineItem < ActiveRecord::Base
   end
 
   def hours
-    return 0 unless finish and start
+    return 0 unless finish && start
     seconds = BigDecimal.new((finish - start).to_s)
     seconds / 60 / 60
   end
-  
-  def == (target)
+
+  def ==(target)
     target == id
   end
-  
+
   def unbilled?
     invoice_id.nil?
   end
@@ -74,18 +74,16 @@ class LineItem < ActiveRecord::Base
   def checked?
     unbilled?
   end
-  
+
   def user_name=(name)
-    unless name.nil?
-      self.user = User.find_by_name!(name)
-    end
+    self.user = User.find_by_name!(name) unless name.nil?
   end
-  
+
   def invoice_total
     invoice.try(:total) || client.unbilled_balance
   end
-  
-  def <=> target
-    (target.start || Time.zone.parse("0000-01-01")) <=> (self.start || Time.zone.parse("0000-01-01"))
+
+  def <=>(target)
+    (target.start || Time.zone.parse("0000-01-01")) <=> (start || Time.zone.parse("0000-01-01"))
   end
 end

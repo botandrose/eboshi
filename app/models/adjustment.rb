@@ -18,18 +18,18 @@
 
 class Adjustment < LineItem
   def total
-    self.rate
+    rate
   end
-  
+
   def total=(value)
     self.rate = value
   end
 
   def no_user
-    self.user.nil? and !self.new_record?
+    user.nil? && !new_record?
   end
 
   def no_date
-    self.start.nil? and !self.new_record?
+    start.nil? && !new_record?
   end
 end
