@@ -1,8 +1,8 @@
 source "http://rubygems.org"
 
-gem "rails", "~>4.1.0"
+gem "rails", "~>4.2"
 gem "haml-rails"
-gem "mysql2", "~>0.3.0"
+gem "mysql2"
 gem "bard-rake"
 gem "authlogic"
 gem "paperclip"
