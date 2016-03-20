@@ -1,0 +1,58 @@
+@import "blueprint"
+@import "compass/reset"
+@import "compass/utilities"
+@import "compass/layout"
+@import "compass/css3"
+
+=blueprint($body_selector: "body")
+  +blueprint-typography($body_selector)
+  +blueprint-utilities
+  +blueprint-debug
+  +blueprint-interaction
+  +blueprint-colors
+  
+@import "constant"
+@import "general/*"
+
+$font: "Arial Black"
+$default: Arial, sans-serif
+
+$primaryColor: #333333
+$secondaryColor: #000000
+
+$content_width: 1000px
+$var_border: 3px double #666666
+
+.invoice-preview
+  position: relative
+  padding: 36px 72px
+  width: 612px
+  height: 792px
+  border: 1px dashed #ccc
+
+.half
+  width:  50%
+.invoice-details
+  float: right
+  text-align: right
+  b
+    display: inline-block
+    width: 90px
+.company
+  float: left
+
+.invoicee, .project
+  float: left
+  clear:  both
+  margin-top: 15px
+
+.signature
+  float: left
+  margin-top: 20px
+
+.invoice-footer
+  position:  absolute
+  left: 0
+  bottom: 36px
+  width:  100%
+  text-align:  center

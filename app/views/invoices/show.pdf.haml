@@ -8,111 +8,73 @@
   %body
     #container
       #content
-      
-        #return
-          #logo
-            - if current_user.logo.exists?
-              = image_tag current_user.logo.url(:pdf)
-            - else
-              = current_user.business_name_or_name
-          - unless current_user.address.blank?
-            %p= h current_user.address
-          - unless current_user.address2.blank?
-            %p= h current_user.address2
-          - if current_user.city_state_zip
-            %p= h current_user.city_state_zip
-          %p.color= mail_to current_user.business_email_or_email
-        .clear
-        
-        #client
-          %h1 Invoice
-          %p attention:
-          %h2= h @invoice.client.contact
-          %p= h @invoice.client.address
-        .clear
-        
-        #date
-          %h3="#{@invoice.date.day}  #{Date::MONTHNAMES[@invoice.date.month]}  #{@invoice.date.year}"
-        .clear
-        
-        #project
-          #project_header
-            %table{:cellspacing => '0', :cellpadding => '0', :width => '100%'}
-              %col{:width => '49%'}
-              %col{:width => '2%'}
-              %col{:width => '49%'}
-              - unless @invoice.project_name.blank?
-                %tr
-                  %td PROJECT
-                  %td .
-                  %td.right_align= h @invoice.project_name
+        .invoice-preview
+          .invoice-details.half
+            %h2 Invoice
+            %p
+              Date:
+              %b= rfc822 @invoice.date
+            %p
+              Invoice Number:
+              %b= @invoice.id
+            %p
+              Terms:
+              %b NET ##
+
+          .company.half
+            = wicked_pdf_image_tag current_user.logo.url(:pdf) if current_user.logo.exists?
+            %h3= current_user.business_name_or_name
+            - unless current_user.address.blank?
+              %p= h current_user.address
+            - unless current_user.address2.blank?
+              %p= h current_user.address2
+            - if current_user.city_state_zip
+              %p= h current_user.city_state_zip
+            %p= mail_to current_user.business_email_or_email
+
+          .invoicee
+            %h5 Attn
+            %h3= @invoice.client.contact
+            %h4= @invoice.client.name
+
+          .project
+            %h5 Project
+            %h3= @invoice.client.name
+
+          %table.list-items
+            %thead
               %tr
-                %td INVOICE NUMBER
-                %td .
-                %td.right_align= @invoice.id
+                %th Item
+                %th
+                %th
+                %th Price
+            %tbody
+              - @invoice.line_items.sort.each do |line_item|
+                %tr
+                  %td= line_item.notes
+                  %td
+                  %td
+                  %td= number_to_currency line_item.total
+
+            %tfoot
               %tr
-                %td TERMS
-                %td .
-                %td.right_align Due on Receipt
-                
-          #items
-            %table{:cellspacing => '0', :cellpadding => '0', :width => '100%'}
-              - if @invoice.include_dates
-                %col{:width => '25%'}
-              %col{:width => '*%'}
-              - unless @invoice.works.empty?
-                %col{:width => '15%'}
-              %col{:width => '15%'}
-              
-              %thead
-                %tr
-                  - if @invoice.include_dates
-                    %th date
-                  %th.left_align item
-                  - unless @invoice.works.empty?
-                    %th hours
-                  - unless @invoice.consistant_rate
-                    %th rate
-                  %th cost
-                  
-              %tbody
-                - @invoice.line_items.sort.each do |line_item|
-                  %tr{:class => cycle('line_item even','line_item')}
-                    - if @invoice.include_dates
-                      %td= line_item.start.to_s(:slash) if line_item.start
-                    - if line_item.is_a? Work
-                      %td.li= line_item.notes
-                      %td.center_align
-                        - if @invoice.include_times and line_item.is_a? Work
-                          = raw line_item.start.to_s(:pretty_time)
-                          = raw line_item.finish.to_s(:pretty_time)
-                          %br
-                        = number_with_precision line_item.hours, :precision => 2
-                      - unless @invoice.consistant_rate
-                        %td.center_align= number_to_currency line_item.rate
-                      %td.center_align= number_to_currency line_item.total
-                    - if line_item.is_a? Adjustment
-                      %td{:colspan => (@invoice.consistant_rate ? 1 : 2) + (@invoice.works.empty? ? 0 : 1)}
-                        = line_item.notes
-                      %td.center_align= number_to_currency line_item.total
-                      
-                %tr
-                  %td{:colspan => @invoice.include_dates ? 2 : 1 } TOTAL
-                  - unless @invoice.works.empty?
-                    %td
-                  - unless @invoice.consistant_rate
-                    %td
-                  %td.center_align= number_to_currency @invoice.total
-                      
-          - if @invoice.consistant_rate.respond_to?(:nonzero?)
-            #project_footer
-              %em== Work rated at #{number_to_per_hour @invoice.consistant_rate}.
-          
-        .clear
-        
-      #sig
-        %p sincerely,
-        - if current_user.signature.exists?
-          = image_tag current_user.signature.url(:pdf)
-        - else
-          = current_user.business_name_or_name
+                %td(colspan="3") Subtotal
+                %td= number_to_currency @invoice.total
+              %tr
+                %td(colspan="3") Fees
+                %td $0
+              %tr
+                %td(colspan="3") Amount Paid
+                %td $0
+              %tr
+                %td(colspan="3")
+                  %b Balance Due
+                %td
+                  %b= number_to_currency @invoice.total
+
+          .signature
+            %p Thank you,
+            = wicked_pdf_image_tag current_user.signature.url(:pdf)
+            %p= current_user.name
+            %p= current_user.business_name_or_name
+
