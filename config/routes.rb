@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :invoices do
       resources :payments
     end
+    resources :budgets
 
     resources :line_items, only: [:update]
     resources :works, except: [:index, :show] do

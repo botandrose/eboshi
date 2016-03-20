@@ -25,6 +25,7 @@ class Client < ActiveRecord::Base
   has_many :adjustments
   has_many :invoices, -> { includes(:line_items, :payments).order('`date` DESC') }, dependent: :destroy
   has_many :payments, through: :invoices
+  has_many :budgets
   has_many :assignments, dependent: :destroy
   has_many :users, through: :assignments
 
@@ -32,7 +33,10 @@ class Client < ActiveRecord::Base
 
   def build_invoice_from_unbilled(line_items_ids = nil)
     lis = line_items_ids ? LineItem.find(line_items_ids) : line_items.unbilled
-    invoices.build line_items: lis
+    budget = budgets.order(:created_at).last
+    invoice = invoices.build line_items: lis, budget: budget
+    budget.unbilled_invoice = invoice if budget
+    invoice
   end
 
   def invoices_with_unbilled

@@ -1,0 +1,17 @@
+= error_messages_for :budget
+
+= form_for [@client, @budget] do |form|
+  %p
+    = form.label :name
+    = form.text_field :name
+
+  %p
+    = form.label :total
+    ==$#{form.text_field :total}
+
+  %p
+    = form.label :created_at
+    = form.date_select :created_at
+
+  %p= form.submit @budget.new_record? ? "Create" : "Update"
+

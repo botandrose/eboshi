@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131122211732) do
+ActiveRecord::Schema.define(version: 20160320022237) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(version: 20131122211732) do
 
   add_index "assignments", ["client_id"], name: "index_assignments_on_client_id", using: :btree
   add_index "assignments", ["user_id"], name: "index_assignments_on_user_id", using: :btree
+
+  create_table "budgets", force: :cascade do |t|
+    t.integer  "client_id",  limit: 4
+    t.string   "name",       limit: 255
+    t.decimal  "total",                  precision: 10, scale: 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "clients", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -45,6 +53,7 @@ ActiveRecord::Schema.define(version: 20131122211732) do
     t.boolean  "include_times",             default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "budget_id",     limit: 4
   end
 
   add_index "invoices", ["client_id"], name: "index_invoices_on_client_id", using: :btree

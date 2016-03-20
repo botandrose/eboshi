@@ -8,9 +8,31 @@
 = content_for :actions do
   = link_to 'Create Invoice', new_invoice_path(@client), :id => 'create_invoice', :class => "button left"
   = link_to 'Merge', merge_works_path(@client), :id => 'merge', :class => "button left"
+  = link_to 'New Budget', [:new, @client, :budget], class: "button left"
   .clear
     
-= render @invoices
+- @invoices.group_by(&:budget).each do |budget, invoices|
+  - if budget
+    .budget(style="background: white; margin: 10px")
+      %dfn
+        %dd Name:
+        %dt= budget.name
+        %dd Total:
+        %dt= number_to_currency budget.total
+        %dd Used:
+        %dt= number_to_currency budget.used
+        - if budget.under?
+          %dd Remaining:
+          %dt= number_to_currency budget.remaining
+        - if budget.over?
+          %dd Over:
+          %dt= number_to_currency budget.remaining
+        %dd= link_to "Edit Budget", [:edit, @client, budget]
+
+      = render invoices
+
+  - else
+    = render invoices
 
 %p
   Total:
