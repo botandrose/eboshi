@@ -49,7 +49,7 @@
                 %th
                 %th Price
             %tbody
-              - @invoice.line_items.sort.each do |line_item|
+              - @invoice.line_items_for_invoice.each do |line_item|
                 %tr
                   %td= line_item.notes
                   %td
