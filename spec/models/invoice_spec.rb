@@ -1,6 +1,8 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Invoice do
+  subject { FactoryGirl.create(:invoice) }
+
   describe "consistant_rate" do
     it "should return false if invoice contains work items with varying hourly rates" do
       @it = FactoryGirl.create(:invoice)
@@ -94,5 +96,19 @@ describe Invoice do
     count = @invoice.adjustments.length
     @invoice.total = @invoice.total
     @invoice.adjustments.length.should eql count
+  end
+
+  describe "#line_items_for_invoice" do
+    it "groups line items with the same notes together" do
+      FactoryGirl.create(:work, invoice: subject, total: 50, notes: "a")
+      FactoryGirl.create(:work, invoice: subject, total: 50, notes: "a")
+      FactoryGirl.create(:work, invoice: subject, total: 75, notes: "b")
+      FactoryGirl.create(:work, invoice: subject, total: 50, notes: "a")
+
+      subject.line_items_for_invoice.should == [
+        OpenStruct.new(total: 150, notes: "a"),
+        OpenStruct.new(total: 75, notes: "b"),
+      ]
+    end
   end
 end

@@ -79,4 +79,10 @@ class Invoice < ActiveRecord::Base
   def users
     line_items.collect(&:user).uniq.sort_by { |user| user ? user.name : "" }
   end
+
+  def line_items_for_invoice
+    line_items.sort.group_by(&:notes).map do |notes, line_items|
+      OpenStruct.new(notes: notes, total: line_items.sum(&:total))
+    end
+  end
 end
