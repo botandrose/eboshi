@@ -10,7 +10,7 @@ a, h1, h2, h3
 h1, h2, h3, ul, li, p
   :margin 0
   :padding 0
-  
+
 ul, li
   :list-style-type none
 
@@ -20,7 +20,7 @@ h1
 
 h2
   :font-size 1.3em
-  
+
 h3
   :font-size .9em
 
@@ -38,7 +38,7 @@ a
   &:hover
     :text-decoration underline
 
-    
+
 th
   :font-variant small-caps
   :color #333333
@@ -82,11 +82,11 @@ img
   &.lg
     padding: 6px 36px
     font-size: 1.25em
-    @include background( linear-gradient(top, #fff, #ccc) )
+    background: linear-gradient(top, #fff, #ccc)
     border: 1px solid #fcfcfc
-    +box-shadow( 0px 0px 3px #333 )
+    box-shadow: 0px 0px 3px #333
     &:hover
       background: #ccc
-    
+
 .button
   :padding 2px 12px
