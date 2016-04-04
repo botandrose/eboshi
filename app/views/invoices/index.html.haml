@@ -10,24 +10,29 @@
   = link_to 'Merge', merge_works_path(@client), :id => 'merge', :class => "button left"
   = link_to 'New Budget', [:new, @client, :budget], class: "button left"
   .clear
-    
+
 - @invoices.group_by(&:budget).each do |budget, invoices|
   - if budget
-    .budget(style="background: white; margin: 10px")
+    %dl.budget
       %dfn
         %dd Name:
         %dt= budget.name
+      %dfn
         %dd Total:
         %dt= number_to_currency budget.total
+      %dfn
         %dd Used:
         %dt= number_to_currency budget.used
-        - if budget.under?
+      - if budget.under?
+        %dfn
           %dd Remaining:
           %dt= number_to_currency budget.remaining
-        - if budget.over?
+      - if budget.over?
+        %dfn
           %dd Over:
           %dt= number_to_currency budget.remaining
-        %dd= link_to "Edit Budget", [:edit, @client, budget]
+      %dfn
+        %dd= link_to "Edit Budget", [:edit, @client, budget], class: "edit-budget"
 
       = render invoices
 
