@@ -1,26 +1,18 @@
 %table{:class => "invoice #{invoice.status}", :width=>"100%", :border=>"0", :cellpadding=>"0", :cellspacing=>"0" }
-  %col{:width=>"5%"}
-  %col{:width=>"12%"}
-  %col{:width=>"12%"}
-  %col{:width=>"8%"}
-  %col{:width=>"8%"}
-  %col{:width=>"10%"}
-  %col{:width=>"45%"}
-  
   %thead{ :id => "invoice_#{invoice.id_or_new}" }
     - if invoice.status == 'unbilled'
       %tr
-        %td{ :colspan => 7 }
+        %td{ :colspan => 8 }
           %h2 Building Invoice
       %tr
-        %td{ :colspan => 7 }
+        %td{ :colspan => 8 }
           = button_to 'Clock In', clock_in_path(@client), :id => 'clock_in', :class => "button left"
           = link_to 'New Time Item', new_client_work_path(@client), :class => "button left"
           = link_to 'New Flat Fee', new_client_adjustment_path(@client), :class => "button left"
-          .clear          
+          .clear
     - else
       %tr
-        %td{ :colspan => 7 }
+        %td{ :colspan => 8 }
           %h2
             Invoice ##{invoice.id}
             = " - #{invoice.project_name}" unless invoice.project_name.blank?
@@ -45,22 +37,24 @@
           - else
             %b.red UNPAID
             =# button_to 'Mark as Paid', paid_invoice_path(invoice)
-  
+
     %tr#new_line_items
-      %th
+      %th &nbsp;
       %th user
       %th time
       %th hours
       %th rate
       %th total
       %th notes
+      %th &nbsp;
     %tr#totals
       %td{:colspan => "3"}
-      %td.total_hours= number_with_precision invoice.total_hours, :precision => 2  
+      %td.total_hours= number_with_precision invoice.total_hours, :precision => 2
       %td &nbsp;
       %td.total= number_to_currency invoice.balance
       %td.align_left
         %b Current Balance
+      %td &nbsp;
 
   %tbody
     = render invoice.line_items.sort
@@ -70,7 +64,7 @@
         %td
         %td= user ? h(user.name) : "<em>Ambiguous</em>".html_safe
         %td
-        %td.total_hours= number_with_precision invoice.total_hours_for_user(user), :precision => 2  
+        %td.total_hours= number_with_precision invoice.total_hours_for_user(user), :precision => 2
         %td &nbsp;
         %td.total= number_to_currency invoice.total_for_user(user)
         - if i == 0
