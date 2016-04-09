@@ -1,7 +1,7 @@
 - content_for :title do
   All Clients
 
-%table#clients{:width => "100%"}
+%table.client-table{:width => "100%"}
   %col{ :width => '35%' }
   %col{ :width => '35%' }
   %col{ :width => '15%' }
@@ -16,4 +16,4 @@
       %td{ :align => 'center' }= link_to 'Edit', edit_client_path(client), :class=>"button"
       %td{ :align => 'center' }= link_to 'Delete', client, :confirm => 'Are you sure?', :method => :delete, :class=>"button"
 
-      
+
