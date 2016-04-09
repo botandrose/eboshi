@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :clients do
     resources :invoices do
+      resource :delivery
       resources :payments
     end
     resources :budgets

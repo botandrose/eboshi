@@ -68,3 +68,5 @@
   = f.collection_select :budget_id, @client.budgets, :id, :name_and_total, include_blank: true
 
 = f.submit @invoice.new_record? ? "Create" : "Update"	
+= f.submit "Send"
+

@@ -30,7 +30,8 @@ class InvoicesController < ApplicationController
     @invoice = @client.invoices.build
     @invoice.attributes = params[:invoice]
     if @invoice.save
-      redirect_to invoices_path(@client), notice: "Invoice successfully created."
+      flash.notice = "Invoice successfully created."
+      redirect_to params[:commit] == "Send" ? [:new, @client, @invoice, :delivery] : [@client, :invoices]
     else
       render :new
     end
@@ -47,7 +48,8 @@ class InvoicesController < ApplicationController
   def update
     @invoice = @client.invoices.find(params[:id])
     if @invoice.update_attributes(params[:invoice])
-      redirect_to invoices_path(@client), notice: "Invoice successfully updated."
+      flash.notice = "Invoice successfully updated."
+      redirect_to params[:commit] == "Send" ? [:new, @client, @invoice, :delivery] : [@client, :invoices]
     else
       render :edit
     end
