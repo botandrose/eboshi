@@ -19,7 +19,7 @@
               %b= @invoice.id
             %p
               Terms:
-              %b NET ##
+              %b= @invoice.client.terms
 
           .company.half
             = wicked_pdf_image_tag current_user.logo.url(:pdf) if current_user.logo.exists?
@@ -35,7 +35,7 @@
           .invoicee
             %h5 Attn
             %h3= @invoice.client.contact
-            %h4= @invoice.client.name
+            %h4= @invoice.client.company_name
 
           .project
             %h5 Project
@@ -73,8 +73,13 @@
                   %b= number_to_currency @invoice.total
 
           .signature
-            %p Thank you,
-            = wicked_pdf_image_tag current_user.signature.url(:pdf)
-            %p= current_user.name
-            %p= current_user.business_name_or_name
+            - if current_user.signature?
+              = wicked_pdf_image_tag current_user.signature.url(:pdf)
+            - else
+              %p Thank you,
+              %p= current_user.name
+              %p= current_user.business_name_or_name
+
+        .invoice-footer
+          %p= @invoice.client.terms_explanation
 
