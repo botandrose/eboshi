@@ -1,3 +1,12 @@
 = form_for @delivery, url: [@client, @invoice, :delivery] do |form|
+  = form.label :reply_to
+  = form.text_field :reply_to
+
+  = form.label :subject
+  = form.text_field :subject
+
+  = form.label :body
+  = form.text_area :body
+
   = form.submit "Send"
 

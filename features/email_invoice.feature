@@ -14,6 +14,8 @@ Feature: User can email an invoice to the client's contact
   Scenario: User previews an invoice and emails it with some boilerplate
     When I follow "Create Invoice"
     And I press "Send"
+
+    When I fill in "Body" with "Pay up!"
     And I press "Send"
     Then I should see "Invoice sent to admin@bossanova.com"
     And "admin@bossanova.com" should receive an email
