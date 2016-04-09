@@ -1,19 +1,18 @@
 = content_for :title do
   All Clients
 
-%table#clients(width="100%")
-  %col(width="35%")
-  %col(width="35%")
-  %col(width="15%")
-  %col(width="15%")
+%table#clients.client-table{:width => "100%"}
+  %col{ :width => '35%' }
+  %col{ :width => '35%' }
+  %col{ :width => '15%' }
+  %col{ :width => '15%' }
   %tr
     %th name
     %th balance
-
   - @clients.each do |client|
     %tr{class: cycle('even','')}
       %td= link_to client.name, [client, :invoices]
       %td(align="center")= number_to_currency client.balance
       %td(align="center")= link_to "Edit", [:edit, client], class: "button"
       %td(align="center")= link_to "Delete", client, data: { confirm: 'Are you sure?' }, method: :delete, class: "button"
-      
+
