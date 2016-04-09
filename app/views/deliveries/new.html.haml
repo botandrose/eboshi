@@ -1,4 +1,6 @@
 = form_for @delivery, url: [@client, @invoice, :delivery] do |form|
+  = link_to "Preview Invoice", polymorphic_path([@client, @invoice], format: :pdf), target: "_blank"
+
   = form.label :reply_to
   = form.text_field :reply_to
 
