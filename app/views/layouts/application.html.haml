@@ -97,10 +97,11 @@
               %col{:width=>"20%"}
               %col{:width=>"20%"}
               - current_user.clients.each do |client|
-                %tr
-                  %td= link_to h(client.name), invoices_path(client), :class=>"inline"
-                  %td= currency_or_empty client.unbilled_balance
-                  %td.red= currency_or_empty client.overdue_balance
+                = cache client do
+                  %tr
+                    %td= link_to client.name, [client, :invoices], class: "inline"
+                    %td= currency_or_empty client.unbilled_balance
+                    %td.red= currency_or_empty client.overdue_balance
                       
             = link_to '+ Add Client', new_client_path, :class=>"button right"
             .clear

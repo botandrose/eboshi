@@ -1,5 +1,5 @@
 class Budget < ActiveRecord::Base
-  belongs_to :client
+  belongs_to :client, touch: true
   has_many :invoices
 
   attr_accessor :unbilled_invoice

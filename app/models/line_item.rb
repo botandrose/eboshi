@@ -19,7 +19,7 @@
 class LineItem < ActiveRecord::Base
   include Comparable
 
-  belongs_to :client
+  belongs_to :client, touch: true
   belongs_to :user
   belongs_to :invoice, touch: true
 

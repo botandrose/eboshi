@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
 
   belongs_to :last_client, class_name: "Client"
   has_many :assignments, dependent: :destroy
-  has_many :clients, -> { includes(:line_items, :payments) }, through: :assignments
+  has_many :clients, through: :assignments
   has_many :works
 
   has_attached_file :logo,
