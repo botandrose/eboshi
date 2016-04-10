@@ -2,7 +2,6 @@
 //= require jquery_ujs
 
 //= require_self
-//= require toggle_summaries
 //= require friendly_time_select
 //= require invoices
 //= require new_invoice

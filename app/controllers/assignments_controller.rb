@@ -9,11 +9,9 @@ class AssignmentsController < ApplicationController
     user = User.find_by_id(params[:assignment][:user_id]) || User.find_by_email(params[:assignment][:email])
     if user
       @client.users << user
-      flash[:notice] = "Successfully created!"
-      redirect_to invoices_path(@client)
+      redirect_to invoices_path(@client), notice: "Successfully created!"
     else
-      flash[:error] = "A user with that email address does not exist!"
-      redirect_to new_assignment_path(@client)
+      redirect_to new_assignment_path(@client), alert: "A user with that email address does not exist!"
     end
   end
 
