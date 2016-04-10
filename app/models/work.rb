@@ -24,7 +24,7 @@ class Work < LineItem
   end
 
   def self.merge_from_ids(ids)
-    works = Work.order("finish DESC").find(ids)
+    works = Work.order(finish: :desc).find(ids)
     hours = works.sum(&:hours)
     notes = works.collect(&:notes).select(&:present?).join(' ')
     works.first.update_attributes hours: hours, notes: notes
