@@ -6,8 +6,6 @@ gem "mysql2"
 gem "bard-rake"
 gem "authlogic"
 gem "paperclip"
-gem "RedCloth"
-gem "chronic"
 gem "default_value_for"
 gem "dynamic_form"
 gem "wicked_pdf"
@@ -16,16 +14,11 @@ gem "bard_static"
 gem "rack-mini-profiler"
 gem "flamegraph"
 
-gem "coveralls", require: false
-
-gem 'sprockets-rails'
 gem "sass-rails"
 gem "compass-rails"
-gem "compass-blueprint"
 
 gem "coffee-rails"
 gem "uglifier"
-
 gem "jquery-rails"
 
 group :development, :test do
@@ -40,7 +33,6 @@ group :development do
 end
 
 group :test do
-  gem "pry-byebug"
   gem "rspec-rails"
   gem "factory_girl_rails"
   gem "faker"
@@ -51,8 +43,9 @@ group :test do
   gem "poltergeist"
   gem "phantomjs-binaries"
 end
+gem "coveralls", require: false
 
 group :production do
   gem "exception_notification"
-  gem "whenever", require: false
 end
+
