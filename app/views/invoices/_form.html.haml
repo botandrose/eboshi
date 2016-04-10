@@ -24,7 +24,7 @@
         %td= number_with_precision line_item.hours, :precision => 2
         %td= number_to_per_hour line_item.rate
         %td{:align => "right", :"data-total" => line_item.total}= number_to_currency line_item.total
-        %td= raw textilize line_item.notes
+        %td= line_item.notes
 
     - if line_item.is_a? Adjustment
       %tr
@@ -38,7 +38,7 @@
           %td=# number_to_currency line_item.rate, :precision => 0
         %td{:align => "center", :colspan => 4} Flat Fee:
         %td{:align => "right", :"data-total" => line_item.total}= number_to_currency line_item.total
-        %td= raw textilize line_item.notes
+        %td= line_item.notes
 
 %h2 Details
 

@@ -81,11 +81,11 @@
                     - if @invoice.include_dates
                       %td= line_item.start.to_s(:slash) if line_item.start
                     - if line_item.is_a? Work
-                      %td.li= raw textilize(line_item.notes)
+                      %td.li= line_item.notes
                       %td.center_align
                         - if @invoice.include_times and line_item.is_a? Work
-                          = raw line_item.start.to_s(:pretty_time)
-                          = raw line_item.finish.to_s(:pretty_time)
+                          = line_item.start.to_s(:pretty_time)
+                          = line_item.finish.to_s(:pretty_time)
                           %br
                         = number_with_precision line_item.hours, :precision => 2
                       - unless @invoice.consistant_rate
@@ -93,7 +93,7 @@
                       %td.center_align= number_to_currency line_item.total
                     - if line_item.is_a? Adjustment
                       %td{:colspan => (@invoice.consistant_rate ? 1 : 2) + (@invoice.works.empty? ? 0 : 1)}
-                        = raw textilize line_item.notes
+                        = line_item.notes
                       %td.center_align= number_to_currency line_item.total
                       
                 %tr
