@@ -1,18 +1,7 @@
-@import "blueprint"
-@import "compass/reset"
-@import "compass/utilities"
-@import "compass/layout"
-@import "compass/css3"
-
-=blueprint($body_selector: "body")
-  +blueprint-typography($body_selector)
-  +blueprint-utilities
-  +blueprint-debug
-  +blueprint-interaction
-  +blueprint-colors
-  
 @import "constant"
 @import "general/*"
+@import "components/*"
+@import "components/-table/*"
 
 $font: "Arial Black"
 $default: Arial, sans-serif
