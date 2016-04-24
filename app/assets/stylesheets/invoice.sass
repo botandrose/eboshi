@@ -3,40 +3,88 @@
 @import "components/*"
 @import "components/-table/*"
 
-$font: "Arial Black"
-$default: Arial, sans-serif
-
-$primaryColor: #333333
-$secondaryColor: #000000
-
-$content_width: 1000px
-$var_border: 3px double #666666
-
+html
+  height: 100%
+body, #container, #content, .invoice-preview
+  min-height: 100%
 .invoice-preview
   position: relative
   padding: 36px 72px
   width: 612px
   height: 792px
-  border: 1px dashed #ccc
+  min-height: 100%
+p, dt, dd
+  font-size: 12pt
+p, dl, dfn
+  margin: 0
+dl
+  line-height: 1.4em
+h1, h2, h3, h4, h5, h6
+  margin: 0
+  padding: 0
+  font-family: $font
+h1
+  font-size: 3em
+  font-weight: 900
+h2
+  font-size: 12pt
+  font-weight: 900
+h3
+  font-size: 12pt
+  font-weight: 400
+h5
+  font-size: 8pt
+  font-weight: 300
+  text-transform: uppercase
+.list-items
+  margin: 15px 0
+  border-collapse: collapse
+  th, td
+    padding: 0
+    line-height: 1em
+    &:nth-last-child(1)
+      padding-left: 15px
+  th
+    font-size: 8pt
+    text-transform: uppercase
+    text-align: left
+    font-weight: 300
+  td
+    font-size: 11pt
+  tbody
+    border-bottom: 2px solid #303030
+    border-top: 2px solid #303030
+  b
+    font-weight: 900
+
+.right_align
+  text-align: right
 
 .half
-  width:  50%
+  width:  49%
+  display: inline-block
+  vertical-align: top
+
 .invoice-details
-  float: right
-  text-align: right
-  b
+  dfn
+    display: block
+    margin: 0
+    padding: 0
+    width: 100%
+  dt, dd
     display: inline-block
-    width: 90px
-.company
-  float: left
+  dt
+    font-weight: bold
+    width: 100px
+  dd
+    display: inline-block
+    font-style: normal
+    width: 120px
 
 .invoicee, .project
-  float: left
-  clear:  both
   margin-top: 15px
 
 .signature
-  float: left
   margin-top: 20px
 
 .invoice-footer
@@ -45,3 +93,6 @@ $var_border: 3px double #666666
   bottom: 36px
   width:  100%
   text-align:  center
+  p
+    font-size: 9pt
+    color: #666

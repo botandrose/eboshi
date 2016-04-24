@@ -9,37 +9,42 @@
     #container
       #content
         .invoice-preview
-          .invoice-details.half
-            %h2 Invoice
-            %p
-              Date:
-              %b= rfc822 @invoice.date
-            %p
-              Invoice Number:
-              %b= @invoice.id
-            %p
-              Terms:
-              %b= @invoice.client.terms
-
-          .company.half
+          .half
             = wicked_pdf_image_tag current_user.logo.url(:pdf) if current_user.logo.exists?
-            %h3= current_user.business_name_or_name
-            - unless current_user.address.blank?
-              %p= h current_user.address
-            - unless current_user.address2.blank?
-              %p= h current_user.address2
-            - if current_user.city_state_zip
-              %p= h current_user.city_state_zip
-            %p= mail_to current_user.business_email_or_email
+            %h2= current_user.business_name_or_name
+            %p
+              - unless current_user.address.blank?
+                = h current_user.address
+              - unless current_user.address2.blank?
+                %br
+                = h current_user.address2
+              - if current_user.city_state_zip
+                %br
+                = h current_user.city_state_zip
+              %br
+              = mail_to current_user.business_email_or_email
+
+          .half.right_align
+            %h1 Invoice
+            %dl.invoice-details
+              %dfn
+                %dd Date:
+                %dt= rfc822 @invoice.date
+              %dfn
+                %dd Invoice Number:
+                %dt= @invoice.id
+              %dfn
+                %dd Terms:
+                %dt= @invoice.client.terms
 
           .invoicee
             %h5 Attn
             %h3= @invoice.client.contact
-            %h4= @invoice.client.company_name
+            %h2= @invoice.client.company_name
 
           .project
             %h5 Project
-            %h3= @invoice.client.name
+            %h2= @invoice.client.name
 
           %table.list-items
             %thead
@@ -47,13 +52,13 @@
                 %th Item
                 %th
                 %th
-                %th Price
+                %th Total
             %tbody
               - @invoice.line_items_for_invoice.each do |line_item|
                 %tr
                   %td= line_item.notes
                   %td
-                  %td
+                  %td= line_item.hours
                   %td= number_to_currency line_item.total
 
             %tfoot
