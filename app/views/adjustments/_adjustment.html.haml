@@ -7,7 +7,7 @@
     %i Flat Fee
   %td= number_to_currency adjustment.total
   %td.notes
-    %textarea{ :id => "notes_#{adjustment.id}", :autocomplete => "off" }
+    %textarea{ :id => "notes_#{adjustment.id}", :autocomplete => "off", :data => { :url => line_item_path(adjustment) } }
       =h adjustment.notes
           
   %td
