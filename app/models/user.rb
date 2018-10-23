@@ -34,6 +34,7 @@
 class User < ActiveRecord::Base
   acts_as_authentic do |config|
     config.crypto_provider = Authlogic::CryptoProviders::Sha512
+    config.merge_validates_length_of_password_field_options minimum: 4
   end
 
   belongs_to :last_client, class_name: "Client"

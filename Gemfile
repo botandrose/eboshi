@@ -1,18 +1,16 @@
 source "http://rubygems.org"
 
 gem "rails", "~>4.2"
-gem "haml-rails"
-gem "mysql2"
+gem "mysql2", "~>0.4.0"
 gem "bard-rake"
-gem "authlogic"
-gem "paperclip"
+gem "bard-static"
+gem "haml-rails"
+gem "authlogic", "~>3.0"
+gem "scrypt", "~>2.0"
+gem "paperclip", "~>4.0"
 gem "default_value_for"
 gem "dynamic_form"
 gem "wicked_pdf"
-gem "bard_static"
-
-gem "rack-mini-profiler"
-gem "flamegraph"
 
 gem "sass-rails"
 gem "compass-rails"
@@ -23,13 +21,13 @@ gem "jquery-rails"
 
 group :development, :test do
   gem "quiet_assets"
+  gem "bard"
 end
 
 group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem "meta_request"
-  gem "spring-commands-cucumber", require: false
 end
 
 group :test do
@@ -39,6 +37,8 @@ group :test do
   gem "delorean"
 
   gem "cucumber-rails", require: false
+  gem "cucumber", "~>2.0", require: false
+  gem "capybara", "~>2.0"
   gem "database_cleaner"
   gem "poltergeist"
   gem "phantomjs-binaries"

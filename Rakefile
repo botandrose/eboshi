@@ -11,5 +11,9 @@ Coveralls::RakeTask.new
 
 task :ci => ["coveralls:push"]
 
-task "bootstrap:production:post" => ["tmp:clear"]
+task :restart do
+  if ENV["RAILS_ENV"] == "production"
+    Rake::Task["tmp:clear"].invoke
+  end
+end
 
