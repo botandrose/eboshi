@@ -1,2 +1,4 @@
 language: ruby
+addons:
+  chrome: stable
 
