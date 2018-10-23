@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160409211139) do
+ActiveRecord::Schema.define(version: 20160320022237) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -32,20 +32,17 @@ ActiveRecord::Schema.define(version: 20160409211139) do
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string   "name",              limit: 255
-    t.string   "address",           limit: 255
-    t.string   "city",              limit: 255
-    t.string   "state",             limit: 255
-    t.string   "zip",               limit: 255
-    t.string   "country",           limit: 255
-    t.string   "email",             limit: 255
-    t.string   "contact",           limit: 255
-    t.string   "phone",             limit: 255
+    t.string   "name",       limit: 255
+    t.string   "address",    limit: 255
+    t.string   "city",       limit: 255
+    t.string   "state",      limit: 255
+    t.string   "zip",        limit: 255
+    t.string   "country",    limit: 255
+    t.string   "email",      limit: 255
+    t.string   "contact",    limit: 255
+    t.string   "phone",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "company_name",      limit: 255
-    t.string   "terms",             limit: 255
-    t.text     "terms_explanation", limit: 65535
   end
 
   create_table "invoices", force: :cascade do |t|
