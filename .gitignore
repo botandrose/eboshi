@@ -16,3 +16,6 @@ public/stylesheets/*.css
 
 public/logos
 public/signatures
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
