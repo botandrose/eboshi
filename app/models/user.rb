@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :signature, content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   def default_rate_for(client)
-    last_work = client.works.complete.where(user: self).order("start DESC").first
+    last_work = client.works.complete.where(user: self).order(start: :desc).first
     last_work.try(:rate) || rate
   end
 

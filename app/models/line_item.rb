@@ -26,7 +26,7 @@ class LineItem < ActiveRecord::Base
   validates_presence_of :client, :rate
 
   def self.unbilled
-    where(invoice_id: nil).order("start DESC")
+    where(invoice_id: nil).order(start: :desc)
   end
 
   def self.on_date(date)

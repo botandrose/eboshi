@@ -11,11 +11,11 @@ describe AdjustmentsController do
   describe "should not error out" do
     it "on edit" do
       get :edit, params: { client_id: @client.id, id: @adjustment.id }
-      response.should be_success
+      response.should be_successful
     end
     it "on new" do
       get :new, params: { client_id: @client.id }
-      response.should be_success
+      response.should be_successful
     end
 
     it "on create" do
@@ -29,7 +29,7 @@ describe AdjustmentsController do
     end
     it "on js update" do
       put :update, params: { client_id: @client.id, id: @adjustment.id, adjustment: FactoryBot.attributes_for(:adjustment), format: 'js' }
-      response.should be_success
+      response.should be_successful
     end
 
     it "on shallow update" do
@@ -38,7 +38,7 @@ describe AdjustmentsController do
     end
     it "on js shallow update" do
       put :update, params: { id:  @adjustment.id, adjustment: FactoryBot.attributes_for(:adjustment), format: 'js' }
-      response.should be_success
+      response.should be_successful
     end
 
     it "on destroy" do
@@ -47,7 +47,7 @@ describe AdjustmentsController do
     end
     it "on js destroy" do
       delete :destroy, params: { client_id: @client.id, id: @adjustment.id, format: 'js' }
-      response.should be_success
+      response.should be_successful
     end
   end
 

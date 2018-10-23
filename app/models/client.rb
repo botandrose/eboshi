@@ -23,7 +23,7 @@ class Client < ActiveRecord::Base
   has_many :line_items, dependent: :destroy
   has_many :works
   has_many :adjustments
-  has_many :invoices, -> { includes(:line_items, :payments).order('`date` DESC') }, dependent: :destroy
+  has_many :invoices, -> { includes(:line_items, :payments).order(date: :desc) }, dependent: :destroy
   has_many :payments, through: :invoices
   has_many :budgets
   has_many :assignments, dependent: :destroy

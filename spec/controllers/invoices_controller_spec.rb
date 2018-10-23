@@ -13,30 +13,30 @@ describe InvoicesController do
 
     it "on index" do
       get :index, params: { client_id: @client.id }
-      response.should be_success
+      response.should be_successful
     end
     it "on new" do
       get :new, params: { client_id: @client.id }
-      response.should be_success
+      response.should be_successful
     end
 
     # it "on show" do
     #   get :show, params: { :format => "pdf", :client_id => @client.id, :id => @invoice.id }
-    #   response.should be_success
+    #   response.should be_successful
     # end
 
     it "on js show" do
       get :show, params: { client_id: @client.id, id: @invoice.id, format: 'js' }, xhr: true
-      response.should be_success
+      response.should be_successful
     end
 
     it "on edit" do
       get :edit, params: { client_id: @client.id, id: @invoice.id }
-      response.should be_success
+      response.should be_successful
     end
     it "on js edit" do
       get :edit, params: { client_id: @client.id, id: @invoice.id, format: 'js' }, xhr: true
-      response.should be_success
+      response.should be_successful
     end
 
     it "on create" do
@@ -62,6 +62,6 @@ describe InvoicesController do
   #   get :show, params: { :client_id => @client.id, :id => @invoice.id, :format => 'pdf'
 
   #   response.headers["Content-Disposition"].should =~ /micah-geisel_invoice-\#123\.pdf/
-  #   response.should be_success
+  #   response.should be_successful
   # end
 end
