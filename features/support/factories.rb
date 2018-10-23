@@ -17,15 +17,15 @@ FactoryBot.define do
   factory :user do
     name { Faker::Name.name.gsub(/[^a-zA-Z]/, '') }
     email { Faker::Internet.email }
-    password "secret"
-    password_confirmation "secret"
+    password { "secret" }
+    password_confirmation { "secret" }
     created_at { Time.now }
     updated_at { Time.now }
-    rate 50
-    color '123456'
+    rate { 50 }
+    color { '123456' }
 
     factory :admin do
-      admin true
+      admin { true }
     end
   end
 
@@ -35,15 +35,15 @@ FactoryBot.define do
     user
     start { Time.now }
     finish { start + 1.hour }
-    rate 50
+    rate { 50 }
     notes { Faker::Lorem.sentence rand(3) }
   end
 
   factory :adjustment do
     client
     invoice
-    rate 0
-    notes "adjustment"
+    rate { 0 }
+    notes { "adjustment" }
   end
 
   factory :invoice do
@@ -54,6 +54,6 @@ FactoryBot.define do
 
   factory :payment do
     invoice
-    total 0
+    total { 0 }
   end
 end
