@@ -16,10 +16,15 @@ Rails.application.routes.draw do
     resources :assignments, only: [:new, :create, :destroy]
   end
 
+  resources :payments
+  resources :adjustments, except: [:index, :show]
+  resources :assignments, only: [:new, :create, :destroy]
+  resources :works, except: [:index, :show]
+
   match "/clients/:client_id/clock_in(.:format)"            => "works#clock_in",  :as => "clock_in", :via => [:get, :post]
   match "/clients/:client_id/works/:id/clock_out(.:format)" => "works#clock_out", :as => "clock_out", :via => [:get, :post]
 
-  get "calendar/:year/:month" => "calendar#index", :as => "calendar"
+  get "/calendar(/:year(/:month))" => "calendar#index", :as => "calendar"
 
   resources :users
   resource :account, controller: "users"

@@ -12,43 +12,43 @@ describe InvoicesController do
     end
 
     it "on index" do
-      get :index, client_id: @client.id
+      get :index, params: { client_id: @client.id }
       response.should be_success
     end
     it "on new" do
-      get :new, client_id: @client.id
+      get :new, params: { client_id: @client.id }
       response.should be_success
     end
 
     # it "on show" do
-    #   get :show, :format => "pdf", :client_id => @client.id, :id => @invoice.id
+    #   get :show, params: { :format => "pdf", :client_id => @client.id, :id => @invoice.id }
     #   response.should be_success
     # end
 
     it "on js show" do
-      xhr :get, :show, client_id: @client.id, id: @invoice.id, format: 'js'
+      get :show, params: { client_id: @client.id, id: @invoice.id, format: 'js' }, xhr: true
       response.should be_success
     end
 
     it "on edit" do
-      get :edit, client_id: @client.id, id: @invoice.id
+      get :edit, params: { client_id: @client.id, id: @invoice.id }
       response.should be_success
     end
     it "on js edit" do
-      xhr :get, :edit, client_id: @client.id, id: @invoice.id, format: 'js'
+      get :edit, params: { client_id: @client.id, id: @invoice.id, format: 'js' }, xhr: true
       response.should be_success
     end
 
     it "on create" do
-      post :create, client_id: @client.id, invoice: FactoryBot.attributes_for(:invoice)
+      post :create, params: { client_id: @client.id, invoice: FactoryBot.attributes_for(:invoice) }
       response.should be_redirect
     end
     it "on js update" do
-      xhr :put, :update, client_id: @client.id, id: @invoice.id, invoice: FactoryBot.attributes_for(:invoice), format: "js"
+      put :update, params: { client_id: @client.id, id: @invoice.id, invoice: FactoryBot.attributes_for(:invoice), format: "js" }, xhr: true
       response.should be_redirect
     end
     it "on destroy" do
-      delete :destroy, client_id: @client.id, id: @invoice.id
+      delete :destroy, params: { client_id: @client.id, id: @invoice.id }
       response.should be_redirect
     end
   end
@@ -59,7 +59,7 @@ describe InvoicesController do
   #   FactoryBot.create :work, invoice: @invoice, client: @client, user: @current_user
   #   FactoryBot.create :adjustment, invoice: @invoice, client: @client
 
-  #   get :show, :client_id => @client.id, :id => @invoice.id, :format => 'pdf'
+  #   get :show, params: { :client_id => @client.id, :id => @invoice.id, :format => 'pdf'
 
   #   response.headers["Content-Disposition"].should =~ /micah-geisel_invoice-\#123\.pdf/
   #   response.should be_success

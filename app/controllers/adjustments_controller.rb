@@ -29,7 +29,7 @@ class AdjustmentsController < ApplicationController
       flash[:notice] = "Successfully updated Adjustment."
       respond_to do |wants|
         wants.html { redirect_to invoices_path(@client) }
-        wants.js { render nothing: true }
+        wants.js { head :ok }
       end
     else
       render :edit

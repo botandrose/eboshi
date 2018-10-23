@@ -6,7 +6,7 @@ describe PaymentsController do
   it "should not error out on new" do
     @client = FactoryBot.create :client
     @invoice = FactoryBot.create :invoice, client: @client
-    get :new, invoice_id: @invoice.id
+    get :new, params: { invoice_id: @invoice.id }
   end
 
   it "should add a payment to the invoice on create" do
@@ -15,7 +15,7 @@ describe PaymentsController do
     payment_attributes = {
       total: "50"
     }
-    post :create, invoice_id: @invoice.id, payment: payment_attributes
+    post :create, params: { invoice_id: @invoice.id, payment: payment_attributes }
     assigns(:invoice).balance.to_i.should == 450
   end
 end

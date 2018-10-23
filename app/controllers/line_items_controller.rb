@@ -7,7 +7,7 @@ class LineItemsController < ApplicationController
     if line_item.timestamp < params[:line_item][:timestamp].to_i
       line_item.update_attributes(params[:line_item])
     end
-    render nothing: true
+    head :ok
   end
 
   private

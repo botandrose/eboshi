@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
-gem "rails", "~>4.2"
-gem "mysql2", "~>0.4.0"
+gem "rails", "~>5.0.0"
+gem "mysql2"
 gem "bard-rake"
 gem "bard-static"
 gem "haml-rails"
@@ -18,16 +18,14 @@ gem "coffee-rails"
 gem "uglifier"
 gem "jquery-rails"
 
-group :development, :test do
-  gem "quiet_assets"
+group :development do
   gem "bard"
-  gem "parallel_tests"
+  gem "web-console"
 end
 
-group :development do
-  gem "better_errors"
-  gem "binding_of_caller"
-  gem "meta_request"
+group :development, :test do
+  gem "byebug"
+  gem "parallel_tests"
 end
 
 group :test do
@@ -39,7 +37,7 @@ group :test do
   gem "faker"
   gem "delorean"
   gem "rspec-rails"
-  gem "byebug"
+  gem "rails-controller-testing"
 end
 gem "coveralls", require: false
 

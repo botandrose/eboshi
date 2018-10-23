@@ -14,16 +14,16 @@ describe UsersController do
       get :index
     end
     it "on edit" do
-      get :edit, id: @user.id
+      get :edit, params: { id: @user.id }
     end
     it "on new" do
       get :new
     end
     it "on update" do
-      put :update, id: @user.id, user: @user.attributes
+      put :update, params: { id: @user.id, user: @user.attributes }
     end
     it "on create" do
-      post :create, user: @user.attributes
+      post :create, params: { user: @user.attributes }
     end
   end
 end

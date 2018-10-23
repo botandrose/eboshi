@@ -11,79 +11,79 @@ describe WorksController do
 
   describe "should not error out" do
     it "on new" do
-      get :new, client_id: @client.id
+      get :new, params: { client_id: @client.id }
       response.should be_success
     end
     it "on edit" do
-      get :edit, client_id: @client.id, id: @work.id
+      get :edit, params: { client_id: @client.id, id: @work.id }
       response.should be_success
     end
 
     it "on create" do
-      post :create, client_id: @client.id, work: FactoryBot.attributes_for(:work)
+      post :create, params: { client_id: @client.id, work: FactoryBot.attributes_for(:work) }
       response.should be_redirect
     end
 
     it "on update" do
-      put :update, client_id: @client.id, id: @work.id, work: FactoryBot.attributes_for(:work)
+      put :update, params: { client_id: @client.id, id: @work.id, work: FactoryBot.attributes_for(:work) }
       response.should be_redirect
     end
     it "on js update" do
-      xhr :put, :update, client_id: @client.id, id: @work.id, work: FactoryBot.attributes_for(:work), format: 'js'
+      put :update, params: { client_id: @client.id, id: @work.id, work: FactoryBot.attributes_for(:work), format: 'js' }, xhr: true
       response.should be_success
     end
 
     it "on shallow update" do
-      put :update, id: @work.id, work: FactoryBot.attributes_for(:work)
+      put :update, params: { id: @work.id, work: FactoryBot.attributes_for(:work) }
       response.should be_redirect
     end
     it "on js shallow update" do
-      xhr :put, :update, id: @work.id, work: FactoryBot.attributes_for(:work), format: 'js'
+      put :update, params: { id: @work.id, work: FactoryBot.attributes_for(:work), format: 'js' }, xhr: true
       response.should be_success
     end
 
     it "on destroy" do
-      delete :destroy, client_id: @client.id, id: @work.id
+      delete :destroy, params: { client_id: @client.id, id: @work.id }
       response.should be_redirect
     end
     it "on js destroy" do
-      xhr :delete, :destroy, client_id: @client.id, id: @work.id, format: 'js'
+      delete :destroy, params: { client_id: @client.id, id: @work.id, format: 'js' }, xhr: true
       response.should be_success
     end
 
     it "on clock_in" do
-      get :clock_in, client_id: @client.id
+      get :clock_in, params: { client_id: @client.id }
       response.should be_redirect
     end
     it "on js clock_in" do
-      xhr :get, :clock_in, client_id: @client.id, format: 'js'
+      get :clock_in, params: { client_id: @client.id, format: 'js' }, xhr: true
       response.should be_success
     end
 
     it "on clock_out" do
       @work = FactoryBot.create(:work, start: Time.zone.today, finish: Time.zone.today)
-      get :clock_out, client_id: @client.id, id: @work.id
+      get :clock_out, params: { client_id: @client.id, id: @work.id }
       response.should be_redirect
     end
     it "on js clock_out" do
       @work = FactoryBot.create(:work, start: Time.zone.today, finish: Time.zone.today)
-      xhr :get, :clock_out, client_id: @client.id, id: @work.id, format: 'js'
+      get :clock_out, params: { client_id: @client.id, id: @work.id, format: 'js' }, xhr: true
       response.should be_success
     end
     it "on merge" do
-      get :merge, client_id: @client.id, line_item_ids: @client.works.collect(&:id)
+      get :merge, params: { client_id: @client.id, line_item_ids: @client.works.collect(&:id) }
       response.should be_redirect
     end
 
     it "on js merge" do
-      xhr :get, :merge, client_id: @client.id, line_item_ids: @client.works.collect(&:id), format: 'js'
+      get :merge, params: { client_id: @client.id, line_item_ids: @client.works.collect(&:id), format: 'js' }, xhr: true
       response.should be_success
     end
   end
 
   describe "on update" do
     it "should allow update of notes" do
-      put :update, id: @work.id, work: { notes: 'test' }
+      put :update, params: { id: @work.id, work: { notes: 'test' } }
       assigns(:work).errors.should be_empty
       assigns(:work).notes.should == 'test'
       response.should be_redirect

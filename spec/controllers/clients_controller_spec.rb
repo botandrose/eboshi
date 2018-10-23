@@ -13,19 +13,19 @@ describe ClientsController do
       get :index
     end
     it "on edit" do
-      get :edit, id: @client.id
+      get :edit, params: { id: @client.id }
     end
     it "on new" do
       get :new
     end
     it "on update" do
-      put :update, id: @client.id, client: FactoryBot.attributes_for(:client)
+      put :update, params: { id: @client.id, client: FactoryBot.attributes_for(:client) }
     end
     it "on destroy" do
-      delete :destroy, id: @client.id
+      delete :destroy, params: { id: @client.id }
     end
     it "on create" do
-      post :create, client: FactoryBot.attributes_for(:client)
+      post :create, params: { client: FactoryBot.attributes_for(:client) }
     end
   end
 end

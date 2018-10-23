@@ -19,7 +19,10 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find params[:id]
     raise ActiveRecord::RecordNotFound unless current_user.clients.include? @assignment.client
     @assignment.destroy
-    path = @assignment.user == current_user ? "/" : :back
-    redirect_to path
+    if @assignment.user == current_user
+      redirect_to "/"
+    else
+      redirect_back fallback_location: "/"
+    end
   end
 end

@@ -38,8 +38,8 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  config.expect_with(:rspec) { |c| c.syntax = :should }
-  config.mock_with(:rspec) { |c| c.syntax = :should }
+  config.expect_with(:rspec) { |c| c.syntax = [:expect, :should] }
+  config.mock_with(:rspec) { |c| c.syntax = [:expect, :should] }
 
   config.alias_example_to :fit, :focus
   config.filter_run focus: true
