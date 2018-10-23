@@ -1,8 +1,2 @@
 language: ruby
-rvm:
-  - 2.1.2
-env:
-  global:
-    - BUNDLE_JOBS=4
-    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 
