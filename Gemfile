@@ -33,14 +33,14 @@ end
 
 group :test do
   gem "cucumber-rails", require: false
-  gem "capybara", "~>2.0"
+  gem "capybara-headless_chrome"
+  gem "capybara-screenshot"
   gem "factory_bot_rails"
   gem "database_cleaner"
   gem "faker"
   gem "delorean"
-  gem "poltergeist"
-  gem "phantomjs-binaries"
   gem "rspec-rails"
+  gem "byebug"
 end
 gem "coveralls", require: false
 

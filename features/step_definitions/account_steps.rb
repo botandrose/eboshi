@@ -1,9 +1,9 @@
 When /^I upload a logo image$/ do
-  attach_file "Logo", "features/support/images/logo.gif"
+  attach_file "Logo", Rails.root.join("features/support/images/logo.gif")
 end
 
 When /^I upload a signature$/ do
-  attach_file "Signature", "features/support/images/signature.gif"
+  attach_file "Signature", Rails.root.join("features/support/images/signature.gif")
 end
 
 Then /^the logo should say "([^\"]*)"$/ do |text|

@@ -9,8 +9,18 @@ Coveralls.wear_merged!("rails")
 
 require 'cucumber/rails'
 require 'capybara'
-require 'capybara/poltergeist'
-Capybara.default_driver = :poltergeist
+require 'capybara/headless_chrome'
+require 'capybara-screenshot/cucumber' unless ENV["CI"]
+
+Capybara.register_driver :chrome do |app|
+  Capybara::HeadlessChrome::Driver.new(app, args: ["lang=es_MX"])
+end
+
+Capybara::Screenshot.register_driver :chrome do |driver, path|
+  driver.save_screenshot(path)
+end
+
+Capybara.server = :webrick
 
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
 # order to ease the transition to Capybara we set the default here. If you'd

@@ -12,6 +12,7 @@ coverage
 public/stylesheets/*.css
 *[~]
 .bundle
+.byebug_history
 
 public/logos
 public/signatures
