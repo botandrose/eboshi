@@ -4,8 +4,8 @@ describe AssignmentsController do
   include ControllerSpecHelpers
 
   it "should raise a 404 when trying to destroy an unassigned clients assignment" do
-    controller.stub current_user: FactoryGirl.create(:user)
-    @it = Assignment.create! client: FactoryGirl.create(:client), user: FactoryGirl.create(:user)
+    controller.stub current_user: FactoryBot.create(:user)
+    @it = Assignment.create! client: FactoryBot.create(:client), user: FactoryBot.create(:user)
     -> { delete :destroy, id: @it.id }.should raise_error ActiveRecord::RecordNotFound
   end
 end

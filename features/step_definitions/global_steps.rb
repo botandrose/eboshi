@@ -26,12 +26,12 @@ end
 Given /^I worked (\d+) hours for "([^\"]*)" on "([^\"]*)"$/ do |hours, client_name, date|
   date = Time.zone.parse(date)
   client = Client.find_by_name(client_name)
-  FactoryGirl.create(:work, client: client, start: date, finish: date + hours.to_f.hours, user: @user)
+  FactoryBot.create(:work, client: client, start: date, finish: date + hours.to_f.hours, user: @user)
 end
 
 Given /^I worked (\d+) hours for "([^\"]*)" today$/ do |hours, client_name|
   client = Client.find_by_name(client_name)
   start = Time.zone.today + 1.hour
   finish = start + hours.to_f.hours
-  FactoryGirl.create(:work, client: client, start: start, finish: finish, user: @user)
+  FactoryBot.create(:work, client: client, start: start, finish: finish, user: @user)
 end

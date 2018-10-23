@@ -3,8 +3,8 @@ require "spec_helper"
 describe LineItemsController do
   include ControllerSpecHelpers
 
-  let(:client) { FactoryGirl.create(:client) }
-  let(:work) { FactoryGirl.create(:work, client: client, timestamp: 2, notes: "test") }
+  let(:client) { FactoryBot.create(:client) }
+  let(:work) { FactoryBot.create(:work, client: client, timestamp: 2, notes: "test") }
 
   describe "on update" do
     it "updates notes if note is newer than existing" do

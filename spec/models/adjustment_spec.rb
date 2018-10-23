@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Adjustment do
   before(:each) do
-    @adjustment = FactoryGirl.create(:adjustment)
+    @adjustment = FactoryBot.create(:adjustment)
   end
 
   it "should not have any hours" do

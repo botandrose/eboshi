@@ -1,7 +1,7 @@
 require "faker"
-require "factory_girl"
+require "factory_bot"
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :client do
     name { Faker::Company.name }
     address { Faker::Address.street_address }

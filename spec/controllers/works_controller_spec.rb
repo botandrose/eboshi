@@ -4,9 +4,9 @@ describe WorksController do
   include ControllerSpecHelpers
 
   before :each do
-    @client = FactoryGirl.create :client
+    @client = FactoryBot.create :client
     @client.users << @current_user
-    @work = FactoryGirl.create :work, client: @client, user: @current_user
+    @work = FactoryBot.create :work, client: @client, user: @current_user
   end
 
   describe "should not error out" do
@@ -20,25 +20,25 @@ describe WorksController do
     end
 
     it "on create" do
-      post :create, client_id: @client.id, work: FactoryGirl.attributes_for(:work)
+      post :create, client_id: @client.id, work: FactoryBot.attributes_for(:work)
       response.should be_redirect
     end
 
     it "on update" do
-      put :update, client_id: @client.id, id: @work.id, work: FactoryGirl.attributes_for(:work)
+      put :update, client_id: @client.id, id: @work.id, work: FactoryBot.attributes_for(:work)
       response.should be_redirect
     end
     it "on js update" do
-      xhr :put, :update, client_id: @client.id, id: @work.id, work: FactoryGirl.attributes_for(:work), format: 'js'
+      xhr :put, :update, client_id: @client.id, id: @work.id, work: FactoryBot.attributes_for(:work), format: 'js'
       response.should be_success
     end
 
     it "on shallow update" do
-      put :update, id: @work.id, work: FactoryGirl.attributes_for(:work)
+      put :update, id: @work.id, work: FactoryBot.attributes_for(:work)
       response.should be_redirect
     end
     it "on js shallow update" do
-      xhr :put, :update, id: @work.id, work: FactoryGirl.attributes_for(:work), format: 'js'
+      xhr :put, :update, id: @work.id, work: FactoryBot.attributes_for(:work), format: 'js'
       response.should be_success
     end
 
@@ -61,12 +61,12 @@ describe WorksController do
     end
 
     it "on clock_out" do
-      @work = FactoryGirl.create(:work, start: Time.zone.today, finish: Time.zone.today)
+      @work = FactoryBot.create(:work, start: Time.zone.today, finish: Time.zone.today)
       get :clock_out, client_id: @client.id, id: @work.id
       response.should be_redirect
     end
     it "on js clock_out" do
-      @work = FactoryGirl.create(:work, start: Time.zone.today, finish: Time.zone.today)
+      @work = FactoryBot.create(:work, start: Time.zone.today, finish: Time.zone.today)
       xhr :get, :clock_out, client_id: @client.id, id: @work.id, format: 'js'
       response.should be_success
     end

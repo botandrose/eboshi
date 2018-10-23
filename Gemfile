@@ -34,7 +34,7 @@ end
 group :test do
   gem "cucumber-rails", require: false
   gem "capybara", "~>2.0"
-  gem "factory_girl_rails"
+  gem "factory_bot_rails"
   gem "database_cleaner"
   gem "faker"
   gem "delorean"

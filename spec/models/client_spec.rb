@@ -2,16 +2,16 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Client do
   before do
-    @client = FactoryGirl.create(:client)
-    @invoice = FactoryGirl.create(:invoice, client: @client)
-    @user = FactoryGirl.create(:user, rate: 65)
+    @client = FactoryBot.create(:client)
+    @invoice = FactoryBot.create(:invoice, client: @client)
+    @user = FactoryBot.create(:user, rate: 65)
     @unbilled = [
-      FactoryGirl.create(:work, client: @client, user: @user, invoice: nil, start: Time.zone.now),
-      FactoryGirl.create(:work, client: @client, user: @user, invoice: nil, start: Time.zone.yesterday)
+      FactoryBot.create(:work, client: @client, user: @user, invoice: nil, start: Time.zone.now),
+      FactoryBot.create(:work, client: @client, user: @user, invoice: nil, start: Time.zone.yesterday)
     ]
-    FactoryGirl.create(:work, client: @client, user: @user, invoice: @invoice)
+    FactoryBot.create(:work, client: @client, user: @user, invoice: @invoice)
     Payment.create(invoice: @invoice, total: 50)
-    FactoryGirl.create(:adjustment, client: @client, user: @user, invoice: @invoice, rate: 100)
+    FactoryBot.create(:adjustment, client: @client, user: @user, invoice: @invoice, rate: 100)
   end
 
   it "should order the building invoice before the saved invoices" do
@@ -31,7 +31,7 @@ describe Client do
   end
 
   it "should create a new instance given valid attributes" do
-    Client.create! FactoryGirl.attributes_for(:client)
+    Client.create! FactoryBot.attributes_for(:client)
   end
 
   it "should calculate the total balance correctly" do

@@ -4,7 +4,7 @@ describe ClientsController do
   include ControllerSpecHelpers
 
   before(:each) do
-    @client = FactoryGirl.create(:client)
+    @client = FactoryBot.create(:client)
     @client.users << @current_user
   end
 
@@ -19,13 +19,13 @@ describe ClientsController do
       get :new
     end
     it "on update" do
-      put :update, id: @client.id, client: FactoryGirl.attributes_for(:client)
+      put :update, id: @client.id, client: FactoryBot.attributes_for(:client)
     end
     it "on destroy" do
       delete :destroy, id: @client.id
     end
     it "on create" do
-      post :create, client: FactoryGirl.attributes_for(:client)
+      post :create, client: FactoryBot.attributes_for(:client)
     end
   end
 end

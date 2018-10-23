@@ -20,5 +20,5 @@ end
 
 Given /^a[n]? (.+) exists for "(.+)"$/ do |model_name, name|
   client = Client.find_by_name name
-  client.send(model_name.tr(' ', '_').pluralize.to_sym) << FactoryGirl.create(model_name)
+  client.send(model_name.tr(' ', '_').pluralize.to_sym) << FactoryBot.create(model_name)
 end

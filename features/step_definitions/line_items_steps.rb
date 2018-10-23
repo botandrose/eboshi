@@ -2,13 +2,13 @@ Given /^(\d+) unbilled works? exists? with client: "(.+?)", user: "(.+?)"$/ do |
   client = Client.find_by_name!(client_name)
   user = User.find_by_name!(user_name)
   count.to_i.times do
-    FactoryGirl.create(:work, client: client, user: user, invoice: nil)
+    FactoryBot.create(:work, client: client, user: user, invoice: nil)
   end
 end
 
 Given /^a time item for "(.+)"$/ do |client_name|
   @client = Client.find_by_name!(client_name)
-  FactoryGirl.create(:work, client: @client, invoice: nil)
+  FactoryBot.create(:work, client: @client, invoice: nil)
 end
 
 When /^I check all time items$/ do

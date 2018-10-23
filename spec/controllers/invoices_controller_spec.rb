@@ -5,10 +5,10 @@ describe InvoicesController do
 
   describe "should not error out" do
     before :each do
-      @client = FactoryGirl.create :client
-      @invoice = FactoryGirl.create :invoice, client: @client
-      FactoryGirl.create :work, invoice: @invoice, client: @client, user: @current_user
-      FactoryGirl.create :adjustment, invoice: @invoice, client: @client
+      @client = FactoryBot.create :client
+      @invoice = FactoryBot.create :invoice, client: @client
+      FactoryBot.create :work, invoice: @invoice, client: @client, user: @current_user
+      FactoryBot.create :adjustment, invoice: @invoice, client: @client
     end
 
     it "on index" do
@@ -40,11 +40,11 @@ describe InvoicesController do
     end
 
     it "on create" do
-      post :create, client_id: @client.id, invoice: FactoryGirl.attributes_for(:invoice)
+      post :create, client_id: @client.id, invoice: FactoryBot.attributes_for(:invoice)
       response.should be_redirect
     end
     it "on js update" do
-      xhr :put, :update, client_id: @client.id, id: @invoice.id, invoice: FactoryGirl.attributes_for(:invoice), format: "js"
+      xhr :put, :update, client_id: @client.id, id: @invoice.id, invoice: FactoryBot.attributes_for(:invoice), format: "js"
       response.should be_redirect
     end
     it "on destroy" do
@@ -54,10 +54,10 @@ describe InvoicesController do
   end
 
   # it "should name the pdf correctly" do
-  #   @client = FactoryGirl.create :client
-  #   @invoice = FactoryGirl.create :invoice, client: @client, id: 123
-  #   FactoryGirl.create :work, invoice: @invoice, client: @client, user: @current_user
-  #   FactoryGirl.create :adjustment, invoice: @invoice, client: @client
+  #   @client = FactoryBot.create :client
+  #   @invoice = FactoryBot.create :invoice, client: @client, id: 123
+  #   FactoryBot.create :work, invoice: @invoice, client: @client, user: @current_user
+  #   FactoryBot.create :adjustment, invoice: @invoice, client: @client
 
   #   get :show, :client_id => @client.id, :id => @invoice.id, :format => 'pdf'
 
