@@ -219,6 +219,9 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (= 0.3.0)
+    parallel (1.12.1)
+    parallel_tests (2.24.0)
+      parallel
     phantomjs-binaries (2.1.1.1)
       sys-uname (= 0.9.0)
     poltergeist (1.18.1)
@@ -357,6 +360,7 @@ DEPENDENCIES
   meta_request
   mysql2 (~> 0.4.0)
   paperclip (~> 4.0)
+  parallel_tests
   phantomjs-binaries
   poltergeist
   quiet_assets

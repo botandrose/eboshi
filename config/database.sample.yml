@@ -10,4 +10,5 @@ staging:
 
 test: &test
   <<: *login
-  database: eboshi_test
+  database: eboshi_test<%= ENV["TEST_ENV_NUMBER"] %>
+

@@ -22,6 +22,7 @@ gem "jquery-rails"
 group :development, :test do
   gem "quiet_assets"
   gem "bard"
+  gem "parallel_tests"
 end
 
 group :development do
@@ -31,17 +32,16 @@ group :development do
 end
 
 group :test do
-  gem "rspec-rails"
-  gem "factory_girl_rails"
-  gem "faker"
-  gem "delorean"
-
   gem "cucumber-rails", require: false
   gem "cucumber", "~>2.0", require: false
   gem "capybara", "~>2.0"
+  gem "factory_girl_rails"
   gem "database_cleaner"
+  gem "faker"
+  gem "delorean"
   gem "poltergeist"
   gem "phantomjs-binaries"
+  gem "rspec-rails"
 end
 gem "coveralls", require: false
 
