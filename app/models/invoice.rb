@@ -10,10 +10,10 @@
 #
 
 class Invoice < ActiveRecord::Base
-  belongs_to :client, touch: true
+  belongs_to :client, touch: true, required: false
   has_many :line_items, dependent: :nullify
   has_many :payments, -> { order(created_at: :desc) }, dependent: :destroy
-  belongs_to :budget, touch: true
+  belongs_to :budget, touch: true, required: false
 
   validates_presence_of :client, :date
 

@@ -11,6 +11,6 @@
 #
 
 class Assignment < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :client
+  belongs_to :user, required: false
+  belongs_to :client, required: false
 end

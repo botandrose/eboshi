@@ -19,9 +19,9 @@
 class LineItem < ActiveRecord::Base
   include Comparable
 
-  belongs_to :client, touch: true
-  belongs_to :user
-  belongs_to :invoice, touch: true
+  belongs_to :client, touch: true, required: false
+  belongs_to :user, required: false
+  belongs_to :invoice, touch: true, required: false
 
   validates_presence_of :client, :rate
 

@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
   validates_length_of       :password, minimum: 4, allow_blank: true, message: "must be at least five characters long"
   validates_length_of       :password_confirmation, minimum: 4, allow_blank: true, message: "must be at least five characters long"
 
-  belongs_to :last_client, class_name: "Client"
+  belongs_to :last_client, class_name: "Client", required: false
   has_many :assignments, dependent: :destroy
   has_many :clients, through: :assignments
   has_many :works

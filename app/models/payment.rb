@@ -11,5 +11,5 @@
 #
 
 class Payment < ActiveRecord::Base
-  belongs_to :invoice, touch: true
+  belongs_to :invoice, touch: true, required: false
 end
