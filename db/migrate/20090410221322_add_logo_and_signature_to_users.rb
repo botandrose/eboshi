@@ -1,4 +1,4 @@
-class AddLogoAndSignatureToUsers < ActiveRecord::Migration
+class AddLogoAndSignatureToUsers < ActiveRecord::Migration[4.2]
   def self.up
     add_column :users, :logo_file_name,    :string
     add_column :users, :logo_content_type, :string

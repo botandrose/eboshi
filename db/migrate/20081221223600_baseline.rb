@@ -1,4 +1,4 @@
-class Baseline < ActiveRecord::Migration
+class Baseline < ActiveRecord::Migration[4.2]
   def change
     create_table "clients" do |t|
       t.string   "name"

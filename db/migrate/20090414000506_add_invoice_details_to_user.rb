@@ -1,4 +1,4 @@
-class AddInvoiceDetailsToUser < ActiveRecord::Migration
+class AddInvoiceDetailsToUser < ActiveRecord::Migration[4.2]
   def self.up
     add_column :users, :business_name, :string
     add_column :users, :business_email, :string

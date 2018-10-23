@@ -1,4 +1,4 @@
-class CreatePacts < ActiveRecord::Migration
+class CreatePacts < ActiveRecord::Migration[4.2]
   def self.up
     create_table :pacts do |t|
       t.integer :user_id
