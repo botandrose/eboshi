@@ -102,24 +102,24 @@ When /^I attach the file "(.*?)" to "(.*?)"$/ do |path, field|
 end
 
 Then /^I should see "(.*?)"$/ do |text|
-  page.should have_content(text)
+  expect(page).to have_content(text)
 end
 
 Then /^I should not see "(.*?)"$/ do |text|
-  page.should have_no_content(text)
+  expect(page).to have_no_content(text)
 end
 
 Then /^I should see \/(.*?)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
-  page.should have_xpath('//*', text: regexp)
+  expect(page).to have_xpath('//*', text: regexp)
 end
 
 Then /^I should not see \/(.*?)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
-  page.should have_no_xpath('//*', text: regexp)
+  expect(page).to have_no_xpath('//*', text: regexp)
 end
 
 Then /^I should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).path
-  current_path.should == path_to(page_name)
+  expect(current_path).to eq path_to(page_name)
 end

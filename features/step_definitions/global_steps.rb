@@ -1,6 +1,6 @@
 Then /^I should not be able to go to (.+)$/ do |url|
   visit url
-  page.status_code.should == 403
+  expect(page.status_code).to eq 403
 end
 
 Given /^I am signed in as "Micah"$/ do

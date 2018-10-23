@@ -1,17 +1,17 @@
 Then /^I should see dates on the invoice$/ do
-  page.body.should match /\d{2}\/\d{2}\/\d{2}/
+  expect(page.body).to match /\d{2}\/\d{2}\/\d{2}/
 end
 
 Then /^I should not see any dates on the invoice$/ do
-  page.body.should_not match /\d{2}\/\d{2}\/\d{2}/
+  expect(page.body).to_not match /\d{2}\/\d{2}\/\d{2}/
 end
 
 Then /^I should see times on the invoice$/ do
-  page.should have_xpath('//*', text: /\d{1,2}:\d{2}.[ap]m/i)
+  expect(page).to have_xpath('//*', text: /\d{1,2}:\d{2}.[ap]m/i)
 end
 
 Then /^I should not see any times on the invoice$/ do
-  page.should have_no_xpath('//*', text: /\d{1,2}:\d{2}.[ap]m/i)
+  expect(page).to have_no_xpath('//*', text: /\d{1,2}:\d{2}.[ap]m/i)
 end
 
 When /^I edit the first invoice for "([^\"]*)"$/ do |name|
@@ -25,7 +25,7 @@ end
 
 Then /^I should see ([a-z]+) line items?$/ do |number|
   number = english_to_number number
-  all(".line_item").length.should == number
+  expect(all(".line_item").length).to eq number
 end
 
 Then "I should see the following invoice breakdown:" do |table|

@@ -29,9 +29,9 @@ Then "I should see the following line items:" do |table|
 end
 
 Then /^I should see "(.+)" in a line item$/ do |text|
-  page.should have_css(".line_item", text: text)
+  expect(page).to have_css(".line_item", text: text)
 end
 
 Then /^I should not see "(.+)" in a line item$/ do |text|
-  page.should_not have_css(".line_item", text: text)
+  expect(page).no_not have_css(".line_item", text: text)
 end
