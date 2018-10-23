@@ -33,9 +33,22 @@
 
 class User < ActiveRecord::Base
   acts_as_authentic do |config|
-    config.crypto_provider = Authlogic::CryptoProviders::Sha512
-    config.merge_validates_length_of_password_field_options minimum: 4
+    config.crypto_provider = Authlogic::CryptoProviders::SCrypt
+    config.transition_from_crypto_providers = [Authlogic::CryptoProviders::Sha512]
+    config.validate_email_field = false
+    config.validate_login_field = false
+    config.validate_password_field = false
   end
+
+	validates :email,
+		format: { with: ::Authlogic::Regex::EMAIL, message: "should look like an email address." },
+		length: { maximum: 100 },
+		uniqueness: { case_sensitive: false, if: :email_changed? }
+
+  validates_presence_of     :password, :on => :create
+  validates_confirmation_of :password, if: proc { |user| user.password.present? }
+  validates_length_of       :password, minimum: 4, allow_blank: true, message: "must be at least five characters long"
+  validates_length_of       :password_confirmation, minimum: 4, allow_blank: true, message: "must be at least five characters long"
 
   belongs_to :last_client, class_name: "Client"
   has_many :assignments, dependent: :destroy
