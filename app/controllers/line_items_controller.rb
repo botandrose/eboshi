@@ -1,6 +1,6 @@
 class LineItemsController < ApplicationController
-  before_filter :get_client
-  before_filter :authorized?
+  before_action :get_client
+  before_action :authorized?
 
   def update
     line_item = LineItem.find(params[:id])

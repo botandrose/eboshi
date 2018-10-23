@@ -1,9 +1,9 @@
 class AdjustmentsController < ApplicationController
-  before_filter :get_client
-  before_filter :authorized?
+  before_action :get_client
+  before_action :authorized?
 
-  before_filter :filter_date, only: [:create, :update]
-  before_filter :filter_user, only: [:create, :update]
+  before_action :filter_date, only: [:create, :update]
+  before_action :filter_user, only: [:create, :update]
 
   def new
     @adjustment = @client.adjustments.build

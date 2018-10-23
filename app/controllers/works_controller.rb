@@ -1,6 +1,6 @@
 class WorksController < ApplicationController
-  before_filter :get_client
-  before_filter :authorized?
+  before_action :get_client
+  before_action :authorized?
 
   def new
     @work = @client.works.build user: current_user

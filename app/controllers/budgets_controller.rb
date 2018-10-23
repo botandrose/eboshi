@@ -1,5 +1,5 @@
 class BudgetsController < ApplicationController
-  before_filter :get_client, :authorized?
+  before_action :get_client, :authorized?
 
   def new
     @budget = @client.budgets.build

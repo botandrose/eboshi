@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
-  before_filter :get_invoice
-  before_filter :authorized?
+  before_action :get_invoice
+  before_action :authorized?
 
   def new
     @payment = @invoice.payments.build(params[:payment] || { total: @invoice.balance })

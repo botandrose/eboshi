@@ -9,10 +9,10 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '777e12608199867e6528eb1a3556d20d'
 
-  before_filter :correct_webkit_and_ie_accept_headers
-  before_filter :autoinstall
-  before_filter :activate_authlogic
-  before_filter :require_user
+  before_action :correct_webkit_and_ie_accept_headers
+  before_action :autoinstall
+  before_action :activate_authlogic
+  before_action :require_user
 
   private
 

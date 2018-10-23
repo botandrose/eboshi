@@ -1,5 +1,5 @@
 class InstallsController < ApplicationController
-  skip_before_filter :autoinstall, :require_user
+  skip_before_action :autoinstall, :require_user
 
   def new
     @user = User.new

@@ -34,6 +34,4 @@ Rails.application.routes.draw do
   delete "logout" => "user_sessions#destroy"
 
   resource :install, only: [:new, :create]
-
-  match ":controller(/:action(/:id(.:format)))", via: [:get, :post]
 end

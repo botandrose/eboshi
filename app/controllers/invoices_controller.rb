@@ -1,5 +1,5 @@
 class InvoicesController < ApplicationController
-  before_filter :get_client, :authorized?
+  before_action :get_client, :authorized?
 
   def index
     @invoices = @client.invoices_with_unbilled
