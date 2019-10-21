@@ -3,7 +3,6 @@ development: &login
   database: eboshi
   username: root
   password:
-  socket: /var/run/mysqld/mysqld.sock
 
 staging:
   <<: *login
