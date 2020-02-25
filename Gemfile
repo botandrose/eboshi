@@ -3,14 +3,16 @@ source "http://rubygems.org"
 gem "rails", "~>5.2.0"
 gem "bootsnap"
 gem "mysql2"
-gem "bard-rake"
+gem "bard-rake", "~>0.16.0" # 0.17 requires rails 6+
 gem "bard-static"
 gem "haml-rails"
-gem "authlogic"
+gem "authlogic", "~>4.0" # need to sort out validations to upgrade to 5.0
 gem "paperclip"
 gem "default_value_for"
 gem "dynamic_form"
 gem "wicked_pdf"
+
+gem "sprockets", "~>3.0"
 
 gem "sass-rails"
 gem "compass-rails"
