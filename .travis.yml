@@ -1,6 +1,11 @@
-sudo: false
 language: ruby
 cache: bundler
+services:
+  - mysql
 addons:
   chrome: stable
+
+# otherwise each test runner tries to install it in parallel
+before_script:
+  - bundle exec rake webdrivers:chromedriver:update
 
