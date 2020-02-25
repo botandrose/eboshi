@@ -36,7 +36,7 @@ FactoryBot.define do
     start { Time.now }
     finish { start + 1.hour }
     rate { 50 }
-    notes { Faker::Lorem.sentence rand(3) }
+    notes { Faker::Lorem.sentence(word_count: rand(3)) }
   end
 
   factory :adjustment do
